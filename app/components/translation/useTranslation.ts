@@ -1,5 +1,4 @@
 import { useQuery } from '@tanstack/react-query'
-import { GenreService } from 'services/genre.service'
 import { TranslationService } from 'services/translation.service'
 
 export const useTranslation = () => {
