@@ -1,0 +1,19 @@
+.table,
+.th,
+.td {
+	border: 1px solid;
+}
+.th,
+.td {
+	padding: 15px;
+	text-align: center;
+}
+
+.table {
+	width: 100%;
+	border-collapse: collapse;
+}
+
+.btn {
+	@apply m-8  h-12 w-24 border rounded hover:bg-teal-700;
+}

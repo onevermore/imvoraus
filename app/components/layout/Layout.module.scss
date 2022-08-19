@@ -1,0 +1,8 @@
+$bar-width: 18%;
+
+.layout {
+	> .center {
+		@apply min-h-screen p-1;
+		margin: 0 $bar-width;
+	}
+}
