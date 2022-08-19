@@ -4,7 +4,7 @@ import { TranslationService } from 'services/translation.service'
 
 export const useTranslation = () => {
 	const queryData = useQuery(['translation-data'], () =>
-		TranslationService.getTranslation('hello')
+		TranslationService.getTranslation('hello') || { translatedText: 'hello' }
 	)
 
 	return queryData
