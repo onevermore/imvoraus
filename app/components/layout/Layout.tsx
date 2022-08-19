@@ -1,6 +1,5 @@
 import { Navigation } from './Navigation/Navigation'
-import { SearchBar } from './Navigation/SearchBar'
-import { Sidebar } from './Sidebar/Sidebar'
+
 import { FC } from 'react'
 
 import s from './Layout.module.scss'
@@ -14,7 +13,7 @@ export const Layout: FC<ILayout> = ({ children }) => {
 			<Navigation />
 			<div className={s.center}>{children}</div>
 
-			{/*<Sidebar />*/}
+			
 		</div>
 	)
 }

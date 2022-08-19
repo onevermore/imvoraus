@@ -9,7 +9,7 @@ import { DekorHeading } from '@/components/ui/heading-decor/DekorHeading'
 
 import { Meta } from '@/utils/meta/Meta'
 import {Options} from '@/components/options/Options'
-import { Tooltip } from '../../tooltip/Tooltip'
+
 
 export const Home: FC<IHome> = () => {
 	return (
