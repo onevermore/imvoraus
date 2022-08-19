@@ -4,7 +4,7 @@ import cn from 'classnames'
 import s from './DekorHeading.module.scss'
 import decor from './decorr.svg'
 interface IDecorHeading {
-	title: string
+	text: string
 	className?: string
 }
 export const DekorHeading: FC<IDecorHeading> = ({ text, className }) => {
