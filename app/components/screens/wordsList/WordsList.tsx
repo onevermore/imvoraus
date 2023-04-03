@@ -1,5 +1,4 @@
-
-import { FC } from 'react'
+import { FC, useState } from 'react'
 import { toastr } from 'react-redux-toastr'
 
 import { DekorHeading } from '@/components/ui/heading-decor/DekorHeading'
@@ -9,15 +8,35 @@ import { Meta } from '@/utils/meta/Meta'
 import { Tooltip } from '../../tooltip/Tooltip'
 
 export const WordsList: FC = () => {
+	const [val, setVal] = useState('')
+
+	const handleInput = (e: any) => {
+		setVal(e.target.value)
+	}
+	console.count('render WordsList')
 	return (
 		<Meta
 			title="Learn new words"
 			description="Learn new words from your dictionary"
 		>
-		<DekorHeading text="Lüğət" className='text-center' />
+			<DekorHeading text="Lüğət" className="text-center" />
 
-			<Tooltip 
-			text="As has been the case for many years, jobs, or forms of employment wherein employees perform a service or duty in exchange for financial compensation, play a prominent role in society. Furthermore, all jobs—even those of seemingly little significance—are important, as they simply wouldn't exist if their specific responsibilities weren't of value to employers (companies or persons that pay others for their work), customers (individuals who pay money for a product or service), and the economy generally. Teachers, or educational professionals tasked with helping students understand certain subjects and topics, are especially crucial today. In short, teachers help their students to become qualified for their future careers. Doctors, or medical professionals who specialize in providing health-related assistance to patients, are some of the most respected individuals in America and the world. It's the responsibility of doctors to help those who feel less-than-stellar to determine the underlying health issue(s) and recommend an effective treatment (or remedy to a disease, disorder, or condition)." />
+			<h2>Put your text here: </h2>
+			<textarea
+				className="resize block"
+				value={val}
+				onInput={handleInput}
+			></textarea>
+			<button className="rounded bg-primary p-3 mt-3">Add text</button>
+			<Tooltip
+				title="Hello"
+				text="Hallo mein Freund ! 
+			Für das Wochenende und die Ferien mache ich gern Pläne. An den freien Samstagen und Sonntagen werde ich lange schlafen. Dann klingelt der Wecker nicht. Aber ich werde für die Wochenenden nicht zu viel planen, weil ich gern faul bin und nichts tue. Aber ich werde vielleicht zum Sport gehen. Manchmal habe ich am Wochenende ein Turnier. Diesen Sonntag zum Beispiel werde ich mit meinem Team in eine andere Stadt fahren. Wir werden dort ein Match gegen einen anderen Hockeyverein spielen. Das wird bestimmt ein Spaß. Wenn das Wetter schön ist, werde ich anschließend mit meinen Freunden schwimmen gehen. In der Nähe gibt es einen See, der wird schon warm genug sein.
+
+			Wenn ich länger frei habe, mache ich gerne größere Pläne. In den Sommerferien werde ich sehr oft mit meinen Freunden unterwegs sein. Wir werden zum See fahren. Dort werden wir im Zelt übernachten und beim Lagerfeuer sitzen. Eine oder zwei Wochen möchte ich gerne reisen. Ein Freund wird mich auf der Reise begleiten, wir werden mit dem Zug losfahren. Wir planen eine Route durch das ganze Land, von West bis Ost und von Süd bis Nord. Mit Rucksäcken und Wanderschuhen werden wir auch in die Berge fahren. Am liebsten würde ich dort in einer Hütte übernachten. Wir werden sehen, ob wir das auch schaffen werden. Ein Abenteuer wird es aber ganz bestimmt.
+
+"
+			/>
 		</Meta>
 	)
 }

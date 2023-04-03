@@ -1,49 +1,64 @@
-import { TextForTooltip } from './TextForTooltip'
-import { FC, useEffect, useRef, useState } from 'react'
-import ReactTooltip from 'react-tooltip'
+import Text from './Text'
+import { useQuery } from '@tanstack/react-query'
+import dynamic from 'next/dynamic'
+import { FC, useEffect, useState } from 'react'
 
-import { TableOfWords } from '../TableOfWords/TableOfWords'
+import Dictionary from '../Dictionary/Dictionary'
+import { useTranslation } from '../translation/useTranslation'
 
 import s from './Tooltip.module.scss'
 
-/*const handleEnter = (e: React.MouseEvent<HTMLDivElement>) => {
-	console.log(e)
+//import ReactTooltip from 'react-tooltip'
 
-	ReactTooltip.show(e.currentTarget)
+const ReactTooltip = dynamic(() => import('react-tooltip'), {
+	ssr: false,
+})
+interface ITranslate {
+	word: string
+	translation: string
 }
-		const hMouseOver = (e: React.MouseEvent<HTMLSpanElement>, i: number) => {
-			//	setCurrentVal(ref.current[i]?.innerHTML)
-			//						onMouseOver={(e) => hMouseOver(e, i)}
-			//		ref={(el) => (ref.current[i] = el)}
-		}
 
-		/*	useEffect(() => {
-		ref.current = ref.current.slice(0, text.split(' ').length)
-	}, [text])
+export const Tooltip: FC<{ title: string; text: string }> = ({
+	title,
+	text,
+}) => {
+	const [list, setList] = useState<ITranslate[]>([])
+	const { isSuccess, data, word, error, setWord, isLoading } = useTranslation()
 
-	const handleMouseOver = (e: React.MouseEvent<HTMLDivElement>, i: number) => {
-		setVal(ref.current[i]?.innerHTML)
-	}*/
-
-export const Tooltip: FC<{ text: string }> = ({ text }) => {
-	const ref = useRef<Array<HTMLSpanElement | null>>([])
-	const [list, setList] = useState<string[]>([])
-	//const [isToolTipMounted, setIsToolTipMounted] = useState<boolean>(false)
+	console.count('render')
 
 	useEffect(() => {
-		ReactTooltip.rebuild()
-	})
+		const listt = localStorage.getItem('list')
+		if (listt) {
+			console.count('effect empty')
+			setList(JSON.parse(listt))
+		}
+		//	ReactTooltip.rebuild();
+	}, [])
 
-	const handleMouseEnter = (e: React.MouseEvent<HTMLSpanElement>) => {
-		//setIsToolTipMounted(true)
+	useEffect(() => {
+		console.count('effect list')
+		window.localStorage.setItem('list', JSON.stringify(list))
+	}, [list])
+
+	const addWordToDictionary = () => {
+		//	setWord(tip)
+		if (data?.responseData && data?.responseData?.translatedText) {
+			setList([
+				...list,
+				{
+					word: word,
+					translation: data?.responseData.translatedText,
+				},
+			])
+		}
 	}
-	const handleMouseLeave = (e: React.MouseEvent<HTMLSpanElement>) => {
-		//setIsToolTipMounted(false)
+	const onClick = (value: string) => {
+		setWord(value)
 	}
 
 	return (
 		<>
-			
 			<ReactTooltip
 				id="foo"
 				type="error"
@@ -51,19 +66,33 @@ export const Tooltip: FC<{ text: string }> = ({ text }) => {
 				clickable={true}
 				globalEventOff="click"
 				multiline={true}
-				getContent={(dataTip) => (
-					<div className='flex-center-between'>
-						<span>{dataTip?.toUpperCase()}</span> <br /> 
-						<button className=' border rounded p-1 ml-5' onClick={() => setList([...list, dataTip])}>
-							<b>Add +</b>
-						</button>
-					</div>
-				)}
+				getContent={(dataTip) => {
+					console.log('my data is: ', data?.responseData)
+					return data?.responseData ? (
+						<div className="flex-center-between flex-wrap">
+							<span className="font-bold">
+								{`${word?.toUpperCase()} `}{' '}
+								<p>{data.responseData?.translatedText?.toUpperCase()}</p>
+							</span>{' '}
+							{data.responseData?.translatedText ? (
+								<button
+									className="border rounded p-1 ml-5"
+									onClick={() => addWordToDictionary()}
+								>
+									<b>Add +</b>
+								</button>
+							) : (
+								<div>{` Not found`}</div>
+							)}
+						</div>
+					) : null
+				}}
 			/>
-
-			<TextForTooltip text={text} />
+			<h1>{title}</h1>
+			<Text text={text} onClick={onClick} />
 			<br />
-			<TableOfWords list={list} setList={setList} />
+
+			<Dictionary list={list} setList={setList} />
 		</>
 	)
 }

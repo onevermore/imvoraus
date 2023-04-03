@@ -1,16 +1,16 @@
 .menu {
-	@apply mb-14 animate-fade;
+	@apply mb-14 animate-fade hidden xl:block;
 
 	.items {
-		@apply flex;
+		@apply flex flex-nowrap;
 		> li {
 			@apply px-8 border-r-4 border-r-transparent transition-colors;
 
 			> a {
-				@apply flex items-center text-gray-600 px-3  cursor-pointer;
+				@apply flex items-center flex-nowrap text-gray-600 px-3  cursor-pointer;
 
 				> span {
-					@apply ml-3 text-ml hover:text-white;
+					@apply ml-3 text-ml xl:text-ml 2xl:text-xl hover:text-white;
 				}
 
 				> svg {
@@ -24,7 +24,6 @@
 			}
 			&.active {
 				@apply border-r-primary;
-
 
 				> a > svg {
 					@apply fill-primary;

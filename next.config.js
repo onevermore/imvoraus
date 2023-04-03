@@ -1,6 +1,10 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
 	// reactStrictMode: true,
+	images: {
+		domains: ['videos-imvoraus.s3.amazonaws.com', 'lh3.googleusercontent.com'],
+		formats: ['image/avif', 'image/webp'],
+	},
 	poweredByHeader: false,
 	env: {
 		REACT_APP_URL: process.env.REACT_APP_URL,
@@ -11,12 +15,8 @@ const nextConfig = {
 	async rewrites() {
 		return [
 			{
-				source: '/api/:path*',
-				destination: 'http://localhost:4200/api/:path*',
-			},
-			{
-				source: '/uploads/:path*',
-				destination: 'http://localhost:4200/uploads/:path*',
+				source: '/apii/:path*',
+				destination: 'http://localhost:3333/api/:path*',
 			},
 		]
 	},
