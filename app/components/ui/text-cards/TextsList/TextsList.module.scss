@@ -1,0 +1,11 @@
+.swipe-container {
+	@apply flex overflow-x-scroll p-2 w-72 snap-mandatory snap-x scroll-p-2;
+}
+
+.swipe-item {
+	@apply shrink-0 grow-0 basis-full p-2 snap-start h-full;
+}
+
+.grid-container {
+	@apply w-[80%] mx-auto grid md:grid-cols-2 xl:grid-cols-3  gap-5;
+}

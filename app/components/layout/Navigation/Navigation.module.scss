@@ -1,3 +1,7 @@
-.navigation {
-	@apply pt-11 flex justify-evenly;
+.container {
+	width: 100%;
+	overflow: hidden;
+	
+	@apply pt-11 px-16 flex justify-between;
+	
 }

@@ -1,0 +1,39 @@
+.thead {
+	@apply rounded-t-full;
+	//border: 1px solid gray;
+
+	> tr {
+		@apply bg-primary font-bold;
+		> th:first-child {
+			@apply rounded-tl-xl;
+		}
+		> th:last-child {
+			@apply rounded-tr-xl;
+		}
+	}
+}
+.th,
+.td {
+	@apply px-4;
+	text-align: center;
+}
+
+.table {
+	@apply table-fixed my-16 mx-auto;
+	width: 80%;
+	border-collapse: separate !important;
+	//	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+.btn {
+	@apply m-8  h-12 w-24 border rounded hover:bg-teal-700;
+}
+
+.flexx {
+	@apply flex-center-between;
+}
+
+.editable {
+	@apply underline text-red-600 border px-3 py-2;
+}

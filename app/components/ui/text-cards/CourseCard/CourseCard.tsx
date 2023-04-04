@@ -1,0 +1,47 @@
+import { ICourseCard } from './course-card.interface'
+import Image from 'next/image'
+import { useRouter } from 'next/router'
+import { FC } from 'react'
+
+import { Button } from '../../form-elements/Button'
+
+import s from './CourseCard.module.scss'
+
+export const CourseCard: FC<ICourseCard> = ({
+	_id,
+	title,
+	description,
+	level,
+	price,
+	slug,
+	imageURL,
+}) => {
+	const router = useRouter()
+
+	return (
+		<div className="bg-teal-700/[.5]  rounded-3xl  basis-4/12 h-92">
+			<div className="m-8   overflow-x-hidden">
+				<h2 className="mr-auto">{title}</h2>
+				<Image
+					alt="image"
+					src={imageURL}
+					width="100%"
+					height="55%"
+					layout="responsive"
+				/>
+				<div className="py-5 h-50 overflow-y-hidden">
+					{description.slice(0, 20)}...
+				</div>
+				<div className="flex-center-between">
+					<div>{level}</div>
+					<div>{price}</div>
+				</div>
+				<div>
+					<Button colored onClick={() => router.push(`/courses/${slug}`)}>
+						Open
+					</Button>
+				</div>
+			</div>
+		</div>
+	)
+}

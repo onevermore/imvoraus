@@ -3,7 +3,7 @@ import { FC } from 'react'
 
 import { SkeletonLoader } from '@/components/ui/SkeletonLoader'
 
-export const Translation: FC = () => {
+export const Translation: FC<{ word: string }> = ({ word }) => {
 	const { isLoading, data, error } = useTranslation()
 
 	return isLoading ? (
