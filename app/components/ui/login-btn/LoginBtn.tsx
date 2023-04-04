@@ -19,7 +19,7 @@ export const LoginBtn = () => {
 					/>
 				)}
 
-				<p>
+				<p className="invisible 2xl:visible">
 					Signed in as <b> {session.user?.email} </b>
 				</p>
 
@@ -32,7 +32,7 @@ export const LoginBtn = () => {
 
 	return (
 		<div className="flex-center-between">
-			<p>You are not signed in </p>
+			<p className="invisible 2xl:visible">You are not signed in </p>
 			<Button colored onClick={() => signIn()}>
 				Sign in
 			</Button>

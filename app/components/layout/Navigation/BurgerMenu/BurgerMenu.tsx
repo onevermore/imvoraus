@@ -39,8 +39,8 @@ export const BurgerMenu: FC = () => {
 
 			<nav
 				className={`${
-					isOpen ? 'block' : 'hidden'
-				}  w-full lg:flex lg:items-center lg:w-auto`}
+					isOpen ? 'block w-full lg:flex lg:items-center lg:w-auto' : 'hidden'
+				}  `}
 			>
 				<ul className="text-base text-gray-600 ">
 					<li className="uppercase">

@@ -14,9 +14,9 @@ export const Logo: FC = () => {
 					<div className="hidden xl:block">
 						<span
 							style={{ position: 'relative', left: '9px' }}
-							className="font-['Kelly_Slab'] font-normal text-2xl tracking-[.5em]"
+							className="font-['Proxima Nova'] font-normal text-2xl tracking-[.5em]"
 						>
-							menyu
+							imvoraus
 						</span>
 						<span
 							className="hidden 2xl:block"

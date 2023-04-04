@@ -13,23 +13,6 @@ import { DekorHeading } from '@/components/ui/heading-decor/DekorHeading'
 import { Meta } from '@/utils/meta/Meta'
 
 export const Home: FC<IHome> = () => {
-	/*	const [data, setData] = useState('')
-
-	useEffect(() => {
-		const f = async () => {
-			const fet = await axiosClassic.get('/files/url/access', {
-				params: {
-					key: 'users/user2/20210708_111234.jpg',
-				},
-			})
-
-			setData(fet.data.url)
-			console.log('fetchRES ======== ', fet.data.url)
-		}
-		f()
-	}, [])
-*/
-
 	return (
 		<Meta
 			title="learn German online"
@@ -38,7 +21,8 @@ export const Home: FC<IHome> = () => {
 			<DekorHeading text="Learn German" className="text-center" />
 			<Options />
 			<div className="my-24 ">
-				<Button colored onClick={() => router.push(`/course`)}>
+				<div>Try out our new feature:</div>
+				<Button colored onClick={() => router.push(`/dictionary`)}>
 					Dictionary
 				</Button>
 			</div>

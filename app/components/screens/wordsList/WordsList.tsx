@@ -19,7 +19,7 @@ export const WordsList: FC = () => {
 			title="Learn new words"
 			description="Learn new words from your dictionary"
 		>
-			<DekorHeading text="Lüğət" className="text-center" />
+			<DekorHeading text="Dictionary" className="text-center" />
 
 			<h2>Put your text here: </h2>
 			<textarea

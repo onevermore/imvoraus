@@ -1,5 +1,5 @@
 import { axiosClassic } from 'api/interceptors'
-import { GetStaticPaths, GetStaticProps } from 'next'
+import { GetStaticPaths, GetStaticProps, NextPage } from 'next'
 import { useRouter } from 'next/router'
 
 import { Heading } from '@/components/ui/heading/Heading'
@@ -28,12 +28,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 	})
 
 	return {
-		paths: [
-			...paths1,
-			{ params: { textId: 'text-1-c-1' } },
-			{ params: { textId: 'text-2-c-1' } },
-			{ params: { textId: 'text-3-c-1' } },
-		],
+		paths: ,
 		fallback: false,
 	}
 }
@@ -50,24 +45,28 @@ export const getStaticProps: GetStaticProps = async (context) => {
 	const textSlug = context.params?.textId
 
 	let { data } = await axiosClassic.get(`/texts/by-slug/${textSlug}`)
+	let { _id, title, slug, description, text, complexity } = data
+	const mytext: Partial<IText> = {
+		_id,
+		title,
+		slug,
+		description,
+		text,
+		complexity,
+	}
 
 	return {
 		props: {
-			text: data,
+			text: mytext,
 		},
 	}
 }
 
-const Text = ({ text }: { text: IText }) => {
-	//const router = useRouter()
-	//const { slug, textId } = router.query
-	//const courseSlug = String(router.query.slug)
-	//console.log('my text now is: ', text)
-
+const Text: NextPage<{ text: Partial<IText> }> = ({ text }) => {
 	return (
 		<>
 			<h1>{/*My Text number <b>{textId}</b> for Course: <b>{slug}</b>*/}</h1>
-			<Heading title={text.title} />
+			{text.title && <Heading title={text.title} />}
 			<div className="my-5">{text.text}</div>
 		</>
 	)

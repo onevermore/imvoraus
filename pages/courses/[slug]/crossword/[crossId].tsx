@@ -1,11 +1,7 @@
-import Crossword from '@jaredreisinger/react-crossword'
-import { ThemeProvider } from '@jaredreisinger/react-crossword'
 import { axiosClassic } from 'api/interceptors'
-import { GetStaticPaths, GetStaticProps } from 'next'
-import { useRouter } from 'next/router'
+import { GetStaticPaths, GetStaticProps, NextPage } from 'next'
 
-import { ICrosswordFull } from '@/components/ui/crossword-elements/CrosswordList/CrosswordList'
-import { Heading } from '@/components/ui/heading/Heading'
+import { MyCrossword } from '@/components/ui/crossword-elements/crossword/Crossword'
 
 export const getStaticPaths: GetStaticPaths = async () => {
 	return {
@@ -18,32 +14,39 @@ export const getStaticProps: GetStaticProps = async (context) => {
 	const crossSlug = context.params?.crossId
 
 	let { data } = await axiosClassic.get(`/crosswords/by-slug/${crossSlug}`)
+	let { title, description, data: crosswordData } = data
+	const myCrossword = { title, description, crosswordData }
 
 	return {
 		props: {
-			crossword: data,
+			crossword: myCrossword,
 		},
 	}
 }
 
-export interface ICross {
+export interface ICrossData {
 	across: Record<any, any>
 	down: Record<any, any>
 }
 
-const Text = ({ crossword }: { crossword: ICrosswordFull }) => {
-	const router = useRouter()
+export interface ICrossData2 {
+	id: number
+	direction: string
+	clue: string
+	answer: string
+	row: number
+	col: number
+}
 
-	/*const across = crossword.data.reduce((acc, val, i) => {
-		if (val['direction'] === 'across') {
-			acc[val]
-		}
-	}, {})
-	*/
-	//const across2 = crossword.map(cross => {
+export interface ICross {
+	title: string
+	description: string
+	crosswordData: ICrossData2[]
+}
 
-	const s = crossword.data.reduce(
-		(acc: ICross, val) => {
+const Crossworddd: NextPage<{ crossword: ICross }> = ({ crossword }) => {
+	const s = crossword.crosswordData.reduce(
+		(acc: ICrossData, val) => {
 			if (val['direction'] === 'across') {
 				acc['across'][val.id] = {
 					clue: val.clue,
@@ -64,36 +67,19 @@ const Text = ({ crossword }: { crossword: ICrosswordFull }) => {
 		},
 		{ across: {}, down: {} }
 	)
-	//console.log('cross ---- ', s)
 
-	//})
-	//const cross = { across, down: {} }
-	const themeContext = {
-		columnBreakpoint: '500px',
-		cellBackground: '#504d4dff',
-		cellBorder: 'rgb(0,255,255)',
-		textColor: 'rgb(255,255,255)',
-		numberColor: 'rgba(255,255,255, 1)',
-		focusBackground: 'rgb(0,155,255)',
-		highlightBackground: '#c79bbe',
-		gridBackground: 'transparent',
-	}
 	const onAllCorrect = () => {
 		confirm('good job!')
 	}
 
 	return (
-		<>
-			<h1>{/*My Text number <b>{textId}</b> for Course: <b>{slug}</b>*/}</h1>
-			<Heading title={crossword?.title} />
-			<div className="my-5">{crossword.description}</div>
-			<div className="sm:w-[40%] ml-[20%]">
-				<ThemeProvider theme={themeContext}>
-					<Crossword data={s} onCrosswordCorrect={onAllCorrect} />
-				</ThemeProvider>
-			</div>
-		</>
+		<MyCrossword
+			title={crossword?.title || ''}
+			description={crossword?.description || 'New crossword'}
+			crossData={s}
+			onCrosswordCorrect={onAllCorrect}
+		/>
 	)
 }
 
-export default Text
+export default Crossworddd

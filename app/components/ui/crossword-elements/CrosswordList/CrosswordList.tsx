@@ -1,5 +1,6 @@
 import textImage from '@/assets/images/zod.webp'
 
+import { Heading } from '../../heading/Heading'
 import { CrosswordCard } from '../CrosswordCard/CrosswordCard'
 
 export interface ICrosswordData {
@@ -35,14 +36,17 @@ export interface ICrosswordFull {
 }
 const CrosswordList = ({ crosswords }: { crosswords: ICrosswordFull[] }) => {
 	return (
-		<div className="w-[80%] mx-auto grid md:grid-cols-2 xl:grid-cols-3  gap-5">
-			{crosswords.map((crossword) => (
-				<CrosswordCard
-					key={crossword._id}
-					crossword={{ ...crossword, imageURL: textImage.src }}
-				/>
-			))}
-		</div>
+		<>
+			<Heading title="Crosswords" className="py-8" />
+			<div className="w-[80%] mx-auto grid md:grid-cols-2 xl:grid-cols-3  gap-5">
+				{crosswords.map((crossword) => (
+					<CrosswordCard
+						key={crossword._id}
+						crossword={{ ...crossword, imageURL: textImage.src }}
+					/>
+				))}
+			</div>
+		</>
 	)
 }
 export default CrosswordList
