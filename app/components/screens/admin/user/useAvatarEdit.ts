@@ -17,9 +17,9 @@ export const useAvatarEdit = (setValue: UseFormSetValue<any>) => {
 		() => UsersService.getUserDataByUsername(userId),
 		{
 			onSuccess({ data }) {
-				getKeys(data).forEach((key) => {
-					setValue(key, data[key])
-				})
+				//	getKeys(data).forEach((key) => {
+				//		setValue(key, data[key])
+				//	})
 			},
 			onError(error) {},
 			enabled: !!query.id,

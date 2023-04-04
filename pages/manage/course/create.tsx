@@ -11,7 +11,7 @@ import { ICourse } from '@/shared/types/create-course.types'
 
 import { CoursesService } from '@/services/courses.service'
 
-const Create: NextPage = () => {
+const CreateCourse: NextPage = () => {
 	const {
 		handleSubmit,
 		register,
@@ -28,7 +28,7 @@ const Create: NextPage = () => {
 		},
 	})
 	const onSubmit: SubmitHandler<ICourse> = async (e: ICourse) => {
-		console.log('what is e == ', e)
+		//	console.log('what is e == ', e)
 		await create.mutateAsync(e)
 		push('/courses')
 	}
@@ -83,4 +83,4 @@ const Create: NextPage = () => {
 	)
 }
 
-export default Create
+export default CreateCourse

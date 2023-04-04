@@ -4,6 +4,19 @@ import { useRouter } from 'next/router'
 
 import { Heading } from '@/components/ui/heading/Heading'
 
+export interface IText {
+	_id: string
+	title: string
+	slug: string
+	description: string
+	text: string
+	complexity: number
+	course: string
+	createdAt: string
+	updatedAt: string
+	__v: number
+}
+
 /*
 export const getStaticPaths: GetStaticPaths = async () => {
 	const data = await CoursesService.getAllCourses()
@@ -45,9 +58,8 @@ export const getStaticProps: GetStaticProps = async (context) => {
 	}
 }
 
-const Text = ({ text }) => {
-	const router = useRouter()
-
+const Text = ({ text }: { text: IText }) => {
+	//const router = useRouter()
 	//const { slug, textId } = router.query
 	//const courseSlug = String(router.query.slug)
 	//console.log('my text now is: ', text)
@@ -55,7 +67,7 @@ const Text = ({ text }) => {
 	return (
 		<>
 			<h1>{/*My Text number <b>{textId}</b> for Course: <b>{slug}</b>*/}</h1>
-			<Heading title={text?.title} />
+			<Heading title={text.title} />
 			<div className="my-5">{text.text}</div>
 		</>
 	)

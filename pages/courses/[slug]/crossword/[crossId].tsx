@@ -4,6 +4,7 @@ import { axiosClassic } from 'api/interceptors'
 import { GetStaticPaths, GetStaticProps } from 'next'
 import { useRouter } from 'next/router'
 
+import { ICrosswordFull } from '@/components/ui/crossword-elements/CrosswordList/CrosswordList'
 import { Heading } from '@/components/ui/heading/Heading'
 
 export const getStaticPaths: GetStaticPaths = async () => {
@@ -25,7 +26,12 @@ export const getStaticProps: GetStaticProps = async (context) => {
 	}
 }
 
-const Text = ({ crossword }) => {
+export interface ICross {
+	across: Record<any, any>
+	down: Record<any, any>
+}
+
+const Text = ({ crossword }: { crossword: ICrosswordFull }) => {
 	const router = useRouter()
 
 	/*const across = crossword.data.reduce((acc, val, i) => {
@@ -37,7 +43,7 @@ const Text = ({ crossword }) => {
 	//const across2 = crossword.map(cross => {
 
 	const s = crossword.data.reduce(
-		(acc, val, i) => {
+		(acc: ICross, val) => {
 			if (val['direction'] === 'across') {
 				acc['across'][val.id] = {
 					clue: val.clue,

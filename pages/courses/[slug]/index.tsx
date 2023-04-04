@@ -1,6 +1,6 @@
 import { QueryClient, dehydrate, useQuery } from '@tanstack/react-query'
 import { axiosClassic } from 'api/interceptors'
-import { GetStaticPaths, NextPage } from 'next'
+import { GetStaticPaths, GetStaticProps, NextPage } from 'next'
 import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
 import { CoursesService } from 'services/courses.service'
@@ -42,8 +42,8 @@ export const getStaticPaths: GetStaticPaths = async () => {
 	}
 }
 
-export const getStaticProps = async (context) => {
-	const courseSlug = context.params.slug
+export const getStaticProps: GetStaticProps = async ({ params }) => {
+	const courseSlug = String(params?.slug)
 	//	const { data: texts } = await CoursesService.getCourseDataBySlug(courseSlug)
 	const queryClient = new QueryClient()
 

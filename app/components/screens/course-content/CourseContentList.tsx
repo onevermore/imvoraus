@@ -1,13 +1,10 @@
-import { FC } from "react"
-
+import { FC } from 'react'
 
 interface ICourseContentList {
-    imageURL: string
-    title:
+	imageURL: string
+	title: string
 }
 
-export const CourseContentList:FC = ({}) => {
-  return (
-    <div>CourseContentList</div>
-  )
+export const CourseContentList: FC = ({}) => {
+	return <div>CourseContentList</div>
 }
