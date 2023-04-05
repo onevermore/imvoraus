@@ -1,7 +1,6 @@
 .container {
 	width: 100%;
 	overflow: hidden;
-	
-	@apply pt-11 px-16 flex justify-between;
-	
+
+	@apply pt-4 sm:pt-11 px-2 sm:px-16 flex justify-between;
 }

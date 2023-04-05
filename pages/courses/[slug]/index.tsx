@@ -4,6 +4,10 @@ import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
 import { CoursesService } from 'services/courses.service'
 
+import {
+	CourseContent,
+	ICourseData,
+} from '@/components/screens/course-content/CourseContent'
 import { Button } from '@/components/ui/form-elements/Button'
 
 import { ICourse } from '@/shared/types/create-course.types'
@@ -65,20 +69,8 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 	}
 }
 
-const CourseInfo: NextPage<{ courseData: any }> = ({ courseData }) => {
-	const router = useRouter()
-	const courseSlug = String(router.query.slug)
-
-	return (
-		<div>
-			<div className="font-extrabold">{courseData?.title} </div>
-			<Button colored onClick={() => router.back()}>
-				Back
-			</Button>
-			<DynamicTextsList list={courseData?.texts} />
-			<DynamicCrosswordsList crosswords={courseData?.crosswords} />
-		</div>
-	)
+const CourseInfo: NextPage<{ courseData: ICourseData }> = ({ courseData }) => {
+	return <CourseContent courseData={courseData} />
 }
 
 export default CourseInfo

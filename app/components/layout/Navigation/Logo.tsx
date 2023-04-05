@@ -9,9 +9,8 @@ export const Logo: FC = () => {
 	return (
 		<>
 			<Link href="/">
-				<a className="px-layout mb-10 block relative flex">
-					<BurgerMenu />
-					<div className="hidden xl:block">
+				<a className="px-layout mb-10 block relative flex hidden xl:block">
+					<div>
 						<span
 							style={{ position: 'relative', left: '9px' }}
 							className="font-['Proxima Nova'] font-normal text-2xl tracking-[.5em]"
@@ -19,7 +18,7 @@ export const Logo: FC = () => {
 							imvoraus
 						</span>
 						<span
-							className="hidden 2xl:block"
+							className=""
 							style={{
 								position: 'absolute',
 								bottom: '5px',

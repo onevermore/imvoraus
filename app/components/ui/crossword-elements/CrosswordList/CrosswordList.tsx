@@ -1,5 +1,7 @@
+import crossImage from '@/assets/images/cross.jpg'
 import textImage from '@/assets/images/zod.webp'
 
+import { Button } from '../../form-elements/Button'
 import { Heading } from '../../heading/Heading'
 import { CrosswordCard } from '../CrosswordCard/CrosswordCard'
 
@@ -42,9 +44,12 @@ const CrosswordList = ({ crosswords }: { crosswords: ICrosswordFull[] }) => {
 				{crosswords.map((crossword) => (
 					<CrosswordCard
 						key={crossword._id}
-						crossword={{ ...crossword, imageURL: textImage.src }}
+						crossword={{ ...crossword, imageURL: crossImage.src }}
 					/>
 				))}
+			</div>
+			<div className="flex justify-end">
+				<Button colored>See all</Button>
 			</div>
 		</>
 	)

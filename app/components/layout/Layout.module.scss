@@ -7,8 +7,8 @@ $bar-width: 15% !global;
 .layout {
 	@apply flex flex-col;
 	> .center {
-		@apply min-h-screen p-1 md:text-2xl text-xl;
-		margin: 0 $bar-width;
+		@apply min-h-screen p-1 md:text-2xl text-xl mx-[5%] sm:mx-[15%];
+		//margin: 0 $bar-width;
 		//	max-width: 1400px;
 	}
 }
