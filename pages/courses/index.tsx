@@ -55,15 +55,13 @@ const Courses: NextPage<{ courses: ICourseCard[] }> = ({ courses }) => {
 	const { push } = useRouter()
 
 	const onClick = () => {
-		//	push(getAdminUrl('/course/create'))
+		push(getAdminUrl('/course/create'))
 	}
 	//console.log('ccc = ', courses)
 	return (
 		<div>
 			<span> Courses page </span>
-			<Button colored onClick={onClick}>
-				Add new course
-			</Button>
+			<Button colored>Add new course</Button>
 			<CoursesList courses={courses || []} />
 		</div>
 	)

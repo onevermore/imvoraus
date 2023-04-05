@@ -1,3 +1,4 @@
+import { BurgerMenu } from './BurgerMenu/BurgerMenu'
 import { Logo } from './Logo'
 import { MenuContainer } from './MenuContainer/MenuContainer'
 import { SearchBar } from './SearchBar'
@@ -11,6 +12,7 @@ const Navigation: FC = () => {
 	return (
 		<div className={s.container}>
 			<Logo />
+			<BurgerMenu />
 			<MenuContainer />
 			<LoginBtn />
 			<SearchBar />

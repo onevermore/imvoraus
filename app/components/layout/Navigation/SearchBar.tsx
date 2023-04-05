@@ -1,15 +1,20 @@
 import { FC } from 'react'
 
+import { MaterialIcon } from '@/components/ui/MaterialIcon'
+
 import s from './SearchBar.module.scss'
 
 export const SearchBar: FC = () => {
 	return (
-		<div className="pr-5">
+		<div className="pr-5 justify-center w-36 sm:w-48 md:w-96 hidden sm:flex">
 			<input
-				className="bg-searchColor border-0 h-8 tracking-widest w-40 xl:w-60 "
+				className="bg-searchColor rounded-sm border-0 h-10 tracking-widest max-w-[80%] "
 				type="search"
 				placeholder="search..."
 			/>
+			<div className="mt-2 mx-2 h-10 w-12">
+				<MaterialIcon name="MdSearch" />
+			</div>
 		</div>
 	)
 }

@@ -8,22 +8,30 @@ export const LoginBtn = () => {
 
 	if (session) {
 		return (
-			<div className="flex-center-between gap-5">
-				{session.user && session.user.image && (
-					<Image
-						src={session.user.image}
-						width={50}
-						height={50}
-						alt=""
-						style={{ borderRadius: '50px' }}
-					/>
-				)}
-
-				<p className="invisible 2xl:visible">
-					Signed in as <b> {session.user?.email} </b>
+			<div className="flex justify-center gap-5 pr-8 sm:pr-0">
+				<div className="self-start">
+					{' '}
+					{session.user && session.user.image && (
+						<Image
+							src={session.user.image}
+							width={50}
+							height={50}
+							alt=""
+							style={{ borderRadius: '50px' }}
+						/>
+					)}
+				</div>
+				<p className="hidden 2xl:block pt-2 ">
+					<b>
+						{' '}
+						{session.user?.email?.slice(
+							0,
+							session.user?.email.indexOf('@')
+						)}{' '}
+					</b>
 				</p>
 
-				<Button colored onClick={() => signOut()}>
+				<Button className="w-9 h-3 -mt-8 " colored onClick={() => signOut()}>
 					Sign out
 				</Button>
 			</div>
@@ -31,9 +39,8 @@ export const LoginBtn = () => {
 	}
 
 	return (
-		<div className="flex-center-between">
-			<p className="invisible 2xl:visible">You are not signed in </p>
-			<Button colored onClick={() => signIn()}>
+		<div className="flex justify-center shrink-0 pr-8 ">
+			<Button className="w-9 h-3 -mt-8" colored onClick={() => signIn()}>
 				Sign in
 			</Button>
 		</div>

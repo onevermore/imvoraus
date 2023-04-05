@@ -1,13 +1,13 @@
 .menu {
-	@apply mb-14 animate-fade hidden xl:block;
+	@apply mb-14 animate-fade hidden xl:flex;
 
 	.items {
-		@apply flex flex-nowrap;
+		@apply flex flex-nowrap shrink-0 grow-0;
 		> li {
 			@apply px-8 border-r-4 border-r-transparent transition-colors;
 
 			> a {
-				@apply flex items-center flex-nowrap text-gray-600 px-3  cursor-pointer;
+				@apply flex items-center flex-nowrap grow-0 text-gray-600 xl:px-1 2xl:px-2 cursor-pointer;
 
 				> span {
 					@apply ml-3 text-ml xl:text-ml 2xl:text-xl hover:text-white;

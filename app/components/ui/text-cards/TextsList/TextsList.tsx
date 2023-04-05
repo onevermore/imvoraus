@@ -6,11 +6,11 @@ import textImage from '@/assets/images/zod.webp'
 import { Button } from '../../form-elements/Button'
 import { Heading } from '../../heading/Heading'
 import { TextCard } from '../TextCard/TextCard'
-import { ITextData } from '../TextCard/text.interface'
+import { ITextData, ITextDataFull } from '../TextCard/text.interface'
 
 import s from './TextsList.module.scss'
 
-const TextsList: FC<{ list: ITextData[] }> = ({ list }) => {
+const TextsList: FC<{ list: ITextDataFull[] }> = ({ list }) => {
 	/*w-full flex flex-col lg:flex-row flex-wrap gap-5 py-8 pr-[10] */
 
 	//const isServer = typeof window === 'undefined'

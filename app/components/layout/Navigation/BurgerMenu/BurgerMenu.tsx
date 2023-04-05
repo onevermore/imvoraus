@@ -7,8 +7,11 @@ export const BurgerMenu: FC = () => {
 	const [isOpen, setIsOpen] = useState(false)
 
 	return (
-		<div className="xl:hidden flex items-center justify-between  max-w-full px-[8%] flex-wrap w-full">
-			<div className="space-y-2" onClick={() => setIsOpen(!isOpen)}>
+		<div className=" xl:hidden flex items-center justify-between  max-w-full px-[8%] flex-wrap w-full">
+			<div
+				className="space-y-2 cursor-pointer"
+				onClick={() => setIsOpen(!isOpen)}
+			>
 				<svg
 					width="31"
 					height="21"
@@ -45,7 +48,7 @@ export const BurgerMenu: FC = () => {
 				<ul className="text-base text-gray-600 ">
 					<li className="uppercase">
 						<Link href="/">
-							<a className=" py-2 block hover:text-blue-700">Home</a>
+							<a className=" py-2 pt-4 block hover:text-blue-700">Home</a>
 						</Link>
 					</li>
 					<li className="uppercase">
