@@ -20,14 +20,15 @@ export const WordsList: FC = () => {
 			description="Learn new words from your dictionary"
 		>
 			<DekorHeading text="Dictionary" className="text-center" />
-
-			<h2>Put your text here: </h2>
-			<textarea
+			<h2>Click to add words to your dictionary: </h2>
+			
+		{/*	 <h2>Put your text here: </h2>
+		<textarea
 				className="resize block"
 				value={val}
 				onInput={handleInput}
 			></textarea>
-			<button className="rounded bg-primary p-3 mt-3">Add text</button>
+	<button className="rounded bg-primary p-3 mt-3">Add text</button>*/}
 			<Tooltip
 				title="Hello"
 				text="Hallo mein Freund ! 

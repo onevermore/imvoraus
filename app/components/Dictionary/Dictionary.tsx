@@ -15,7 +15,7 @@ const Dictionary: FC<{
 	const [isEdit, setIsEdit] = useState(false)
 	const [currEditableWord, setCurrEditableWord] = useState<null | number>(null)
 
-	console.count('Dictionary rendered')
+	//console.count('Dictionary rendered')
 
 	const handleDeleteWord = (i: number) => {
 		const newList = list.filter((v, index) => index !== i)
@@ -27,7 +27,7 @@ const Dictionary: FC<{
 		setCurrEditableWord(i)
 
 		if (isEdit) {
-			console.log('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')
+			//	console.log('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')
 			const newListt = list.map((row, index) => {
 				if (index === i) {
 					row.translation = e.target
