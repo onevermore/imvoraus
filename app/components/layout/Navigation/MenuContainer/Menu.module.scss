@@ -7,10 +7,10 @@
 			@apply px-8 border-r-4 border-r-transparent transition-colors;
 
 			> a {
-				@apply flex items-center flex-nowrap grow-0 text-gray-600 xl:px-1 2xl:px-2 cursor-pointer;
+				@apply flex items-center flex-nowrap grow-0 text-gray-700 xl:px-1 2xl:px-2 cursor-pointer;
 
 				> span {
-					@apply ml-3 text-ml xl:text-ml 2xl:text-xl hover:text-white;
+					@apply ml-3 text-ml xl:text-ml 2xl:text-xl hover:text-black;
 				}
 
 				> svg {

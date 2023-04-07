@@ -41,8 +41,12 @@ export const CourseContent = ({ courseData }: { courseData: ICourseData }) => {
 			<Button colored onClick={() => router.back()}>
 				Back
 			</Button>
-			<DynamicTextsList list={courseData?.texts} />
-			<DynamicCrosswordsList crosswords={courseData?.crosswords} />
+			{courseData.texts.length > 0 && (
+				<DynamicTextsList list={courseData.texts} />
+			)}
+			{courseData.crosswords.length > 0 && (
+				<DynamicCrosswordsList crosswords={courseData.crosswords} />
+			)}
 		</div>
 	)
 }

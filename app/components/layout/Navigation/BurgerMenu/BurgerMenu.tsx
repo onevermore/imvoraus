@@ -1,14 +1,23 @@
 import Link from 'next/link'
 import { FC, useState } from 'react'
 
+import { useOutsideClick } from '@/hooks/useOutsideClick'
+
 import s from './BurgerMenu.module.scss'
 
 export const BurgerMenu: FC = () => {
 	const [isOpen, setIsOpen] = useState(false)
 
+	const onClickOutside = () => {
+		setIsOpen(false)
+	}
+
+	const ref = useOutsideClick(onClickOutside)
+
 	return (
 		<div className=" xl:hidden flex items-center justify-between  max-w-full px-[8%] flex-wrap w-full">
 			<div
+				ref={ref}
 				className="space-y-2 cursor-pointer"
 				onClick={() => setIsOpen(!isOpen)}
 			>
@@ -45,20 +54,25 @@ export const BurgerMenu: FC = () => {
 					isOpen ? 'block w-full lg:flex lg:items-center lg:w-auto' : 'hidden'
 				}  `}
 			>
-				<ul className="text-base text-gray-600 ">
+				<ul className="text-base text-gray-700 ">
 					<li className="uppercase">
 						<Link href="/">
-							<a className=" py-2 pt-4 block hover:text-blue-700">Home</a>
+							<a className=" py-2 pt-4 block hover:text-gray-500">Home</a>
 						</Link>
 					</li>
 					<li className="uppercase">
+						<li className="uppercase">
+							<Link href="/profile">
+								<a className=" py-2 block hover:text-gray-500">Pricing</a>
+							</Link>
+						</li>
 						<Link href="/courses">
-							<a className=" py-2 block hover:text-blue-700">Courses</a>
+							<a className=" py-2 block hover:text-gray-500">Courses</a>
 						</Link>
 					</li>
 					<li className="uppercase">
 						<Link href="/profile">
-							<a className=" py-2 block hover:text-blue-700">Profile</a>
+							<a className=" py-2 block hover:text-gray-500">Profile</a>
 						</Link>
 					</li>
 				</ul>

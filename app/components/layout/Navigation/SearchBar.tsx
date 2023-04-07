@@ -6,7 +6,7 @@ import s from './SearchBar.module.scss'
 
 export const SearchBar: FC = () => {
 	return (
-		<div className="pr-5 justify-center w-36 sm:w-48 md:w-96 hidden sm:flex">
+		<div className="pr-5 justify-center w-64 sm:w-88 xl:w-96 hidden sm:flex">
 			<input
 				className="bg-searchColor rounded-sm border-0 h-10 tracking-widest max-w-[80%] "
 				type="search"

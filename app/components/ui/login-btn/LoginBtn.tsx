@@ -8,7 +8,7 @@ export const LoginBtn = () => {
 
 	if (session) {
 		return (
-			<div className="flex justify-center gap-5 pr-8 sm:pr-0">
+			<div className="flex justify-center gap-5 px-8 sm:px-3">
 				<div className="self-start">
 					{' '}
 					{session.user && session.user.image && (
@@ -31,7 +31,7 @@ export const LoginBtn = () => {
 					</b>
 				</p>
 
-				<Button className="w-9 h-3 -mt-8 " colored onClick={() => signOut()}>
+				<Button className=" min-w-max" colored onClick={() => signOut()}>
 					Sign out
 				</Button>
 			</div>
@@ -40,7 +40,12 @@ export const LoginBtn = () => {
 
 	return (
 		<div className="flex justify-center shrink-0 pr-8 ">
-			<Button className="w-9 h-3 -mt-8" colored onClick={() => signIn()}>
+			<Button
+				size="large"
+				className=" min-w-max"
+				colored
+				onClick={() => signIn()}
+			>
 				Sign in
 			</Button>
 		</div>
