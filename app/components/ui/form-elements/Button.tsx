@@ -13,7 +13,7 @@ export const Button: FC<PropsWithChildren<IButton>> = ({
 }) => {
 	return (
 		<button
-			className={cn(s[size], { [s.colored]: colored, className })}
+			className={cn(s[size], { [s.colored]: colored }, className)}
 			{...rest}
 		>
 			{children}

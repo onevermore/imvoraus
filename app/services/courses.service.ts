@@ -30,11 +30,6 @@ export const CoursesService = {
 		const { data } = await axiosClassic.get(getTextsByCourseURL(course))
 	},
 
-	async getAllTexts() {
-		const { data } = await axiosClassic.get(getTextsUrl(''))
-		return data
-	},
-
 	async createCourse(course: ICourse) {
 		const { data } = await axiosClassic.post(getCoursesUrl(''), course)
 		return data

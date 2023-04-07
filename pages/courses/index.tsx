@@ -61,7 +61,9 @@ const Courses: NextPage<{ courses: ICourseCard[] }> = ({ courses }) => {
 	return (
 		<div>
 			<span> Courses page </span>
-			<Button colored>Add new course</Button>
+			<Button colored onClick={onClick}>
+				Add new course
+			</Button>
 			<CoursesList courses={courses || []} />
 		</div>
 	)
