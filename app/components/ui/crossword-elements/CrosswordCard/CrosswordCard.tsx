@@ -33,7 +33,7 @@ export const CrosswordCard = ({
 				<Button
 					colored
 					onClick={() =>
-						router.push(`/courses/${courseSlug}/crossword/${slug}`)
+						router.push(`/courses/${courseSlug}/crosswords/${slug}`)
 					}
 				>
 					Open

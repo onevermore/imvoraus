@@ -10,12 +10,14 @@ import { ICourse } from '@/shared/types/create-course.types'
 
 import { CoursesService } from '@/services/courses.service'
 
+import { generateSlug } from '@/utils/string/generateSlug'
+
 export const CourseForm = () => {
 	const {
 		handleSubmit,
 		register,
 		formState: { errors },
-		getValues,
+		setValue,
 	} = useForm<ICourse>({
 		mode: 'onChange',
 	})
@@ -40,6 +42,9 @@ export const CourseForm = () => {
 					{...register('title', {
 						required: 'Title is required!',
 						maxLength: 15,
+						onChange: (e) => {
+							setValue('slug', generateSlug(e.target.value))
+						},
 					})}
 					placeholder="Title"
 					error={errors.title}

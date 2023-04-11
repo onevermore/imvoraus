@@ -128,6 +128,13 @@ module.exports = {
 					color: theme('colors.white'),
 					boxShadow: theme('boxShadow.lg'),
 				},
+
+				'.l-air-block': {
+					borderRadius: theme('borderRadius.layout'),
+					backgroundColor: theme('colors.gray.300'),
+					color: theme('colors.gray.600'),
+					boxShadow: theme('boxShadow.lg'),
+				},
 			}),
 				addUtilities({
 					'.text-shadow': {
