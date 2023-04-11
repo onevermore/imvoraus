@@ -1,7 +1,7 @@
-import crossImage from '@/assets/images/cross.jpg'
-import textImage from '@/assets/images/zod.webp'
+import { useRouter } from 'next/router'
 
-import { Button } from '../../form-elements/Button'
+import crossImage from '@/assets/images/cross.jpg'
+
 import { Heading } from '../../heading/Heading'
 import { CrosswordCard } from '../CrosswordCard/CrosswordCard'
 
@@ -36,20 +36,28 @@ export interface ICrosswordFull {
 	updatedAt: string
 	__v: number
 }
-const CrosswordList = ({ crosswords }: { crosswords: ICrosswordFull[] }) => {
+const CrosswordList = ({
+	crosswords,
+	full,
+}: {
+	crosswords: ICrosswordFull[]
+	full?: boolean
+}) => {
+	const crossList = full ? crosswords : crosswords.slice(0, 3)
+	const router = useRouter()
+	const { slug: courseSlug } = router.query
+	const { push } = router
+	console.count('Cross List rendered ' + full)
 	return (
 		<>
 			<Heading title="Crosswords" className="py-8" />
 			<div className="w-[80%] mx-auto grid md:grid-cols-2 xl:grid-cols-3  gap-5">
-				{crosswords.map((crossword) => (
+				{crossList.map((crossword) => (
 					<CrosswordCard
 						key={crossword._id}
 						crossword={{ ...crossword, imageURL: crossImage.src }}
 					/>
 				))}
-			</div>
-			<div className="flex justify-end">
-				<Button colored>See all</Button>
 			</div>
 		</>
 	)

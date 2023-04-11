@@ -18,13 +18,18 @@
 .colored {
 	@apply h-12  border rounded hover:bg-teal-700;
 }
+
 .field {
-	@apply text-left mb-8;
+	@apply text-left mb-6;
 
 	input {
-		@apply rounded focus:ring-0 bg-transparent text-gray-500 w-full m-0 px-0;
+		@apply rounded focus:ring-0 bg-transparent text-gray-700 w-full m-0 px-0;
+	}
+	.slug {
+		@apply text-gray-500;
 	}
 }
+
 .uploadField {
 	@apply relative;
 	.uploadFlex {

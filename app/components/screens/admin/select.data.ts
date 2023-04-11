@@ -1,0 +1,22 @@
+import { IOptions } from './select.types'
+
+export const optionsNumber: IOptions[] = [
+	{ value: '1', label: '1' },
+	{ value: '2', label: '2' },
+	{ value: '3', label: '3' },
+	{ value: '4', label: '4' },
+	{ value: '5', label: '5' },
+]
+
+export const optionsLevel: IOptions[] = [
+	{ value: 'A1', label: 'A1' },
+	{ value: 'A2', label: 'A2' },
+	{ value: 'B1', label: 'B1' },
+	{ value: 'B2', label: 'B2' },
+	{ value: 'C1', label: 'C1' },
+]
+
+export const optionsDirection: IOptions[] = [
+	{ value: 'across', label: 'across' },
+	{ value: 'down', label: 'down' },
+]

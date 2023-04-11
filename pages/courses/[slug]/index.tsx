@@ -1,31 +1,12 @@
-import { QueryClient, dehydrate, useQuery } from '@tanstack/react-query'
 import { GetStaticPaths, GetStaticProps, NextPage } from 'next'
-import dynamic from 'next/dynamic'
-import { useRouter } from 'next/router'
 import { CoursesService } from 'services/courses.service'
 
 import {
 	CourseContent,
 	ICourseData,
 } from '@/components/screens/course-content/CourseContent'
-import { Button } from '@/components/ui/form-elements/Button'
 
 import { ICourse } from '@/shared/types/create-course.types'
-
-const DynamicTextsList = dynamic(
-	() => import('@/components/ui/text-cards/TextsList/TextsList'),
-	{
-		ssr: false,
-	}
-)
-
-const DynamicCrosswordsList = dynamic(
-	() =>
-		import('@/components/ui/crossword-elements/CrosswordList/CrosswordList'),
-	{
-		ssr: false,
-	}
-)
 
 export const getStaticPaths: GetStaticPaths = async () => {
 	//	const data = await CoursesService.getAllCourses()

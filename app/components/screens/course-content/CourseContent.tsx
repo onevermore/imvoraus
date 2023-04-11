@@ -1,12 +1,9 @@
 import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
-import { FC } from 'react'
 
 import { ICrosswordFull } from '@/components/ui/crossword-elements/CrosswordList/CrosswordList'
 import { Button } from '@/components/ui/form-elements/Button'
 import { ITextDataFull } from '@/components/ui/text-cards/TextCard/text.interface'
-
-import { IText } from '../../../../pages/courses/[slug]/text/[textId]'
 
 const DynamicTextsList = dynamic(
 	() => import('@/components/ui/text-cards/TextsList/TextsList'),
@@ -34,7 +31,8 @@ export interface ICourseData {
 
 export const CourseContent = ({ courseData }: { courseData: ICourseData }) => {
 	const router = useRouter()
-
+	const { slug: courseSlug } = router.query
+	//console.count('Course content rendered')
 	return (
 		<div>
 			<div className="font-extrabold">{courseData?.title} </div>
@@ -44,9 +42,38 @@ export const CourseContent = ({ courseData }: { courseData: ICourseData }) => {
 			{courseData.texts.length > 0 && (
 				<DynamicTextsList list={courseData.texts} />
 			)}
+			{
+				<div className="flex justify-end">
+					<Button
+						colored
+						onClick={(e) => {
+							e.preventDefault()
+							router.push(`/courses/${courseSlug}/texts`, undefined, {
+								shallow: true,
+							})
+						}}
+					>
+						See all
+					</Button>
+				</div>
+			}
 			{courseData.crosswords.length > 0 && (
 				<DynamicCrosswordsList crosswords={courseData.crosswords} />
 			)}
+
+			<div className="flex justify-end">
+				<Button
+					colored
+					onClick={(e) => {
+						e.preventDefault()
+						router.push(`/courses/${courseSlug}/crosswords`, undefined, {
+							shallow: true,
+						})
+					}}
+				>
+					See all
+				</Button>
+			</div>
 		</div>
 	)
 }

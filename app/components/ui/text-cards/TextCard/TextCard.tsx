@@ -36,7 +36,7 @@ export const TextCard: FC<ITextData> = ({
 				</div>
 				<Button
 					colored
-					onClick={() => router.push(`/courses/${courseSlug}/text/${slug}`)}
+					onClick={() => router.push(`/courses/${courseSlug}/texts/${slug}`)}
 				>
 					Open
 				</Button>

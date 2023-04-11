@@ -10,7 +10,14 @@ const Field = forwardRef<HTMLInputElement, IField>(
 			<div className={cn(styles.common, styles.field)} style={style}>
 				<label>
 					<span>{placeholder}</span>
-					<input ref={ref} type={type} {...rest} />
+					<input
+						className={cn({
+							[styles.slug]: placeholder === 'Slug',
+						})}
+						ref={ref}
+						type={type}
+						{...rest}
+					/>
 				</label>
 				{error && <div className={styles.error}>{error.message}</div>}
 			</div>

@@ -1,7 +1,7 @@
 import { GetStaticProps, NextPage } from 'next'
 
+import { CrosswordForm } from '@/components/screens/admin/crossword/CrosswordForm'
 import { IOptions } from '@/components/screens/admin/select.types'
-import { TextForm } from '@/components/screens/admin/text/TextForm'
 import { ICourseCard2 } from '@/components/ui/text-cards/CourseCard/course-card.interface'
 
 import { CoursesService } from '@/services/courses.service'
@@ -27,11 +27,10 @@ export const getStaticProps: GetStaticProps = async () => {
 		}
 	}
 }
-
-const CreateText: NextPage<{ coursesNames: IOptions[] }> = ({
+const CreateCrossword: NextPage<{ coursesNames: IOptions[] }> = ({
 	coursesNames,
 }) => {
-	return <TextForm coursesNames={coursesNames} />
+	return <CrosswordForm coursesNames={coursesNames} />
 }
 
-export default CreateText
+export default CreateCrossword

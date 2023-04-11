@@ -12,10 +12,9 @@ import { IText, ITextForm } from '@/shared/types/text.types'
 
 import { TextsService } from '@/services/texts.service'
 
-export interface IOptions {
-	value: string
-	label: string
-}
+import { generateSlug } from '@/utils/string/generateSlug'
+
+import { IOptions } from '../select.types'
 
 export const TextForm = ({ coursesNames }: { coursesNames: IOptions[] }) => {
 	const optionss: IOptions[] = [
@@ -32,7 +31,7 @@ export const TextForm = ({ coursesNames }: { coursesNames: IOptions[] }) => {
 		handleSubmit,
 		register,
 		formState: { errors },
-		getValues,
+		setValue,
 	} = useForm<any>({
 		mode: 'onChange',
 	})
@@ -56,16 +55,16 @@ export const TextForm = ({ coursesNames }: { coursesNames: IOptions[] }) => {
 
 	const handleCourseSelect = (e: OnChangeValue<IOptions, boolean>) => {
 		setCourseIdOption((e as IOptions).value)
-		console.log('selected course ID : ', (e as IOptions).value)
+		//console.log('selected course ID : ', (e as IOptions).value)
 	}
 
 	const handleComplexitySelect = (e: OnChangeValue<IOptions, boolean>) => {
 		setComplexityOption(Number((e as IOptions).value))
-		console.log('selected complexity : ', (e as IOptions).value)
+		//	console.log('selected complexity : ', (e as IOptions).value)
 	}
 
 	return (
-		<form onSubmit={handleSubmit(onSubmit)} className="max-w-md">
+		<form onSubmit={handleSubmit(onSubmit)} className="max-w-2xl">
 			<Heading title="Create new text" />
 			<Select
 				id="1"
@@ -79,6 +78,9 @@ export const TextForm = ({ coursesNames }: { coursesNames: IOptions[] }) => {
 					{...register('title', {
 						required: 'Title is required!',
 						maxLength: 15,
+						onChange: (e) => {
+							setValue('slug', generateSlug(e.target.value))
+						},
 					})}
 					placeholder="Title"
 					error={errors.title}
@@ -91,12 +93,10 @@ export const TextForm = ({ coursesNames }: { coursesNames: IOptions[] }) => {
 					placeholder="Description"
 					error={errors.description}
 				/>
-				<Field
-					{...register('text', {
-						required: 'Text is required!',
-					})}
-					placeholder="Text"
-					error={errors.level}
+
+				<textarea
+					className="w-[100%] h-64"
+					{...register('text', { required: 'Text is required!' })}
 				/>
 				<Field
 					{...register('slug', {
