@@ -1,9 +1,10 @@
 import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
 
-import { ICrosswordFull } from '@/components/ui/crossword-elements/CrosswordList/CrosswordList'
 import { Button } from '@/components/ui/form-elements/Button'
 import { ITextDataFull } from '@/components/ui/text-cards/TextCard/text.interface'
+
+import { ICrosswordFull } from '@/shared/types/crossword.types'
 
 const DynamicTextsList = dynamic(
 	() => import('@/components/ui/text-cards/TextsList/TextsList'),
@@ -40,40 +41,42 @@ export const CourseContent = ({ courseData }: { courseData: ICourseData }) => {
 				Back
 			</Button>
 			{courseData.texts.length > 0 && (
-				<DynamicTextsList list={courseData.texts} />
-			)}
-			{
-				<div className="flex justify-end">
-					<Button
-						colored
-						onClick={(e) => {
-							e.preventDefault()
-							router.push(`/courses/${courseSlug}/texts`, undefined, {
-								shallow: true,
-							})
-						}}
-					>
-						See all
-					</Button>
-				</div>
-			}
-			{courseData.crosswords.length > 0 && (
-				<DynamicCrosswordsList crosswords={courseData.crosswords} />
+				<>
+					<DynamicTextsList list={courseData.texts} />
+					<div className="flex justify-end">
+						<Button
+							colored
+							onClick={(e) => {
+								e.preventDefault()
+								router.push(`/courses/${courseSlug}/texts`, undefined, {
+									shallow: true,
+								})
+							}}
+						>
+							View all
+						</Button>
+					</div>
+				</>
 			)}
 
-			<div className="flex justify-end">
-				<Button
-					colored
-					onClick={(e) => {
-						e.preventDefault()
-						router.push(`/courses/${courseSlug}/crosswords`, undefined, {
-							shallow: true,
-						})
-					}}
-				>
-					See all
-				</Button>
-			</div>
+			{courseData.crosswords.length > 0 && (
+				<>
+					<DynamicCrosswordsList crosswords={courseData.crosswords} />
+					<div className="flex justify-end">
+						<Button
+							colored
+							onClick={(e) => {
+								e.preventDefault()
+								router.push(`/courses/${courseSlug}/crosswords`, undefined, {
+									shallow: true,
+								})
+							}}
+						>
+							View all
+						</Button>
+					</div>
+				</>
+			)}
 		</div>
 	)
 }

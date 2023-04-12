@@ -29,7 +29,7 @@ const TextsList: FC<{ list: ITextDataFull[]; full?: boolean }> = ({
 	}, [])
 
 	const textData = full ? list : list.slice(0, 3)
-	console.count('Text List rendered ' + full)
+	//console.count('Text List rendered ' + full)
 	return (
 		<>
 			<Heading title="Texts" className="py-8" />

@@ -1,8 +1,9 @@
 import Image from 'next/image'
 import router, { useRouter } from 'next/router'
 
+import { ICrosswordFull } from '@/shared/types/crossword.types'
+
 import { Button } from '../../form-elements/Button'
-import { ICrosswordFull } from '../CrosswordList/CrosswordList'
 
 export const CrosswordCard = ({
 	crossword,
@@ -15,7 +16,7 @@ export const CrosswordCard = ({
 	const { title, imageURL, description, complexity, slug } = crossword
 	/*p-[50px] grow-0 shrink-0 basis-[calc(100%/3)]    basis-full*/
 	return (
-		<div className="bg-light-400/[.5]  rounded-3xl     ">
+		<div className="bg-light-400/[.5]  rounded-3xl h-full ">
 			<div className="p-10 w-11/12 m-auto flex flex-col min-h-full  ">
 				<div className="font-bold">{title}</div>
 				<div className="flex-auto w-full">
@@ -28,8 +29,8 @@ export const CrosswordCard = ({
 					/>
 					<div>{description}</div>
 					{/*<div className="">{text.slice(0, 40)}...</div>*/}
-					<div>{complexity}</div>
 				</div>
+				<div>{complexity}</div>
 				<Button
 					colored
 					onClick={() =>

@@ -6,7 +6,7 @@ import { FC } from 'react'
 
 import { useAuth } from '@/hooks/useAuth'
 
-import { SkeletonLoader } from '../../SkeletonLoader'
+import { SkeletonLoader } from '../../skeleton-loader/SkeletonLoader'
 import { IUploadField } from '../form.interface'
 import s from '../form.module.scss'
 

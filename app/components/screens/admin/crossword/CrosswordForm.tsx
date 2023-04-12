@@ -32,10 +32,8 @@ export const CrosswordForm = ({
 	coursesNames: IOptions[]
 	level?: string
 }) => {
-	const [options, setOptions] = useState(optionsNumber)
 	const [crossData, setCrossData] = useState({ across: {}, down: {} })
-	const [levelOption] = useState(optionsLevel)
-	const [optDirection, setOptDirection] = useState(optionsDirection)
+
 	const {
 		handleSubmit,
 		register,
@@ -78,7 +76,7 @@ export const CrosswordForm = ({
 		<>
 			<form onSubmit={handleSubmit(onSubmit)} className="max-w-7xl">
 				<div className="max-w-xl">
-					<Heading title="Create new crossword" />
+					<Heading className="pt-6" title="Create new crossword" />
 					<p>Course</p>
 
 					<Controller
@@ -136,7 +134,7 @@ export const CrosswordForm = ({
 									id="6"
 									name="complexity"
 									className="w-48"
-									options={options}
+									options={optionsNumber}
 									onChange={(selectedOption: any) => {
 										onChange(selectedOption.value)
 									}}
@@ -154,7 +152,7 @@ export const CrosswordForm = ({
 									id="5"
 									name="complexity"
 									className="w-48"
-									options={levelOption}
+									options={optionsLevel}
 									onChange={(selectedOption: any) => {
 										onChange(selectedOption.value)
 									}}
@@ -205,7 +203,7 @@ export const CrosswordForm = ({
 										id="3"
 										name="direction"
 										className="w-48"
-										options={optDirection}
+										options={optionsDirection}
 										placeholder="Select"
 										onChange={(selectedOption: any) => {
 											onChange(selectedOption.value)
@@ -281,7 +279,7 @@ export const CrosswordForm = ({
 				</Button>
 			</form>
 
-			{Object.keys(crossData).length > 0 && (
+			{Object.keys(crossData.across).length > 0 && (
 				<MyCrossword
 					title={'Test crossword'}
 					description={'New crossword'}
