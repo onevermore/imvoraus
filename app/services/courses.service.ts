@@ -16,8 +16,14 @@ export const CoursesService = {
 		return data
 	},
 
-	async getAllCourses() {
-		const { data } = await axiosClassic.get(getCoursesUrl(''))
+	async getAllCourses(searchTerm?: string) {
+		const { data } = await axiosClassic.get(getCoursesUrl(''), {
+			params: searchTerm
+				? {
+						searchTerm,
+				  }
+				: {},
+		})
 		return data
 	},
 

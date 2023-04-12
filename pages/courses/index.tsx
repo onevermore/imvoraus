@@ -1,15 +1,9 @@
-import { GetStaticProps, NextPage } from 'next'
-import dynamic from 'next/dynamic'
-import { useRouter } from 'next/router'
+import { NextPage } from 'next'
 
-import { Button } from '@/components/ui/form-elements/Button'
-import { ICourseCard } from '@/components/ui/text-cards/CourseCard/course-card.interface'
-import CoursesList from '@/components/ui/text-cards/CoursesList/CoursesList'
+import CoursesSearchable from '@/components/screens/courses/CoursesSearchable'
+import { Heading } from '@/components/ui/heading/Heading'
 
-import { CoursesService } from '@/services/courses.service'
-
-import { getAdminUrl } from '@/config/url.config'
-
+/*
 const DynamicCoursesList = dynamic(
 	() => import('@/components/ui/text-cards/CoursesList/CoursesList'),
 	{
@@ -20,7 +14,7 @@ const DynamicCoursesList = dynamic(
 export const getStaticProps: GetStaticProps = async () => {
 	try {
 		const data = await CoursesService.getAllCourses()
-		//console.log('MY DATA IS ==================================== ', data)
+
 		const coursee: ICourseCard[] = data.map((course: ICourseCard) => ({
 			_id: course._id,
 			title: course.title,
@@ -42,29 +36,12 @@ export const getStaticProps: GetStaticProps = async () => {
 		}
 	}
 }
-/*
-export interface ICourseData {
-	id: number
-	title: string
-	text: string
-	dictionary: Array<string>
-}
-*/
-
-const Courses: NextPage<{ courses: ICourseCard[] }> = ({ courses }) => {
-	const { push } = useRouter()
-
-	const onClick = () => {
-		push(getAdminUrl('/course/create'))
-	}
-	//console.log('ccc = ', courses)
+*/ // <{ courses: ICourseCard[] }>
+const Courses: NextPage = () => {
 	return (
 		<div>
-			<span> Courses page </span>
-			<Button colored onClick={onClick}>
-				Add new course
-			</Button>
-			<CoursesList courses={courses || []} />
+			<Heading title="Courses" className="mb-4" />
+			<CoursesSearchable />
 		</div>
 	)
 }

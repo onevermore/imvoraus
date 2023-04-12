@@ -35,3 +35,17 @@ export interface ICrossCommon {
 	description: string
 	crossData: ICrossData[]
 }
+
+export interface ICrosswordFull {
+	_id: string
+	title: string
+	description: string
+	level: string
+	data: ICrossData2[]
+	complexity: number
+	slug: string
+	course: string
+	createdAt: string
+	updatedAt: string
+	__v: number
+}

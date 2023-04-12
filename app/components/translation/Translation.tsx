@@ -1,7 +1,7 @@
 import { useTranslation } from './useTranslation'
 import { FC } from 'react'
 
-import { SkeletonLoader } from '@/components/ui/SkeletonLoader'
+import { SkeletonLoader } from '../ui/skeleton-loader/SkeletonLoader'
 
 export const Translation: FC<{ word: string }> = ({ word }) => {
 	const { isLoading, data, error } = useTranslation()

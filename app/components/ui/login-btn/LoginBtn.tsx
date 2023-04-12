@@ -9,7 +9,7 @@ export const LoginBtn = () => {
 	if (session) {
 		return (
 			<div className="flex justify-center gap-5 px-8 sm:px-3">
-				<div className="self-start">
+				<div className="self-start w-8">
 					{' '}
 					{session.user && session.user.image && (
 						<Image

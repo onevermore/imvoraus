@@ -6,7 +6,7 @@
 	}
 
 	> input {
-		@apply text-white placeholder:text-gray-600 block w-full bg-transparent outline-none;
+		@apply placeholder:text-gray-600 block w-full bg-transparent outline-none;
 	}
 
 	&:focus-within {

@@ -23,7 +23,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 		}
 	} catch (e) {
 		// console.log(errorCatch(e))
-		console.log('error ===== ', e)
+		//console.log('error ===== ', e)
 		return {
 			paths: [],
 			fallback: false,
