@@ -39,7 +39,7 @@ export const MyCrossword = ({
 			cross.current.reset()
 		}
 	}
-	console.log('.... ', crossData)
+	//	console.log('.... ', crossData)
 	return (
 		<>
 			<h1>{/*My Text number <b>{textId}</b> for Course: <b>{slug}</b>*/}</h1>

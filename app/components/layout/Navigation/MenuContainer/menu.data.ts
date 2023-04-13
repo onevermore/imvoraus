@@ -16,7 +16,7 @@ export const firstMenu: IMenu = {
 		{
 			icon: 'MdRefresh',
 			link: '/courses',
-			title: 'Our Courses',
+			title: 'Courses',
 		},
 		{
 			icon: 'MdLocalFireDepartment',
