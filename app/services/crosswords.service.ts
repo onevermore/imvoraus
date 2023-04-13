@@ -1,6 +1,7 @@
 import { axiosClassic } from 'api/interceptors'
 
-import { ICross } from '@/shared/types/crossword.types'
+import { ICrossForm } from '@/components/screens/admin/crossword/CrosswordForm'
+
 import { IText } from '@/shared/types/text.types'
 
 import { getCrosswordsUrl } from '@/config/api.config'
@@ -18,7 +19,7 @@ export const CrosswordsService = {
 		return data
 	},
 
-	async createCrossword(crossword: ICross) {
+	async createCrossword(crossword: ICrossForm) {
 		const { data } = await axiosClassic.post(getCrosswordsUrl(''), crossword)
 		return data
 	},

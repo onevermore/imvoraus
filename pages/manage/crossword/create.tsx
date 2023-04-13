@@ -1,7 +1,10 @@
 import { GetStaticProps, NextPage } from 'next'
 
 import { CrosswordForm } from '@/components/screens/admin/crossword/CrosswordForm'
-import { IOptions } from '@/components/screens/admin/select.types'
+import {
+	ILevelsOption,
+	IOptions,
+} from '@/components/screens/admin/select.types'
 import { ICourseCard2 } from '@/components/ui/text-cards/CourseCard/course-card.interface'
 
 import { CoursesService } from '@/services/courses.service'
@@ -9,6 +12,12 @@ import { CoursesService } from '@/services/courses.service'
 export const getStaticProps: GetStaticProps = async () => {
 	try {
 		const allCourses = await CoursesService.getAllCourses()
+		const courseLevels = allCourses.map(
+			(v: Omit<ICourseCard2, 'imageURL'>) => ({
+				value: v._id,
+				level: v.level,
+			})
+		)
 		const coursesNames = allCourses.map(
 			(v: Omit<ICourseCard2, 'imageURL'>) => ({
 				value: v._id,
@@ -16,7 +25,7 @@ export const getStaticProps: GetStaticProps = async () => {
 			})
 		)
 		return {
-			props: { coursesNames },
+			props: { coursesNames, courseLevels },
 		}
 	} catch (e) {
 		// console.log(e)
@@ -27,10 +36,19 @@ export const getStaticProps: GetStaticProps = async () => {
 		}
 	}
 }
-const CreateCrossword: NextPage<{ coursesNames: IOptions[] }> = ({
+
+interface ICreateCrossForm {
+	coursesNames: IOptions[]
+	courseLevels: ILevelsOption[]
+}
+
+const CreateCrossword: NextPage<ICreateCrossForm> = ({
 	coursesNames,
+	courseLevels,
 }) => {
-	return <CrosswordForm coursesNames={coursesNames} />
+	return (
+		<CrosswordForm coursesNames={coursesNames} courseLevels={courseLevels} />
+	)
 }
 
 export default CreateCrossword

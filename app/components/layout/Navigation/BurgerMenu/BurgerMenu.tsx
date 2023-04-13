@@ -3,6 +3,8 @@ import { FC, useState } from 'react'
 
 import { useOutsideClick } from '@/hooks/useOutsideClick'
 
+import { firstMenu } from '../MenuContainer/menu.data'
+
 import s from './BurgerMenu.module.scss'
 
 export const BurgerMenu: FC = () => {
@@ -55,26 +57,15 @@ export const BurgerMenu: FC = () => {
 				}  `}
 			>
 				<ul className="text-base text-gray-700 ">
-					<li className="uppercase">
-						<Link href="/">
-							<a className=" py-2 pt-4 block hover:text-gray-500">Home</a>
-						</Link>
-					</li>
-					<li className="uppercase">
-						<li className="uppercase">
-							<Link href="/profile">
-								<a className=" py-2 block hover:text-gray-500">Pricing</a>
+					{firstMenu.items.map((item, i) => (
+						<li key={i} className="uppercase">
+							<Link href={item.link}>
+								<a className=" py-2 pt-4 block hover:text-gray-500">
+									{item.title}
+								</a>
 							</Link>
 						</li>
-						<Link href="/courses">
-							<a className=" py-2 block hover:text-gray-500">Courses</a>
-						</Link>
-					</li>
-					<li className="uppercase">
-						<Link href="/profile">
-							<a className=" py-2 block hover:text-gray-500">Profile</a>
-						</Link>
-					</li>
+					))}
 				</ul>
 			</nav>
 		</div>

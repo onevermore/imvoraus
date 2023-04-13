@@ -1,6 +1,6 @@
 export interface ICrossData {
 	id: number
-	direction: 'across' | 'down'
+	direction: 'across' | 'down' | ''
 	clue: string
 	answer: string
 	row: number

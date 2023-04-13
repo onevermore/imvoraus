@@ -5,6 +5,7 @@ export interface IButton extends ButtonHTMLAttributes<HTMLButtonElement> {
 	className?: string
 	size?: 'small' | 'medium' | 'large'
 	colored?: boolean
+	rose?: boolean
 }
 /*
 export interface IButtonn {
@@ -17,6 +18,7 @@ export interface IButtonn {
 export interface IFieldProps {
 	placeholder: string
 	error?: any
+	inputStyle?: any
 }
 //FieldError | undefined
 type TypeInputPropsField = InputHTMLAttributes<HTMLInputElement> & IFieldProps
