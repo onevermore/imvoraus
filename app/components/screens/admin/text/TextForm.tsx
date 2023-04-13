@@ -14,7 +14,7 @@ import { TextsService } from '@/services/texts.service'
 
 import { generateSlug } from '@/utils/string/generateSlug'
 
-import { IOptions } from '../select.types'
+import { IOptions, IOptions2 } from '../select.types'
 
 export const TextForm = ({ coursesNames }: { coursesNames: IOptions[] }) => {
 	const optionss: IOptions[] = [
@@ -54,7 +54,7 @@ export const TextForm = ({ coursesNames }: { coursesNames: IOptions[] }) => {
 	}
 
 	const handleCourseSelect = (e: OnChangeValue<IOptions, boolean>) => {
-		setCourseIdOption((e as IOptions).value)
+		setCourseIdOption((e as IOptions2).value)
 		//console.log('selected course ID : ', (e as IOptions).value)
 	}
 
