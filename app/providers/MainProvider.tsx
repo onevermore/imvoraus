@@ -5,8 +5,10 @@ import {
 	QueryClientProvider,
 } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
+import { NextAdapter } from 'next-query-params'
 import { FC, PropsWithChildren, useState } from 'react'
 import { Provider } from 'react-redux'
+import { QueryParamProvider } from 'use-query-params'
 
 import { Layout } from '@/components/layout/Layout'
 
@@ -26,9 +28,11 @@ export const MainProvider: FC<PropsWithChildren> = ({ children }) => {
 	return (
 		<Provider store={store}>
 			<QueryClientProvider client={queryClient}>
-				<ReduxToast />
-				<Layout>{children}</Layout>
-				<ReactQueryDevtools initialIsOpen={false} />
+				<QueryParamProvider adapter={NextAdapter}>
+					<ReduxToast />
+					<Layout>{children}</Layout>
+					<ReactQueryDevtools initialIsOpen={false} />
+				</QueryParamProvider>
 			</QueryClientProvider>
 		</Provider>
 	)

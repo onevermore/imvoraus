@@ -2,6 +2,7 @@ import { axiosClassic } from 'api/interceptors'
 import { GetStaticPaths, GetStaticProps, NextPage } from 'next'
 import { useRouter } from 'next/router'
 
+import { TextWithDictionary } from '@/components/TextWithDictionary/TextWithDictionary'
 import { Heading } from '@/components/ui/heading/Heading'
 
 export interface IText {
@@ -15,6 +16,12 @@ export interface IText {
 	createdAt: string
 	updatedAt: string
 	__v: number
+}
+
+export interface ITextPart {
+	_id: string
+	title: string
+	text: string
 }
 
 /*
@@ -49,26 +56,26 @@ export const getStaticProps: GetStaticProps = async (context) => {
 	const mytext: Partial<IText> = {
 		_id,
 		title,
-		slug,
-		description,
+		//slug,
+		//	description,
 		text,
-		complexity,
+		//complexity,
 	}
 
 	return {
 		props: {
-			text: mytext,
+			textData: mytext,
 		},
 	}
 }
 
-const Text: NextPage<{ text: Partial<IText> }> = ({ text }) => {
+const Text: NextPage<{ textData: ITextPart }> = ({ textData }) => {
 	return (
-		<>
-			<h1>{/*My Text number <b>{textId}</b> for Course: <b>{slug}</b>*/}</h1>
-			{text.title && <Heading title={text.title} />}
-			<div className="my-5">{text.text}</div>
-		</>
+		<TextWithDictionary
+			id={textData._id}
+			title={textData.title}
+			text={textData.text}
+		/>
 	)
 }
 

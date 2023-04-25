@@ -2,7 +2,7 @@ import Crossword, {
 	CrosswordImperative,
 	ThemeProvider,
 } from '@jaredreisinger/react-crossword'
-import { useRef } from 'react'
+import { useEffect, useRef } from 'react'
 
 import { ICrossDataCommon } from '@/shared/types/crossword.types'
 
@@ -24,6 +24,7 @@ export interface IMyCros {
 	onCrosswordCorrect?: () => void
 	title: string
 	description: string
+	filled?: boolean
 }
 
 export const MyCrossword = ({
@@ -31,8 +32,14 @@ export const MyCrossword = ({
 	onCrosswordCorrect,
 	title,
 	description,
+	filled,
 }: IMyCros) => {
 	const cross = useRef<CrosswordImperative>(null)
+
+	useEffect(() => {
+		if (filled) cross?.current?.fillAllAnswers()
+		//	if (!filled) cross?.current?.reset()
+	}, [crossData])
 
 	const onReset = () => {
 		if (cross.current) {
@@ -53,9 +60,11 @@ export const MyCrossword = ({
 						onCrosswordCorrect={onCrosswordCorrect}
 					/>
 				</ThemeProvider>
-				<Button colored onClick={onReset}>
-					Reset
-				</Button>
+				{!filled && (
+					<Button colored onClick={onReset}>
+						Reset
+					</Button>
+				)}
 			</div>
 		</>
 	)

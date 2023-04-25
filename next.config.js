@@ -17,6 +17,7 @@ const nextConfig = {
 			{
 				source: '/apii/:path*',
 				destination: 'https://nestjsapp-production.up.railway.app/api/:path*',
+				//destination: 'http://localhost:3333/api/:path*',
 			},
 		]
 	},

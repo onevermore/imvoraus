@@ -1,4 +1,5 @@
 import { NextPage } from 'next'
+import dynamic from 'next/dynamic'
 
 import CoursesSearchable from '@/components/screens/courses/CoursesSearchable'
 import { Heading } from '@/components/ui/heading/Heading'
@@ -37,11 +38,19 @@ export const getStaticProps: GetStaticProps = async () => {
 	}
 }
 */ // <{ courses: ICourseCard[] }>
+
+const DynamicSeacrhableCourses = dynamic(
+	() => import('@/components/screens/courses/CoursesSearchable'),
+	{
+		ssr: false,
+	}
+)
+
 const Courses: NextPage = () => {
 	return (
 		<div>
 			<Heading title="Courses" className="mb-4" />
-			<CoursesSearchable />
+			<DynamicSeacrhableCourses />
 		</div>
 	)
 }

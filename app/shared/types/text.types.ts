@@ -21,6 +21,7 @@ export interface ITextData {
 	description: string
 	text: string
 	complexity: number
+	_id: string
 }
 
 export interface ITextDataFull {
@@ -34,4 +35,5 @@ export interface ITextDataFull {
 	createdAt: string
 	updatedAt: string
 	__v: number
+	_id: string
 }

@@ -3,8 +3,11 @@ import * as MaterialIcons from 'react-icons/md'
 
 import { TypeMaterialIcon } from '@/shared/types/icon.types'
 
-export const MaterialIcon: FC<{ name: TypeMaterialIcon }> = ({ name }) => {
+export const MaterialIcon: FC<{
+	name: TypeMaterialIcon
+	classname?: string
+}> = ({ name, classname }) => {
 	const IconComponent = MaterialIcons[name]
 
-	return <IconComponent /> || <MaterialIcons.MdError />
+	return <IconComponent className={classname} /> || <MaterialIcons.MdError />
 }

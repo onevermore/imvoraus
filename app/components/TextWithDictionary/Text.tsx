@@ -26,7 +26,12 @@ const Text: FC<ITooltipProps> = ({ text, onClick }) => {
 	return (
 		<div>
 			{text.split(' ').map((value, i) => (
-				<span key={i}>
+				<span
+					key={i}
+					data-tooltip-id="foo"
+					data-tooltip-content={deletePunct(value)}
+					data-tooltip-variant="error"
+				>
 					<span
 						className={cn({
 							[s.active]: isOver === i,
@@ -39,7 +44,7 @@ const Text: FC<ITooltipProps> = ({ text, onClick }) => {
 						onMouseOver={() => handleMouseOver(i, deletePunct(value))}
 						onMouseOut={() => {
 							setIsOver(null)
-							ReactTooltip.hide()
+							//ReactTooltip.hide()
 						}}
 					>
 						{value}
