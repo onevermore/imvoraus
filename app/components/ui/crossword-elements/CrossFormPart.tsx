@@ -9,8 +9,6 @@ import { Button } from '../form-elements/Button'
 import Field from '../form-elements/Field'
 
 interface ICrossFormPart {
-	field: any
-	fields: any[]
 	index: number
 	register: any
 	remove: any
@@ -19,13 +17,11 @@ interface ICrossFormPart {
 }
 
 export const CrossFormPart = ({
-	field,
 	index,
 	register,
 	remove,
 	errors,
 	control,
-	fields,
 }: ICrossFormPart) => {
 	const [isShow, setIsShow] = useState(true)
 
@@ -79,7 +75,7 @@ export const CrossFormPart = ({
 							style={{ maxWidth: '300px' }}
 						/>
 						<Field
-							{...register(`data.${index}.answer` as const, {
+							{...register(`data.${index}.answer`, {
 								required: 'Answer is required!',
 							})}
 							placeholder="Answer"
@@ -91,6 +87,7 @@ export const CrossFormPart = ({
 						<Controller
 							control={control}
 							name={`data.${index}.direction`}
+							rules={{ required: true }}
 							render={({ field: { onChange } }) => (
 								<Select
 									id="3"
@@ -128,11 +125,9 @@ export const CrossFormPart = ({
 							style={{ width: '80px' }}
 						/>
 						<div className="flex items-center">
-							{fields.length !== 1 && (
-								<Button rose onClick={() => remove(index)}>
-									Remove
-								</Button>
-							)}
+							<Button rose onClick={() => remove(index)}>
+								Remove
+							</Button>
 						</div>
 					</div>
 				)}

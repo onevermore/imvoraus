@@ -16,13 +16,13 @@ export const CoursesService = {
 		return data
 	},
 
-	async getAllCourses(searchTerm?: string) {
+	async getAllCourses(searchTerm?: string, level?: string) {
+		let filterParams = {}
+		if (searchTerm) filterParams = { searchTerm }
+		if (level) filterParams = { ...filterParams, level }
+		//	console.log('filter ==== ', filterParams)
 		const { data } = await axiosClassic.get(getCoursesUrl(''), {
-			params: searchTerm
-				? {
-						searchTerm,
-				  }
-				: {},
+			params: filterParams,
 		})
 		return data
 	},

@@ -30,7 +30,7 @@ const CrosswordList = ({
 	const router = useRouter()
 	const { slug: courseSlug } = router.query
 	const { push } = router
-	console.count('Cross List rendered ' + full)
+	//	console.count('Cross List rendered ' + full)
 	return (
 		<>
 			<Heading title="Crosswords" className="py-8" />

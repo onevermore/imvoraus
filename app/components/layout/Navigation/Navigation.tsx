@@ -5,6 +5,7 @@ import { SearchBar } from './SearchBar'
 import { FC } from 'react'
 
 import { LoginBtn } from '@/components/ui/login-btn/LoginBtn'
+import { SignBtn } from '@/components/ui/login-btn/SignBtn'
 
 import s from './Navigation.module.scss'
 
@@ -14,7 +15,7 @@ const Navigation: FC = () => {
 			<Logo />
 			<BurgerMenu />
 			<MenuContainer />
-			<LoginBtn />
+			<SignBtn />
 			<SearchBar />
 		</div>
 	)

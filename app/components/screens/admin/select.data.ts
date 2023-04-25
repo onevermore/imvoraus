@@ -1,4 +1,4 @@
-import { IOptions } from './select.types'
+import { ILevelsOption, IOptions, IOptions2 } from './select.types'
 
 export const optionsNumber: IOptions[] = [
 	{ value: 1, label: '1' },
@@ -9,6 +9,15 @@ export const optionsNumber: IOptions[] = [
 ]
 
 export const optionsLevel: IOptions[] = [
+	{ value: 'A1', label: 'A1' },
+	{ value: 'A2', label: 'A2' },
+	{ value: 'B1', label: 'B1' },
+	{ value: 'B2', label: 'B2' },
+	{ value: 'C1', label: 'C1' },
+]
+
+export const optionsLevel2: IOptions2[] = [
+	{ value: '', label: 'All' },
 	{ value: 'A1', label: 'A1' },
 	{ value: 'A2', label: 'A2' },
 	{ value: 'B1', label: 'B1' },

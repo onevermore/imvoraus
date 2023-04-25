@@ -51,7 +51,7 @@ export const CrosswordForm = ({
 	const {
 		handleSubmit,
 		register,
-		formState: { errors },
+		formState: { errors, isValid },
 		setValue,
 		control,
 		getValues,
@@ -81,11 +81,27 @@ export const CrosswordForm = ({
 
 	const handleGenerateCross = () => {
 		const transformedCrossData = convertCrossData(getValues('data'))
-		//	console.log('form values === ', getValues())
-		setCrossData(() => transformedCrossData)
+		console.log('form values === ', getValues('data'))
+		setCrossData(transformedCrossData)
 	}
 
-	const selectValue = watch('course')
+	//	const selectValue = watch('course')
+	const isSubmitDisabled =
+		!isValid ||
+		!!errors.course ||
+		!!errors.title ||
+		!!errors.slug ||
+		!!errors.description ||
+		fields.length < 1 ||
+		!!errors.complexity ||
+		fields.some(
+			(field, index) =>
+				errors.data?.[index]?.id ||
+				errors.data?.[index]?.clue ||
+				errors.data?.[index]?.answer ||
+				errors.data?.[index]?.direction
+		)
+	//fields.some((field) => !field.clue || !field.answer || !field.direction) ||
 
 	return (
 		<>
@@ -163,6 +179,7 @@ export const CrosswordForm = ({
 						<Controller
 							control={control}
 							name={`complexity`}
+							rules={{ required: true }}
 							render={({ field: { onChange } }) => (
 								<Select
 									id="6"
@@ -182,13 +199,11 @@ export const CrosswordForm = ({
 					{fields.map((field, index, f) => (
 						<CrossFormPart
 							key={field.id}
-							field={field}
 							index={index}
 							register={register}
 							remove={remove}
 							errors={errors}
 							control={control}
-							fields={f}
 						/>
 					))}
 				</div>
@@ -220,17 +235,19 @@ export const CrosswordForm = ({
 					>
 						Generate Cross
 					</Button>
-					<Button colored type="submit">
+					<Button colored type="submit" disabled={isSubmitDisabled}>
 						Create
 					</Button>
 				</div>
 			</form>
 
-			{Object.keys(crossData.across).length > 0 && (
+			{(Object.keys(crossData.across).length > 0 ||
+				Object.keys(crossData.down).length > 0) && (
 				<MyCrossword
 					title={'Test crossword'}
 					description={'New crossword'}
 					crossData={crossData}
+					filled
 				/>
 			)}
 		</>

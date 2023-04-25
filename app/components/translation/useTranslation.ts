@@ -10,7 +10,7 @@ export const useTranslation = () => {
 		() => TranslationService.getTranslateWord(word),
 		{
 			//select: ({ data }) => data.responseData.translatedText,
-			enabled: !!word,
+			enabled: word.length > 0,
 		}
 	)
 
