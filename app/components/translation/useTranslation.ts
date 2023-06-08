@@ -14,6 +14,6 @@ export const useTranslation = () => {
 		}
 	)
 
-	console.log('w translateord data: ', data)
+	//console.log('useTranslation data: ', data)
 	return { isSuccess, data, word, error, setWord, isLoading }
 }

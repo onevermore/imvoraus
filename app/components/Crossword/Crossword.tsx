@@ -49,7 +49,7 @@ const data = {
 
 export const Crosswordd: FC = () => {
 	const onAllCorrect = () => {
-		confirm('good job!')
+		//	confirm('good job!')
 	}
 
 	const themeContext = {

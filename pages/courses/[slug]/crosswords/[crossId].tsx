@@ -32,7 +32,7 @@ const Crossworddd: NextPage<{ crossword: ICrossCommon }> = ({ crossword }) => {
 	const s = convertCrossData(crossword.crossData)
 
 	const onAllCorrect = () => {
-		confirm('good job!')
+		//	confirm('good job!')
 	}
 
 	return (

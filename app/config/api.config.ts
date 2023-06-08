@@ -7,4 +7,5 @@ export const getUserUrl = (string: string) => `/user${string}`
 export const getTextsByCourseURL = (string: string) =>
 	`/texts/by-courses${string}`
 export const getTextsUrl = (string: string) => `/texts${string}`
+export const getDictionaryUrl = (string: string) => `/dictionary${string}`
 export const getCrosswordsUrl = (string: string) => `/crosswords${string}`

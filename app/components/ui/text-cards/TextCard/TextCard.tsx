@@ -2,6 +2,7 @@ import { ITextData } from './text.interface'
 import Image from 'next/image'
 import router, { useRouter } from 'next/router'
 import { FC } from 'react'
+import StarRatingComponent from 'react-star-rating-component'
 
 import { Button } from '../../form-elements/Button'
 
@@ -33,7 +34,15 @@ export const TextCard: FC<ITextData> = ({
 					<div>{description}</div>
 					{/*<div className="">{text.slice(0, 40)}...</div>*/}
 				</div>
-				<div>{complexity}</div>
+
+				<StarRatingComponent
+					name="rate2"
+					editing={false}
+					starCount={5}
+					value={complexity}
+					starColor="#c88ba0"
+					emptyStarColor="#4f4f4f"
+				/>
 				<Button
 					colored
 					onClick={() => router.push(`/courses/${courseSlug}/texts/${slug}`)}

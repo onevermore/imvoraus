@@ -5,6 +5,8 @@ import { useRouter } from 'next/router'
 import { TextWithDictionary } from '@/components/TextWithDictionary/TextWithDictionary'
 import { Heading } from '@/components/ui/heading/Heading'
 
+import { ITextPart } from '@/shared/types/text.types'
+
 export interface IText {
 	_id: string
 	title: string
@@ -16,12 +18,6 @@ export interface IText {
 	createdAt: string
 	updatedAt: string
 	__v: number
-}
-
-export interface ITextPart {
-	_id: string
-	title: string
-	text: string
 }
 
 /*
@@ -52,13 +48,14 @@ export const getStaticProps: GetStaticProps = async (context) => {
 	const textSlug = context.params?.textId
 
 	let { data } = await axiosClassic.get(`/texts/by-slug/${textSlug}`)
-	let { _id, title, slug, description, text, complexity } = data
+	let { _id, title, slug, description, text, complexity, course } = data
 	const mytext: Partial<IText> = {
 		_id,
 		title,
 		//slug,
 		//	description,
 		text,
+		course,
 		//complexity,
 	}
 
@@ -72,9 +69,10 @@ export const getStaticProps: GetStaticProps = async (context) => {
 const Text: NextPage<{ textData: ITextPart }> = ({ textData }) => {
 	return (
 		<TextWithDictionary
-			id={textData._id}
+			_id={textData._id}
 			title={textData.title}
 			text={textData.text}
+			course={textData.course}
 		/>
 	)
 }

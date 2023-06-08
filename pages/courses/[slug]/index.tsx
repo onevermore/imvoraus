@@ -11,6 +11,8 @@ import { ICourse } from '@/shared/types/create-course.types'
 export const getStaticPaths: GetStaticPaths = async () => {
 	//	const data = await CoursesService.getAllCourses()
 
+	//const courses = await CoursesService.getAllCourses()
+
 	try {
 		const courses = await CoursesService.getAllCourses()
 		const paths = courses.map((g: ICourse) => ({
@@ -24,6 +26,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 	} catch (e) {
 		// console.log(errorCatch(e))
 		//console.log('error ===== ', e)
+
 		return {
 			paths: [],
 			fallback: false,

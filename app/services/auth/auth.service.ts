@@ -8,12 +8,13 @@ import { API_URL, getAuthUrl } from '@/config/api.config'
 import { IAuthResponse } from '@/store/user/user.interface'
 
 export const AuthService = {
-	async register(email: string, password: string) {
+	async register(email: string, password: string, birthdate: Date) {
 		const response = await axios.post<IAuthResponse>(
 			`${API_URL}${getAuthUrl('/register')}`,
 			{
 				email,
 				password,
+				birthdate,
 			}
 		)
 

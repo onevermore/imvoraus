@@ -9,12 +9,15 @@
 
 			> button {
 				&:first-child {
-					@apply rounded-r-none;
-				}
-
-				&:last-child {
 					@apply ml-2 rounded-xl opacity-80 hover:opacity-100 transition-opacity bg-primary p-4;
 				}
+
+				/*	&:last-child {
+					@apply rounded-r-none;
+				}*/
+			}
+			.active {
+				@apply ml-2 rounded-xl opacity-80 hover:opacity-100 transition-opacity bg-primary p-4;
 			}
 		}
 	}

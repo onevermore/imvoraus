@@ -9,6 +9,8 @@ import { MaterialIcon } from '@/components/ui/MaterialIcon'
 
 import { useAuth } from '@/hooks/useAuth'
 
+import { Role } from '@/store/user/user.interface'
+
 import s from './Menu.module.scss'
 
 export const Menu: FC<{ menu: IMenu }> = ({ menu: { items } }) => {
@@ -19,13 +21,13 @@ export const Menu: FC<{ menu: IMenu }> = ({ menu: { items } }) => {
 			{items.map((item) => (
 				<MenuItem item={item} key={item.link} />
 			))}
-			{user?.isAdmin && (
+			{user?.roles.includes(Role.Admin) && (
 				<li
 					className={cn({
-						[s.active]: asPath === '/manage',
+						[s.active]: asPath.startsWith('/manage'),
 					})}
 				>
-					<Link href={'/manage'}>
+					<Link href={'/manage/courses'}>
 						<a>
 							<MaterialIcon name={'MdDashboard'} />
 							<span>{'AdminPanel'}</span>

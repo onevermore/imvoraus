@@ -46,7 +46,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 		}
 	} catch (e) {
 		// console.log(errorCatch(e))
-		console.log('error ===== ', e)
+		//	console.log('error in courses/[slug]/texts ===== ', e)
 		return {
 			paths: [],
 			fallback: false,
@@ -55,6 +55,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 }
 
 const CourseTexts: NextPage<any> = ({ courseTexts }) => {
+	//	console.log('courses/[slug]/texts rendered')
 	return (
 		<div>
 			<DynamicTextsList list={courseTexts} full />

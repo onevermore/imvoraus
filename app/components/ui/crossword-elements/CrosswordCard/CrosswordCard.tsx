@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import router, { useRouter } from 'next/router'
+import StarRatingComponent from 'react-star-rating-component'
 
 import { ICrosswordFull } from '@/shared/types/crossword.types'
 
@@ -30,7 +31,14 @@ export const CrosswordCard = ({
 					<div>{description}</div>
 					{/*<div className="">{text.slice(0, 40)}...</div>*/}
 				</div>
-				<div>{complexity}</div>
+				<StarRatingComponent
+					name="rate2"
+					editing={false}
+					starCount={5}
+					value={complexity}
+					starColor="#5ab1bc"
+					emptyStarColor="#4f4f4f"
+				/>
 				<Button
 					colored
 					onClick={() =>

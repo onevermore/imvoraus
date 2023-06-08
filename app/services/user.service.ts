@@ -2,17 +2,21 @@ import { axiosClassic } from 'api/interceptors'
 
 import { getUserUrl } from '@/config/api.config'
 
+import { Role } from '@/store/user/user.interface'
+
 interface IUser {
 	_id: string
-	isAdmin: boolean
+	/*isAdmin: boolean*/
 	avatarURL: string
 	email: string
 	password: string
 	username: string
+	birthdate: Date
+	roles: Role[]
 }
 
 export interface IUserEditInput
-	extends Omit<IUser, '_id' | 'email' | 'password' | 'isAdmin' | 'avatarURL'> {}
+	extends Omit<IUser, '_id' | 'email' | 'password' | 'avatarURL'> {}
 
 export const UsersService = {
 	async getUserDataByUsername(username: string) {
@@ -33,7 +37,6 @@ export const UsersService = {
 		return axiosClassic.put<string>(getUserUrl(`/${username}`), data)
 	},
 
-
 	async uploadAvatar(file: FormData, username: string, subfolder: string) {
 		return axiosClassic.post<{ url: string; name: string }>(
 			'/user/avatar',
@@ -48,6 +51,4 @@ export const UsersService = {
 			}
 		)
 	},
-
-
 }

@@ -4,6 +4,8 @@ import { IOptions } from '@/components/screens/admin/select.types'
 import { TextForm } from '@/components/screens/admin/text/TextForm'
 import { ICourseCard2 } from '@/components/ui/text-cards/CourseCard/course-card.interface'
 
+import { NextPageAuth } from '@/shared/types/auth.types'
+
 import { CoursesService } from '@/services/courses.service'
 
 export const getStaticProps: GetStaticProps = async () => {
@@ -28,10 +30,12 @@ export const getStaticProps: GetStaticProps = async () => {
 	}
 }
 
-const CreateText: NextPage<{ coursesNames: IOptions[] }> = ({
+const CreateText: NextPageAuth<{ coursesNames: IOptions[] }> = ({
 	coursesNames,
 }) => {
 	return <TextForm coursesNames={coursesNames} />
 }
+
+CreateText.isUser = true
 
 export default CreateText

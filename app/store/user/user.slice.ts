@@ -8,6 +8,16 @@ import { getStoreLocal } from '@/utils/local-storage/localStorage'
 
 const initialState: IUserInitialState = {
 	//user: { email: 'hello@gmail.com', isAdmin: true, username: 'user2', avatarURL: '' },
+	/*
+		user: {
+		email: 'hello@gmail.com',
+		username: 'user2',
+		_id: 'fdfd1fd1fedfcd12',
+		birthdate: new Date('06061996'),
+		roles: [Role.User],
+	},
+	*/
+
 	user: getStoreLocal('user'),
 	isLoading: false,
 }

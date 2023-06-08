@@ -7,6 +7,8 @@ import {
 } from '@/components/screens/admin/select.types'
 import { ICourseCard2 } from '@/components/ui/text-cards/CourseCard/course-card.interface'
 
+import { NextPageAuth } from '@/shared/types/auth.types'
+
 import { CoursesService } from '@/services/courses.service'
 
 export const getStaticProps: GetStaticProps = async () => {
@@ -42,7 +44,7 @@ interface ICreateCrossForm {
 	courseLevels: ILevelsOption[]
 }
 
-const CreateCrossword: NextPage<ICreateCrossForm> = ({
+const CreateCrossword: NextPageAuth<ICreateCrossForm> = ({
 	coursesNames,
 	courseLevels,
 }) => {
@@ -50,5 +52,5 @@ const CreateCrossword: NextPage<ICreateCrossForm> = ({
 		<CrosswordForm coursesNames={coursesNames} courseLevels={courseLevels} />
 	)
 }
-
+CreateCrossword.isUser = true
 export default CreateCrossword

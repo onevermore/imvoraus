@@ -4,6 +4,7 @@ import { FC, useEffect, useState } from 'react'
 
 import textImage from '@/assets/images/zod.webp'
 
+import { Button } from '../../form-elements/Button'
 import { Heading } from '../../heading/Heading'
 import { TextCard } from '../TextCard/TextCard'
 import { ITextDataFull } from '../TextCard/text.interface'
@@ -57,6 +58,21 @@ const TextsList: FC<{ list: ITextDataFull[]; full?: boolean }> = ({
 					</div>
 				))}
 			</div>
+			{!full && (
+				<div className="flex justify-end">
+					<Button
+						colored
+						onClick={(e) => {
+							e.preventDefault()
+							router.push(`/courses/${courseSlug}/texts`, undefined, {
+								shallow: true,
+							})
+						}}
+					>
+						View all
+					</Button>
+				</div>
+			)}
 		</>
 	)
 }

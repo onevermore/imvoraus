@@ -1,3 +1,4 @@
+import AuthProvider from './AuthProvider/AuthProvider'
 import { ReduxToast } from './ReduxToast'
 import {
 	Hydrate,
@@ -12,9 +13,14 @@ import { QueryParamProvider } from 'use-query-params'
 
 import { Layout } from '@/components/layout/Layout'
 
+import { TypeComponentAuthFields } from '@/shared/types/auth.types'
+
 import { store } from '@/store/store'
 
-export const MainProvider: FC<PropsWithChildren> = ({ children }) => {
+export const MainProvider: FC<TypeComponentAuthFields> = ({
+	children,
+	Component,
+}) => {
 	const [queryClient] = useState(
 		() =>
 			new QueryClient({
@@ -30,7 +36,9 @@ export const MainProvider: FC<PropsWithChildren> = ({ children }) => {
 			<QueryClientProvider client={queryClient}>
 				<QueryParamProvider adapter={NextAdapter}>
 					<ReduxToast />
-					<Layout>{children}</Layout>
+					<AuthProvider Component={Component}>
+						<Layout>{children}</Layout>
+					</AuthProvider>
 					<ReactQueryDevtools initialIsOpen={false} />
 				</QueryParamProvider>
 			</QueryClientProvider>
