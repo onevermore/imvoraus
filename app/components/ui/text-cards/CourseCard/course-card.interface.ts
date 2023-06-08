@@ -6,6 +6,9 @@ export interface ICourseCard {
 	price: number
 	slug: string
 	imageURL: string
+	allowedUsers?: string[]
+	isPublic: boolean
+	ownerId: string
 }
 
 export interface ICourseCard2 extends ICourseCard {

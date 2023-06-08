@@ -14,6 +14,8 @@ import { TextsService } from '@/services/texts.service'
 
 import { generateSlug } from '@/utils/string/generateSlug'
 
+import { getAdminUrl } from '@/config/url.config'
+
 import { IOptions, IOptions2 } from '../select.types'
 
 export const TextForm = ({ coursesNames }: { coursesNames: IOptions[] }) => {
@@ -50,7 +52,7 @@ export const TextForm = ({ coursesNames }: { coursesNames: IOptions[] }) => {
 		}
 
 		await createText.mutateAsync(res)
-		push('/courses')
+		push(getAdminUrl('texts'))
 	}
 
 	const handleCourseSelect = (e: OnChangeValue<IOptions, boolean>) => {

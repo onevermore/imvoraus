@@ -14,6 +14,7 @@ export const optionsLevel: IOptions[] = [
 	{ value: 'B1', label: 'B1' },
 	{ value: 'B2', label: 'B2' },
 	{ value: 'C1', label: 'C1' },
+	{ value: 'C2', label: 'C2' },
 ]
 
 export const optionsLevel2: IOptions2[] = [
@@ -23,6 +24,7 @@ export const optionsLevel2: IOptions2[] = [
 	{ value: 'B1', label: 'B1' },
 	{ value: 'B2', label: 'B2' },
 	{ value: 'C1', label: 'C1' },
+	{ value: 'C2', label: 'C2' },
 ]
 
 export const optionsDirection: IOptions[] = [

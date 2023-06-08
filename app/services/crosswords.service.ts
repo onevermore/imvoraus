@@ -1,4 +1,4 @@
-import { axiosClassic } from 'api/interceptors'
+import axios, { axiosClassic } from 'api/interceptors'
 
 import { ICrossForm } from '@/components/screens/admin/crossword/CrosswordForm'
 
@@ -22,5 +22,9 @@ export const CrosswordsService = {
 	async createCrossword(crossword: ICrossForm) {
 		const { data } = await axiosClassic.post(getCrosswordsUrl(''), crossword)
 		return data
+	},
+
+	async delete(_id: string) {
+		return axios.delete<string>(getCrosswordsUrl(`/${_id}`))
 	},
 }

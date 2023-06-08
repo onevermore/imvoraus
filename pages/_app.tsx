@@ -4,20 +4,20 @@ import { SessionProvider } from 'next-auth/react'
 import type { AppProps } from 'next/app'
 import { MainProvider } from 'providers/MainProvider'
 
+import { TypeComponentAuthFields } from '@/shared/types/auth.types'
+
 import '@/assets/styles/globals.scss'
 
-function MyApp({
-	Component,
-	pageProps: { session, ...pageProps },
-}: AppProps<{ dehydratedState: DehydratedState }>) {
+type TypeAppProps = AppProps<{ dehydratedState: DehydratedState }> &
+	TypeComponentAuthFields
+
+function MyApp({ Component, pageProps }: TypeAppProps) {
 	return (
-		<SessionProvider session={session}>
-			<MainProvider>
-				<Hydrate state={pageProps.dehydratedState}>
-					<Component {...pageProps} />
-				</Hydrate>
-			</MainProvider>
-		</SessionProvider>
+		<MainProvider Component={Component}>
+			<Hydrate state={pageProps.dehydratedState}>
+				<Component {...pageProps} />
+			</Hydrate>
+		</MainProvider>
 	)
 }
 

@@ -5,6 +5,6 @@ import { NextPageAuth } from '@/shared/types/auth.types'
 const ProfilePage: NextPageAuth = () => {
 	return <Profile />
 }
-ProfilePage.isOnlyUser = true
+ProfilePage.isUser = true
 
 export default ProfilePage

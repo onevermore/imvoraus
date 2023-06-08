@@ -6,6 +6,6 @@ const TextEditPage: NextPageAuth = () => {
 	return <TextEdit />
 }
 
-TextEditPage.isOnlyAdmin = true
+TextEditPage.isAdmin = true
 
 export default TextEditPage

@@ -19,13 +19,14 @@ export const Home: FC<IHome> = () => {
 			description="Learn german by watching movies online on Imvoraus"
 		>
 			<DekorHeading text="Learn German" className="text-center" />
+			<h3>Sign up to create a course !</h3>
 			<Options />
-			<div className="my-24 ">
+			{/*	<div className="my-24 ">
 				<div>Try out our new feature:</div>
 				<Button colored onClick={() => router.push(`/dictionary`)}>
 					Dictionary
 				</Button>
-			</div>
+	</div>*/}
 
 			{/*data && (
 				<Image

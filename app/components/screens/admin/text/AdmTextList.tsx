@@ -21,16 +21,16 @@ export const AdmTextList = ({ list }: { list: ITextDataFull[] }) => {
 		<>
 			<Heading title="Texts" className="py-8" />
 			<div className="w-[80%] mx-auto grid md:grid-cols-2 xl:grid-cols-3  gap-5">
-				{queryData.data?.map((text: ITextDataFull, i: number) => (
+				{queryData.data?.texts?.map((myText: ITextDataFull, i: number) => (
 					<div key={i}>
 						<AdmTextCard
 							imageURL={textImage.src}
-							title={text.title}
-							slug={text.slug}
-							description={text.description}
-							text={text.text}
-							complexity={text.complexity}
-							_id={text._id}
+							title={myText.title}
+							slug={myText.slug}
+							description={myText.description}
+							text={myText.text}
+							complexity={myText.complexity}
+							_id={myText._id}
 						/>
 					</div>
 				))}

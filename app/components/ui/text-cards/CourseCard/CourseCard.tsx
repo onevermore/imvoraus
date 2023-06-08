@@ -7,7 +7,7 @@ import { Button } from '../../form-elements/Button'
 
 import s from './CourseCard.module.scss'
 
-export const CourseCard: FC<ICourseCard> = ({
+export const CourseCard: FC<Omit<ICourseCard, 'ownerId'>> = ({
 	_id,
 	title,
 	description,

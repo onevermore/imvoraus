@@ -1,10 +1,19 @@
 import { IUser } from '@/shared/types/user.types'
 
+export enum Role {
+	Admin = 'admin',
+	User = 'user',
+	Super = 'super',
+}
+
 export interface IUserState {
+	_id: string
 	email: string
-	isAdmin: boolean
+	/*isAdmin: boolean*/
 	username: string
-	avatarURL: string
+	//avatarURL: string
+	birthdate: Date
+	roles: Role[]
 }
 
 export interface ITokens {

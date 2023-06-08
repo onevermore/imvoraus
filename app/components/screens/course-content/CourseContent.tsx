@@ -43,19 +43,6 @@ export const CourseContent = ({ courseData }: { courseData: ICourseData }) => {
 			{courseData.texts.length > 0 && (
 				<>
 					<DynamicTextsList list={courseData.texts} />
-					<div className="flex justify-end">
-						<Button
-							colored
-							onClick={(e) => {
-								e.preventDefault()
-								router.push(`/courses/${courseSlug}/texts`, undefined, {
-									shallow: true,
-								})
-							}}
-						>
-							View all
-						</Button>
-					</div>
 				</>
 			)}
 

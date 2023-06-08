@@ -10,6 +10,7 @@ export const Button: FC<PropsWithChildren<IButton>> = ({
 	size = 'small',
 	colored,
 	rose,
+	primary,
 	...rest
 }) => {
 	return (
@@ -18,6 +19,7 @@ export const Button: FC<PropsWithChildren<IButton>> = ({
 				s[size],
 				{ [s.colored]: colored },
 				{ [s.rose]: rose },
+				{ [s.primary]: primary },
 				className
 			)}
 			{...rest}

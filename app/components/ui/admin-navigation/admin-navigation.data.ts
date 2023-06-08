@@ -22,11 +22,11 @@ export const navAdminItems2: INavItem[] = [
 export const navAdminItems: INavItem[] = [
 	{
 		title: 'Courses',
-		link: getAdminUrl('course'),
+		link: getAdminUrl('courses'),
 	},
 	{
 		title: 'Texts',
-		link: getAdminUrl('text'),
+		link: getAdminUrl('texts'),
 	},
 	{
 		title: 'Crosswords',

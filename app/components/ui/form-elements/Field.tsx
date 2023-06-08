@@ -7,8 +7,8 @@ import styles from './form.module.scss'
 const Field = forwardRef<HTMLInputElement, IField>(
 	({ placeholder, error, type = 'text', style, inputStyle, ...rest }, ref) => {
 		if (placeholder === 'Answer') {
-			console.log('error === ', error)
-			console.log('type of error === ', typeof error)
+			//console.log('error === ', error)
+			//	console.log('type of error === ', typeof error)
 		}
 		return (
 			<div className={cn(styles.common, styles.field)} style={style}>

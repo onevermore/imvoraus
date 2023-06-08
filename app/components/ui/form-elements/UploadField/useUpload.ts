@@ -22,7 +22,7 @@ export const useUpload: TypeUpload = (onChange, folder, user) => {
 		(data: FormData) => FileService.upload(data, user?.username, folder),
 		{
 			onSuccess({ data }) {
-				console.log('uiiiii ======= ', data)
+				//	console.log('uiiiii ======= ', data)
 				onChange(data.url)
 			},
 		}

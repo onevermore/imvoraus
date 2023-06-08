@@ -18,7 +18,7 @@ import { ILevelsOption, IOptions2 } from '../admin/select.types'
 
 //import s from './Search.module.scss'
 
-const Search: FC = () => {
+const CoursesSearchable: FC = () => {
 	//	const [searchTerm, setSearchTerm] = useState('')
 	const router = useRouter()
 	//	const { name } = router.query
@@ -40,7 +40,12 @@ const Search: FC = () => {
 		data: myCourses,
 		isLoading,
 	} = useQuery(['search courses list', debouncedSearch, level], () =>
-		CoursesService.getAllCourses(debouncedSearch as string, level)
+		//CoursesService.getAllCourses(debouncedSearch as string, level)
+		CoursesService.getPaginatedCourses({
+			searchTerm: debouncedSearch,
+			level,
+			page: 1,
+		})
 	)
 	/*
 	const filterCoursesSearch = ({ name, level }) => {
@@ -91,9 +96,9 @@ const Search: FC = () => {
 					<CourseSkeleton count={3} />
 				</div>
 			)}
-			{isSuccess && <CoursesList courses={myCourses || []} />}
+			{isSuccess && <CoursesList courses={myCourses.courses || []} />}
 		</div>
 	)
 }
 
-export default Search
+export default CoursesSearchable

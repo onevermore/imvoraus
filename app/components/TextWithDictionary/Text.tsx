@@ -21,6 +21,7 @@ const Text: FC<ITooltipProps> = ({ text, onClick }) => {
 	}
 
 	const handleClick = (val: string) => {
+		//	console.log('click on word = ', val)
 		onClick(val)
 	}
 	return (

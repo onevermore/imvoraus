@@ -35,6 +35,6 @@ const ManageTexts: NextPageAuth<{ textData: ITextDataFull[] }> = ({
 	)
 }
 
-ManageTexts.isOnlyAdmin = true
+ManageTexts.isAdmin = true
 
 export default ManageTexts

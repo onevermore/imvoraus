@@ -12,8 +12,7 @@ interface ITranslate {
 
 const TextDictionary: FC<{
 	list: ITranslate[]
-	setList: (list: ITranslate[]) => void
-}> = memo(({ list, setList }) => {
+}> = memo(({ list }) => {
 	const [isEdit, setIsEdit] = useState(false)
 	const [currEditableWord, setCurrEditableWord] = useState<null | number>(null)
 
@@ -21,7 +20,7 @@ const TextDictionary: FC<{
 
 	const handleDeleteWord = (i: number) => {
 		const newList = list.filter((v, index) => index !== i)
-		setList(newList)
+		//setList(newList)
 	}
 
 	const handleChangeTranslation = (e: any, i: number) => {
@@ -36,7 +35,7 @@ const TextDictionary: FC<{
 				}
 				return row
 			})
-			setList(newListt)
+			//setList(newListt)
 		}
 	}
 

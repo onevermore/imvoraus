@@ -41,12 +41,13 @@ export const TextEdit = () => {
 	useEffect(() => {
 		setComplexity(comp)
 	}, [comp])
+	//console.log('errors = ', errors)
 
 	return (
 		<form onSubmit={handleSubmit(onSubmit)} className="max-w-2xl">
 			<Heading title="Edit text" />
 			{isLoading && <div>isLoading.........</div>}
-			{!isValid && <div>NOT VALID !!!</div>}
+
 			<Field
 				{...register('course', {
 					required: 'Course is required!',
@@ -94,7 +95,7 @@ export const TextEdit = () => {
 				<div></div>
 			</div>
 			<div className="pb-8">
-				<label htmlFor="6">Select an option:</label>
+				<label htmlFor="6">Complexity:</label>
 				<Controller
 					control={control}
 					name={`complexity`}

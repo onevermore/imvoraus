@@ -81,7 +81,7 @@ export const CrosswordForm = ({
 
 	const handleGenerateCross = () => {
 		const transformedCrossData = convertCrossData(getValues('data'))
-		console.log('form values === ', getValues('data'))
+		//	console.log('form values === ', getValues('data'))
 		setCrossData(transformedCrossData)
 	}
 

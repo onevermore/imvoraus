@@ -36,7 +36,7 @@ export const useTextEdit = (setValue: UseFormSetValue<IText>) => {
 				}
 				const res = getKeys(data).forEach((key) => {
 					if (fields[key as fieldsType]) {
-						console.log(`setValue(${key.toString()}) to ${data[key]}`)
+						//	console.log(`setValue(${key.toString()}) to ${data[key]}`)
 						setValue(key as fieldsType, data[key])
 					}
 					if (key === 'complexity') setComp(data[key])
@@ -65,7 +65,7 @@ export const useTextEdit = (setValue: UseFormSetValue<IText>) => {
 	)
 
 	const onSubmit: SubmitHandler<IText> = async (data) => {
-		console.log('data ===== AA === ', data)
+		//console.log('data ===== AA === ', data)
 		await mutateAsync(data)
 	}
 

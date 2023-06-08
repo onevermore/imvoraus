@@ -1,6 +1,7 @@
 import AuthFields from './AuthFields'
 import { IAuth } from './auth.interface'
 import { useRedirect } from './useRedirect'
+import Link from 'next/link'
 import { FC, useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 
@@ -17,8 +18,6 @@ const Auth: FC = () => {
 
 	const { isLoading } = useAuth()
 
-	const [type, setType] = useState<'login' | 'register'>('login')
-
 	const {
 		register: registerInput,
 		handleSubmit,
@@ -28,11 +27,10 @@ const Auth: FC = () => {
 		mode: 'onChange',
 	})
 
-	const { login, register } = useActions()
+	const { login } = useActions()
 
 	const onSubmit: SubmitHandler<IAuth> = (data) => {
-		if (type === 'login') login(data)
-		else if (type === 'register') register(data)
+		login(data)
 
 		reset()
 	}
@@ -45,20 +43,12 @@ const Auth: FC = () => {
 					<AuthFields register={registerInput} formState={formState} />
 
 					<div className={styles.buttons}>
-						<Button
-							type="submit"
-							onClick={() => setType('login')}
-							disabled={isLoading}
-						>
+						<Button type="submit" disabled={isLoading}>
 							Login
 						</Button>
-						<Button
-							type="submit"
-							onClick={() => setType('register')}
-							disabled={isLoading}
-						>
-							Register
-						</Button>
+						<Link href={'/auth/register'}>
+							<a>Register</a>
+						</Link>
 					</div>
 				</form>
 			</section>

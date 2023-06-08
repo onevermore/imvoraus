@@ -37,3 +37,17 @@ export interface ITextDataFull {
 	__v: number
 	_id: string
 }
+
+export interface ITextPaginatedData {
+	texts: ITextDataFull[]
+	total: number
+	totalPages: number
+	page: number
+}
+
+export interface ITextPart {
+	_id: string
+	title: string
+	text: string
+	course: string
+}

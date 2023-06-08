@@ -23,6 +23,10 @@
 	@apply bg-primary hover:bg-teal-700  rounded p-2  m-2;
 }
 
+.primary {
+	@apply bg-primary;
+}
+
 .field {
 	@apply text-left mb-2 xl:mb-6;
 
