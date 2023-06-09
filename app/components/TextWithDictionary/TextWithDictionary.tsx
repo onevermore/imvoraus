@@ -49,6 +49,7 @@ export const TextWithDictionary: FC<ITextPart> = ({
 	} = useTranslation()
 
 	const translatedText = data?.responseData?.translatedText
+	console.log('loaded data ==== ', myWord)
 
 	const {
 		isSuccess: isGood,
@@ -113,6 +114,7 @@ export const TextWithDictionary: FC<ITextPart> = ({
 							<div className="w-full flex-center-between flex-wrap ">
 								<div>
 									<span className="font-bold">
+										hello
 										{`${myWord?.toUpperCase()} `}{' '}
 									</span>
 									<div>
