@@ -29,7 +29,7 @@ import { optionsNumber } from '../select.data'
 import { ILevelsOption, IOptions } from '../select.types'
 
 export interface ICrossForm {
-	course: string
+	course?: string
 	slug: string
 	description: string
 	title: string
@@ -37,6 +37,7 @@ export interface ICrossForm {
 	complexity: string | number
 	data: ICrossData[]
 	lvl: string
+	courseTitle?: string
 }
 
 export const CrosswordForm = ({
@@ -49,6 +50,11 @@ export const CrosswordForm = ({
 	const [crossData, setCrossData] = useState({ across: {}, down: {} })
 
 	const {
+		push,
+		query: { courseName, cid },
+	} = useRouter()
+
+	const {
 		handleSubmit,
 		register,
 		formState: { errors, isValid },
@@ -58,6 +64,7 @@ export const CrosswordForm = ({
 		watch,
 	} = useForm<ICrossForm>({
 		mode: 'onChange',
+		defaultValues: { courseTitle: courseName as string },
 	})
 
 	const { fields, append, prepend, remove, swap, move, insert } = useFieldArray(
@@ -66,7 +73,6 @@ export const CrosswordForm = ({
 			name: 'data',
 		}
 	)
-	const { push } = useRouter()
 
 	const createCrossword = useMutation({
 		mutationFn: (crossData: ICrossForm) => {
@@ -75,7 +81,10 @@ export const CrosswordForm = ({
 	})
 	const onSubmit: SubmitHandler<ICrossForm> = async (e: ICrossForm) => {
 		//console.log('cross form ===', e)
-		await createCrossword.mutateAsync(e)
+
+		const resCross = { ...e, course: cid ? (cid as string) : e.course }
+
+		await createCrossword.mutateAsync(resCross)
 		push('/courses')
 	}
 
@@ -88,7 +97,6 @@ export const CrosswordForm = ({
 	//	const selectValue = watch('course')
 	const isSubmitDisabled =
 		!isValid ||
-		!!errors.course ||
 		!!errors.title ||
 		!!errors.slug ||
 		!!errors.description ||
@@ -111,29 +119,45 @@ export const CrosswordForm = ({
 						className="pt-6 mb-4 md:mb-10"
 						title="Create new crossword"
 					/>
-					<p className="">Course</p>
 
-					<Controller
-						control={control}
-						name={`course`}
-						render={({ field: { onChange } }) => (
-							<Select
-								id="3"
-								name="course"
-								className="w-48"
-								options={coursesNames}
-								placeholder="Select"
-								onChange={(selectedOption: any) => {
-									const res = selectedOption.value
-									onChange(res)
-									const lvl = courseLevels.filter((v) => v.value === res)[0]
-										.level
+					{!courseName ? (
+						<>
+							<p className="">Course</p>
+							<Controller
+								control={control}
+								name={`course`}
+								render={({ field: { onChange } }) => (
+									<Select
+										id="3"
+										name="course"
+										className="w-48"
+										options={coursesNames}
+										placeholder="Select"
+										onChange={(selectedOption: any) => {
+											const res = selectedOption.value
+											onChange(res)
+											const lvl = courseLevels.filter((v) => v.value === res)[0]
+												.level
 
-									setValue('level', lvl)
-								}}
+											setValue('level', lvl)
+										}}
+									/>
+								)}
 							/>
-						)}
-					/>
+						</>
+					) : (
+						<Field
+							{...register('courseTitle', {
+								required: 'courseTitle is required!',
+							})}
+							name="courseTitle" // Add this line
+							placeholder="Course Title"
+							error={errors.courseTitle}
+							value={courseName}
+							disabled
+							inputStyle={{ backgroundColor: '#ade4e4', textAlign: 'center' }}
+						/>
+					)}
 
 					<div className="flex  flex-col flex-wrap  py-4">
 						<Field

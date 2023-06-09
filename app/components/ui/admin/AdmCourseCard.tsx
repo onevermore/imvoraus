@@ -1,13 +1,13 @@
-import { ICourseCard } from './course-card.interface'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 import { FC } from 'react'
 
-import { Button } from '../../form-elements/Button'
+import { Button } from '../form-elements/Button'
+import { ICourseCard } from '../text-cards/CourseCard/course-card.interface'
 
 import s from './CourseCard.module.scss'
 
-export const CourseCard: FC<Omit<ICourseCard, 'ownerId'>> = ({
+export const AdmCourseCard: FC<Omit<ICourseCard, 'ownerId'>> = ({
 	_id,
 	title,
 	description,
@@ -37,7 +37,10 @@ export const CourseCard: FC<Omit<ICourseCard, 'ownerId'>> = ({
 					<div>{price > 0 ? `${price}$` : 'free'}</div>
 				</div>
 				<div>
-					<Button colored onClick={() => router.push(`/courses/${slug}`)}>
+					<Button
+						colored
+						onClick={() => router.push(`/profile/courses/${slug}`)}
+					>
 						Open
 					</Button>
 				</div>

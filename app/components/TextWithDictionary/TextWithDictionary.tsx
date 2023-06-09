@@ -101,10 +101,6 @@ export const TextWithDictionary: FC<ITextPart> = ({
 
 	return (
 		<>
-			{isGood && <h1>SUCCESS GOOD !!!</h1>}
-			{isLoad && <h1>LOADING......</h1>}
-			{isError && <h1>ERROR !</h1>}
-
 			{
 				<Tooltip
 					id="foo"

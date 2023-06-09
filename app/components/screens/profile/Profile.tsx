@@ -6,6 +6,7 @@ import { FC, useEffect, useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import { OurFileRouter } from 'server/uploadthing'
 
+import AdmCoursesList from '@/components/ui/admin/AdmCoursesList'
 import { Button } from '@/components/ui/form-elements/Button'
 import UploadField from '@/components/ui/form-elements/UploadField/UploadField'
 import { DekorHeading } from '@/components/ui/heading-decor/DekorHeading'
@@ -57,10 +58,16 @@ export const Profile: FC = () => {
 				</div>
 				<div className="mx-8 my-4">
 					<div className="">
-						<ul>
+						<ul className="flex gap-8">
 							<li>
 								<Button rose onClick={() => push(getAdminUrl('course/create'))}>
 									Create course
+								</Button>
+							</li>
+							<li>
+								{' '}
+								<Button rose onClick={() => push('/dictionary')}>
+									My Dictionary
 								</Button>
 							</li>
 						</ul>
@@ -70,7 +77,7 @@ export const Profile: FC = () => {
 				<hr />
 				{usersCourses.length !== 0 ? (
 					<div className="md:max-w-[70%]">
-						<CoursesList courses={usersCourses || []} />
+						<AdmCoursesList full courses={usersCourses || []} />
 					</div>
 				) : (
 					<div className=" mt-6">No courses yet...</div>

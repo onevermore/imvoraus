@@ -58,13 +58,14 @@ export const CourseForm = () => {
 		const allUsernames = usernames.map((v) => v.label)
 		const courseFormData = {
 			...e,
+			price: +e.price,
 			ownerId: user ? user._id : '',
 			allowedUsers: allUsernames,
 			...(allUsernames.length > 0 && { allowedUsers: allUsernames }),
 		}
-
+		console.log('course create data ====== ', courseFormData)
 		await create.mutateAsync(courseFormData)
-		push('/courses')
+		push(`/profile/courses/${e.slug}`)
 	}
 
 	return (

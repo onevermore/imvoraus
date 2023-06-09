@@ -24,4 +24,11 @@ export const DictionaryService = {
 		)
 		return data
 	},
+
+	async getDictionaryByUser(userId: string) {
+		const { data } = await axiosClassic.get(
+			getDictionaryUrl(`/all-words/${userId}`)
+		)
+		return data
+	},
 }
