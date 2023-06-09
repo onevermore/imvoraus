@@ -21,7 +21,7 @@ export const Menu: FC<{ menu: IMenu }> = ({ menu: { items } }) => {
 			{items.map((item) => (
 				<MenuItem item={item} key={item.link} />
 			))}
-			{user?.roles.includes(Role.Admin) && (
+			{user?.roles?.includes(Role.Admin) && (
 				<li
 					className={cn({
 						[s.active]: asPath.startsWith('/manage'),
