@@ -107,7 +107,7 @@ export const TextWithDictionary: FC<ITextPart> = ({
 					clickable={true}
 					events={['click']}
 					render={({ content, activeAnchor }) => {
-						//	console.log('tooltip content === ', content)
+						console.log('tooltip content === ', content)
 						//	console.log('tooltip activeAnchor === ', activeAnchor)
 						return (
 							<div className="w-full flex-center-between flex-wrap ">
