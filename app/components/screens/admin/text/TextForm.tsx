@@ -29,6 +29,12 @@ export const TextForm = ({ coursesNames }: { coursesNames: IOptions[] }) => {
 	const [options, setOptions] = useState(optionss)
 	const [courseIdOption, setCourseIdOption] = useState('')
 	const [complexityOption, setComplexityOption] = useState(0)
+
+	const {
+		push,
+		query: { courseName, cid },
+	} = useRouter()
+
 	const {
 		handleSubmit,
 		register,
@@ -36,8 +42,8 @@ export const TextForm = ({ coursesNames }: { coursesNames: IOptions[] }) => {
 		setValue,
 	} = useForm<any>({
 		mode: 'onChange',
+		defaultValues: { courseTitle: courseName },
 	})
-	const { push } = useRouter()
 
 	const createText = useMutation({
 		mutationFn: (textData: IText) => {
@@ -47,12 +53,16 @@ export const TextForm = ({ coursesNames }: { coursesNames: IOptions[] }) => {
 	const onSubmit: SubmitHandler<IText> = async (e: ITextForm) => {
 		const res: IText = {
 			...e,
-			course: courseIdOption,
+			course: cid ? (cid as string) : courseIdOption,
 			complexity: complexityOption,
 		}
 
 		await createText.mutateAsync(res)
-		push(getAdminUrl('texts'))
+
+		if (courseName) push('/profile')
+		else push(getAdminUrl('texts'))
+
+		//	console.log('all e === ', e)
 	}
 
 	const handleCourseSelect = (e: OnChangeValue<IOptions, boolean>) => {
@@ -67,14 +77,28 @@ export const TextForm = ({ coursesNames }: { coursesNames: IOptions[] }) => {
 
 	return (
 		<form onSubmit={handleSubmit(onSubmit)} className="max-w-2xl">
-			<Heading title="Create new text" />
-			<Select
-				id="1"
-				className="w-64"
-				options={coursesNames}
-				placeholder="Select course"
-				onChange={handleCourseSelect}
-			/>
+			<Heading title="Create new text" className="mb-6" />
+			{!courseName ? (
+				<Select
+					id="1"
+					className="w-64"
+					options={coursesNames}
+					placeholder="Select course"
+					onChange={handleCourseSelect}
+				/>
+			) : (
+				<Field
+					{...register('courseTitle', {
+						required: 'courseTitle is required!',
+					})}
+					name="courseTitle" // Add this line
+					placeholder="Course Title"
+					error={errors.courseTitle}
+					value={courseName}
+					disabled
+					inputStyle={{ backgroundColor: '#ade4e4', textAlign: 'center' }}
+				/>
+			)}
 			<div className="flex  items-center flex-wrap justify-between py-4">
 				<Field
 					{...register('title', {
@@ -110,6 +134,7 @@ export const TextForm = ({ coursesNames }: { coursesNames: IOptions[] }) => {
 				<div></div>
 			</div>
 			<div className="pb-8">
+				<div>Complexity:</div>
 				<Select
 					id="2"
 					className="w-48"

@@ -96,7 +96,7 @@ const CoursesSearchable: FC = () => {
 					<CourseSkeleton count={3} />
 				</div>
 			)}
-			{isSuccess && <CoursesList courses={myCourses.courses || []} />}
+			{isSuccess && <CoursesList full courses={myCourses.courses || []} />}
 		</div>
 	)
 }
