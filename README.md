@@ -1,14 +1,14 @@
-# 'Imvoraus' German e-learning platform
+# 'Imvoraus' German Courses Platform
 
 a [Next.js](https://nextjs.org/) app
 
 ## Running Locally
 
-First, run the development server:
+First, install all dependencies and run the development server:
 
 ```bash
-npm run dev
-# or
+yarn install
+# and
 yarn dev
 ```
 
