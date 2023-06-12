@@ -8,7 +8,6 @@ import { useAuth } from '@/hooks/useAuth'
 
 import { Meta } from '@/utils/meta/Meta'
 
-import { TextWithDictionary } from '../../TextWithDictionary/TextWithDictionary'
 import { useUsersDictionary } from '../profile/useUsersDictionary'
 
 export const WordsList: FC = () => {
