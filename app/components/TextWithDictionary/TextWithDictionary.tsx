@@ -1,5 +1,6 @@
 import Text from './Text'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
+import dynamic from 'next/dynamic'
 import { FC, useEffect, useState } from 'react'
 import { SubmitHandler } from 'react-hook-form'
 import { toastr } from 'react-redux-toastr'
@@ -29,12 +30,7 @@ interface ITranslate {
 	translation: string
 }
 
-export const TextWithDictionary: FC<ITextPart> = ({
-	_id,
-	title,
-	text,
-	course,
-}) => {
+const TextWithDictionary: FC<ITextPart> = ({ _id, title, text, course }) => {
 	const { user } = useAuth()
 	const queryClient = useQueryClient()
 	const [list, setList] = useState<ITranslate[]>([])
@@ -150,3 +146,5 @@ export const TextWithDictionary: FC<ITextPart> = ({
 		</>
 	)
 }
+
+export default TextWithDictionary
