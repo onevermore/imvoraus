@@ -8,7 +8,7 @@ import { useAuth } from '@/hooks/useAuth'
 
 import { Meta } from '@/utils/meta/Meta'
 
-import { useUsersDictionary } from '../profile/useUsersDictionary'
+import { useUsersDictionary } from '../../TextWithDictionary/useUsersDictionary'
 
 export const WordsList: FC = () => {
 	const [val, setVal] = useState('')
@@ -19,7 +19,9 @@ export const WordsList: FC = () => {
 
 	const { user } = useAuth()
 
-	const { usersDictionary } = useUsersDictionary(user?._id || '')
+	const { dictionaryList, deleteWordAsync } = useUsersDictionary(
+		user?._id || ''
+	)
 
 	return (
 		<Meta
@@ -28,7 +30,7 @@ export const WordsList: FC = () => {
 		>
 			<DekorHeading text="Dictionary" className="text-center" />
 
-			<TextDictionary list={usersDictionary} />
+			{<TextDictionary list={dictionaryList} removeHandler={deleteWordAsync} />}
 		</Meta>
 	)
 }

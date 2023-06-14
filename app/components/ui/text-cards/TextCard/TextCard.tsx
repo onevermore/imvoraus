@@ -27,8 +27,10 @@ export const TextCard: FC<ITextData> = ({
 					<Image
 						alt="image"
 						src={imageURL}
-						width="100%"
-						height="55%"
+						width={0}
+						height={0}
+						sizes="100vw"
+						style={{ width: '100%', height: '55%' }}
 						layout="responsive"
 					/>
 					<div>{description}</div>

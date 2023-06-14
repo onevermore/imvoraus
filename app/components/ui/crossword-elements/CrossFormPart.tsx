@@ -106,6 +106,12 @@ export const CrossFormPart = ({
 							{...register(`data.${index}.row`, {
 								required: 'Row is required!',
 								valueAsNumber: true,
+								validate: {
+									integer: (val: string) =>
+										/^[0-9]+$/.test(val) || 'invalid value',
+									min: (val: number) => val >= 0 || 'The min value is 0',
+									max: (val: number) => val <= 50 || 'The max value is 50',
+								},
 							})}
 							placeholder="Row"
 							error={errors.data?.[index]?.row}
@@ -117,6 +123,13 @@ export const CrossFormPart = ({
 							{...register(`data.${index}.col`, {
 								required: 'Col is required!',
 								valueAsNumber: true,
+
+								validate: {
+									integer: (val: string) =>
+										/^[0-9]+$/.test(val) || 'invalid value',
+									min: (val: number) => val >= 0 || 'The min value is 0',
+									max: (val: number) => val <= 50 || 'The max value is 50',
+								},
 							})}
 							type="number"
 							placeholder="Column"

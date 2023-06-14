@@ -46,9 +46,7 @@ const Auth: FC = () => {
 						<Button type="submit" disabled={isLoading}>
 							Login
 						</Button>
-						<Link href={'/auth/register'}>
-							<a>Register</a>
-						</Link>
+						<Link href={'/auth/register'}>Register</Link>
 					</div>
 				</form>
 			</section>

@@ -9,32 +9,30 @@ export const Logo: FC = () => {
 	return (
 		<>
 			<Link href="/">
-				<a className="px-layout mb-10 block relative flex hidden xl:block">
-					<div>
-						<span
-							style={{ position: 'relative', left: '9px' }}
-							className="font-['Proxima Nova'] font-normal text-2xl tracking-[.5em]"
-						>
-							imvoraus
-						</span>
-						<span
-							className=""
-							style={{
-								position: 'absolute',
-								bottom: '5px',
-								right: '-7px',
-							}}
-						>
-							<Image
-								src={logoImage}
-								width={50}
-								height={54}
-								alt="learn German"
-								draggable={false}
-							/>
-						</span>
-					</div>
-				</a>
+				<div className="px-layout mb-10 block relative flex hidden xl:block">
+					<span
+						style={{ position: 'relative', left: '9px' }}
+						className="font-['Proxima Nova'] font-normal text-2xl tracking-[.5em]"
+					>
+						imvoraus
+					</span>
+					<span
+						className=""
+						style={{
+							position: 'absolute',
+							bottom: '5px',
+							right: '-7px',
+						}}
+					>
+						<Image
+							src={logoImage}
+							width={50}
+							height={54}
+							alt="learn German"
+							draggable={false}
+						/>
+					</span>
+				</div>
 			</Link>
 		</>
 	)

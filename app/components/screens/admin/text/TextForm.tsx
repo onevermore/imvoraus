@@ -6,6 +6,7 @@ import Select, { OnChangeValue } from 'react-select'
 
 import { Button } from '@/components/ui/form-elements/Button'
 import Field from '@/components/ui/form-elements/Field'
+import { TextArea } from '@/components/ui/form-elements/TextArea'
 import { Heading } from '@/components/ui/heading/Heading'
 
 import { IText, ITextForm } from '@/shared/types/text.types'
@@ -120,8 +121,12 @@ export const TextForm = ({ coursesNames }: { coursesNames: IOptions[] }) => {
 					error={errors.description}
 				/>
 
-				<textarea
+				{/*<textarea
 					className="w-[100%] h-64"
+					{...register('text', { required: 'Text is required!' })}
+				/>*/}
+				<TextArea
+					placeholder="Text"
 					{...register('text', { required: 'Text is required!' })}
 				/>
 				<Field

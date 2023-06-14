@@ -22,6 +22,7 @@ import { ICrossData } from '@/shared/types/crossword.types'
 
 import { CrosswordsService } from '@/services/crosswords.service'
 
+import { toastError } from '@/utils/api/withToastrErrorRedux'
 import { convertCrossData } from '@/utils/crossword/convertCrossData'
 import { generateSlug } from '@/utils/string/generateSlug'
 
@@ -33,7 +34,7 @@ export interface ICrossForm {
 	slug: string
 	description: string
 	title: string
-	level: string
+	level?: string
 	complexity: string | number
 	data: ICrossData[]
 	lvl: string
@@ -89,9 +90,13 @@ export const CrosswordForm = ({
 	}
 
 	const handleGenerateCross = () => {
-		const transformedCrossData = convertCrossData(getValues('data'))
-		//	console.log('form values === ', getValues('data'))
-		setCrossData(transformedCrossData)
+		try {
+			const transformedCrossData = convertCrossData(getValues('data'))
+			//	console.log('form values === ', getValues('data'))
+			setCrossData(transformedCrossData)
+		} catch (e) {
+			toastError(e, 'Generate Cross')
+		}
 	}
 
 	//	const selectValue = watch('course')
@@ -160,16 +165,18 @@ export const CrosswordForm = ({
 					)}
 
 					<div className="flex  flex-col flex-wrap  py-4">
-						<Field
-							{...register('level', {
-								required: 'Level is required!',
-							})}
-							placeholder="Level"
-							error={errors.level}
-							disabled
-							style={{ width: '60px' }}
-							inputStyle={{ backgroundColor: '#ade4e4', textAlign: 'center' }}
-						/>
+						{!courseName && (
+							<Field
+								{...register('level', {
+									required: 'Level is required!',
+								})}
+								placeholder="Level"
+								error={errors.level}
+								disabled
+								style={{ width: '60px' }}
+								inputStyle={{ backgroundColor: '#ade4e4', textAlign: 'center' }}
+							/>
+						)}
 						<Field
 							{...register('title', {
 								required: 'Title is required!',
@@ -250,6 +257,36 @@ export const CrosswordForm = ({
 						ADD CLUE
 					</Button>
 				</div>
+
+				<div className="leading-9 bg-red-600/[0.2] rounded-md p-6 mb-8">
+					<p className="text-red-600 font-bold">Achtung!</p>
+					Please click <b>&quot;Generate Cross&quot;</b> button{' '}
+					<b>before clicking &quot;Create&quot; </b>
+					to make sure that all data is correct!
+					<p>
+						If &quot;Create&quot; button <b>is disabled</b> then maybe you have
+						left some fields empty or the values are invalid! <br /> Please
+						check all your data one more time
+					</p>
+					<div className="m-8">
+						<h3 className="font-bold">Notice that:</h3>
+						<ul className="list-disc">
+							<li>
+								All numbers must be a{' '}
+								<span className="underline">positive integer</span> (Example: 5)
+							</li>
+							<li>
+								Mostly there is no need to change Slug field, as it&apos;s value
+								will be generated after you fill in Title field
+							</li>
+							<li>
+								There must be at least 1 Clue in Crossword. Click ADD CLUE to
+								add one!
+							</li>
+						</ul>
+					</div>
+				</div>
+
 				<div className="mb-10">
 					<Button
 						className=" mr-6"

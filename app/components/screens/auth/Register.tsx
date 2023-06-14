@@ -49,9 +49,7 @@ export const Register = () => {
 					/>
 
 					<div className={styles.buttons}>
-						<Link href={'/auth/login'}>
-							<a>Login</a>
-						</Link>
+						<Link href={'/auth/login'}>Login</Link>
 						<Button
 							className={styles.active}
 							type="submit"
