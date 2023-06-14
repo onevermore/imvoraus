@@ -24,9 +24,7 @@ export const SignBtn = () => {
 			<div className="flex justify-center gap-5 px-8 sm:px-3">
 				<p className="hidden 2xl:block pt-2 ">
 					<b>
-						<Link href={'/profile'}>
-							<a>{user?.username}</a>
-						</Link>
+						<Link href={'/profile'}>{user?.username}</Link>
 					</b>
 				</p>
 

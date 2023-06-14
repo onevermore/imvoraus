@@ -58,12 +58,11 @@ export const BurgerMenu: FC = () => {
 			>
 				<ul className="text-base text-gray-700 ">
 					{firstMenu.items.map((item, i) => (
-						<li key={i} className="uppercase">
-							<Link href={item.link}>
-								<a className=" py-2 pt-4 block hover:text-gray-500">
-									{item.title}
-								</a>
-							</Link>
+						<li
+							key={i}
+							className="uppercase py-2 pt-4 block hover:text-gray-500"
+						>
+							<Link href={item.link}>{item.title}</Link>
 						</li>
 					))}
 				</ul>

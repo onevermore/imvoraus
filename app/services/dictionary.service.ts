@@ -11,16 +11,19 @@ export const DictionaryService = {
 	},
 */
 	async addWord(wordData: IAddWord) {
-		const { data } = await axiosClassic.post(
-			getDictionaryUrl('/add-word'),
-			wordData
-		)
+		const { data } = await axios.post(getDictionaryUrl('/add-word'), wordData)
 		return data
 	},
 
-	async getWordsByTextForUser(textId: string, userId: string) {
+	async getWordsByTextForUser(userId: string, textId?: string) {
+		let filterParams = {}
+		if (textId) filterParams = { textId }
+
 		const { data } = await axiosClassic.get(
-			getDictionaryUrl(`/${textId}/words/${userId}`)
+			getDictionaryUrl(`/${userId}/words`),
+			{
+				params: filterParams,
+			}
 		)
 		return data
 	},
@@ -28,6 +31,19 @@ export const DictionaryService = {
 	async getDictionaryByUser(userId: string) {
 		const { data } = await axiosClassic.get(
 			getDictionaryUrl(`/all-words/${userId}`)
+		)
+		return data
+	},
+
+	async deleteWordFromUsersDictionary({
+		wordId,
+		userId,
+	}: {
+		wordId: string
+		userId: string
+	}) {
+		const { data } = await axios.delete(
+			getDictionaryUrl(`/${userId}/words/${wordId}`)
 		)
 		return data
 	},

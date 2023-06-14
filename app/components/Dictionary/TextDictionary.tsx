@@ -1,28 +1,41 @@
 import cn from 'classnames'
 import { FC, memo, useState } from 'react'
 
+import { useAuth } from '@/hooks/useAuth'
+
 import { MaterialIcon } from '../ui/MaterialIcon'
 
 import s from './Dictionary.module.scss'
 
 interface ITranslate {
+	userId: string
+	_id: string
 	word: string
 	translation: string
 }
 
-const TextDictionary: FC<{
+interface ITextDictionary {
 	list: ITranslate[]
-}> = memo(({ list }) => {
+	removeHandler: ({
+		wordId,
+		userId,
+	}: {
+		wordId: string
+		userId: string
+	}) => void
+}
+
+const TextDictionary: FC<ITextDictionary> = memo(({ list, removeHandler }) => {
 	const [isEdit, setIsEdit] = useState(false)
 	const [currEditableWord, setCurrEditableWord] = useState<null | number>(null)
-
+	const { user } = useAuth()
 	//console.count('TextDictionary rendered')
 
 	const handleDeleteWord = (i: number) => {
-		const newList = list.filter((v, index) => index !== i)
+		//	const newList = list.filter((v, index) => index !== i)
 		//setList(newList)
 	}
-
+	/*	
 	const handleChangeTranslation = (e: any, i: number) => {
 		setIsEdit(!isEdit)
 		setCurrEditableWord(i)
@@ -38,6 +51,9 @@ const TextDictionary: FC<{
 			//setList(newListt)
 		}
 	}
+*/
+
+	if (!user) return <div>Loading...</div>
 
 	return (
 		<table className={s.table}>
@@ -66,10 +82,8 @@ const TextDictionary: FC<{
 						</td>
 						<td className={s.td}>
 							<div className="flex items-center justify-end">
-								<div
-									className="cursor-pointer h-full"
-									onClick={(e) => handleChangeTranslation(e, i)}
-								>
+								{/*	<div className="cursor-pointer h-full">
+								
 									{i === currEditableWord && isEdit ? (
 										<MaterialIcon
 											classname="hover:fill-teal-900"
@@ -81,10 +95,12 @@ const TextDictionary: FC<{
 											name="MdEditNote"
 										/>
 									)}
-								</div>
+								</div>*/}
 
 								<div
-									onClick={() => handleDeleteWord(i)}
+									onClick={() =>
+										removeHandler({ wordId: value._id, userId: value.userId })
+									}
 									className="mt-2 md:mx-2 h-full w-12 cursor-pointer"
 								>
 									<MaterialIcon

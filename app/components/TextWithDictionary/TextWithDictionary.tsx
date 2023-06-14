@@ -1,4 +1,5 @@
 import Text from './Text'
+import { useUsersDictionary } from './useUsersDictionary'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import dynamic from 'next/dynamic'
 import { FC, useEffect, useState } from 'react'
@@ -45,38 +46,12 @@ const TextWithDictionary: FC<ITextPart> = ({ _id, title, text, course }) => {
 	} = useTranslation()
 
 	const translatedText = data?.responseData?.translatedText
-	console.log('loaded data ==== ', myWord)
+	//console.log('loaded data ==== ', myWord)
 
-	const {
-		isSuccess: isGood,
-		isLoading: isLoad,
-		isError,
-		data: dictionaryList,
-	} = useQuery(
-		['dictionary list'],
-		() => DictionaryService.getWordsByTextForUser(_id, user?._id || ''),
-		{
-			select: (data) =>
-				data.map((wordd: IDictionaryFull) => ({
-					word: wordd.word,
-					translation: wordd.translation,
-				})),
-			enabled: !!user,
-		}
+	const { dictionaryList, addWordAsync, deleteWordAsync } = useUsersDictionary(
+		user?._id,
+		_id
 	)
-
-	const addWord = useMutation({
-		mutationFn: (dictionaryData: IAddWord) => {
-			return DictionaryService.addWord(dictionaryData)
-		},
-		onError: (error, variables, context) => {
-			toastError(error, 'Add word to dictionary')
-		},
-		onSuccess({ data: _id }) {
-			toastr.success('Add word', 'word added successfully')
-			queryClient.refetchQueries(['dictionary list'])
-		},
-	})
 
 	const onAddWordtoDictionary = async () => {
 		const newWordData = {
@@ -86,9 +61,8 @@ const TextWithDictionary: FC<ITextPart> = ({ _id, title, text, course }) => {
 			word: myWord,
 			translation: translatedText,
 		}
-		//console.log('data that will be added = ', newWordData)
 
-		await addWord.mutateAsync(newWordData)
+		await addWordAsync(newWordData)
 	}
 
 	const onClick = (value: string) => {
@@ -104,13 +78,12 @@ const TextWithDictionary: FC<ITextPart> = ({ _id, title, text, course }) => {
 					clickable={true}
 					events={['click']}
 					render={({ content, activeAnchor }) => {
-						console.log('tooltip content === ', content)
-						//	console.log('tooltip activeAnchor === ', activeAnchor)
+						//	console.log('tooltip content === ', content)
+						//		console.log('tooltip activeAnchor === ', activeAnchor)
 						return (
 							<div className="w-full flex-center-between flex-wrap ">
 								<div>
 									<span className="font-bold">
-										hello
 										{`${myWord?.toUpperCase()} `}{' '}
 									</span>
 									<div>
@@ -142,7 +115,10 @@ const TextWithDictionary: FC<ITextPart> = ({ _id, title, text, course }) => {
 			<Text text={text} onClick={onClick} />
 			<br />
 
-			<TextDictionary list={dictionaryList} />
+			<TextDictionary
+				list={dictionaryList || []}
+				removeHandler={deleteWordAsync}
+			/>
 		</>
 	)
 }

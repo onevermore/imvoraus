@@ -25,8 +25,10 @@ export const AdmCourseCard: FC<Omit<ICourseCard, 'ownerId'>> = ({
 				<Image
 					alt="image"
 					src={imageURL}
-					width="100%"
-					height="55%"
+					width={0}
+					height={0}
+					sizes="100vw"
+					style={{ width: '100%', height: '55%' }}
 					layout="responsive"
 				/>
 				<div className="py-5 h-50 overflow-y-hidden">
