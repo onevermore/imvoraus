@@ -18,14 +18,15 @@ const nextConfig = {
 		REACT_APP_ENV: process.env.REACT_APP_ENV,
 		APP_SERVER_URL: process.env.REACT_APP_SERVER_URL,
 		UPLOADTHING_SECRET: process.env.UPLOADTHING_SECRET,
+		API_URL: process.env.API_URL,
 	},
 	swcMinify: true,
 	async rewrites() {
 		return [
 			{
 				source: '/apii/:path*',
-				//destination: 'https://nestjsapp-production.up.railway.app/api/:path*',
-				destination: 'http://localhost:3333/api/:path*',
+				destination: 'https://nestjsapp-production.up.railway.app/api/:path*',
+				//destination: 'http://localhost:3333/api/:path*',
 			},
 		]
 	},
