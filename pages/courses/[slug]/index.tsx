@@ -18,10 +18,10 @@ export const getStaticPaths: GetStaticPaths = async () => {
 		const paths = courses.map((g: ICourse) => ({
 			params: { slug: g.slug },
 		}))
-
+		console.log(paths)
 		return {
 			paths,
-			fallback: 'blocking',
+			fallback: false,
 		}
 	} catch (e) {
 		// console.log(errorCatch(e))
@@ -36,7 +36,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
 	const courseSlug = String(params?.slug)
-
+	console.log('params = ', params)
 	try {
 		const courseData = await CoursesService.getCourseDataBySlug(courseSlug)
 

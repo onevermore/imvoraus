@@ -29,7 +29,6 @@ export const AdmCourseCard: FC<Omit<ICourseCard, 'ownerId'>> = ({
 					height={0}
 					sizes="100vw"
 					style={{ width: '100%', height: '55%' }}
-					layout="responsive"
 				/>
 				<div className="py-5 h-50 overflow-y-hidden">
 					{description.slice(0, 20)}...
