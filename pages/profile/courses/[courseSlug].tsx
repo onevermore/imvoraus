@@ -16,7 +16,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 	try {
 		const courses = await CoursesService.getAllCourses()
-		//	console.log('courses [slug] = ', courses)
+
 		const paths = courses.map((g: ICourse) => ({
 			params: { courseSlug: g._id },
 		}))
