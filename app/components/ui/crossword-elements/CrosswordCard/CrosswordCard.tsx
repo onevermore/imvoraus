@@ -28,7 +28,6 @@ export const CrosswordCard = ({
 						height={0}
 						sizes="100vw"
 						style={{ width: '100%', height: '55%' }}
-						layout="responsive"
 					/>
 					<div>{description}</div>
 					{/*<div className="">{text.slice(0, 40)}...</div>*/}

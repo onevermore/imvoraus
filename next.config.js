@@ -1,6 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
 	// reactStrictMode: true,
+
 	images: {
 		domains: [
 			'videos-imvoraus.s3.amazonaws.com',
@@ -11,6 +12,7 @@ const nextConfig = {
 	},
 	experimental: {
 		esmExternals: false, // THIS IS THE FLAG THAT MATTERS
+		appDir: false,
 	},
 	poweredByHeader: false,
 	env: {
