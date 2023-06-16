@@ -50,6 +50,10 @@ export const TextForm = ({ coursesNames }: { coursesNames: IOptions[] }) => {
 		mutationFn: (textData: IText) => {
 			return TextsService.createText(textData)
 		},
+		onSuccess() {
+			if (courseName) push(`/profile/courses/${cid}`)
+			else push(getAdminUrl('texts'))
+		},
 	})
 	const onSubmit: SubmitHandler<IText> = async (e: ITextForm) => {
 		const res: IText = {
@@ -59,9 +63,6 @@ export const TextForm = ({ coursesNames }: { coursesNames: IOptions[] }) => {
 		}
 
 		await createText.mutateAsync(res)
-
-		if (courseName) push('/profile')
-		else push(getAdminUrl('texts'))
 
 		//	console.log('all e === ', e)
 	}

@@ -19,9 +19,12 @@ export const WordsList: FC = () => {
 
 	const { user } = useAuth()
 
-	const { dictionaryList, deleteWordAsync } = useUsersDictionary(
-		user?._id || ''
-	)
+	const {
+		dictionaryList,
+		deleteWordAsync,
+		isLoadingDeleteWord,
+		isSuccessDeleteWord,
+	} = useUsersDictionary(user?._id || '')
 
 	return (
 		<Meta
@@ -30,7 +33,14 @@ export const WordsList: FC = () => {
 		>
 			<DekorHeading text="Dictionary" className="text-center" />
 
-			{<TextDictionary list={dictionaryList} removeHandler={deleteWordAsync} />}
+			{
+				<TextDictionary
+					list={dictionaryList}
+					removeHandler={deleteWordAsync}
+					deleteIsLoading={isLoadingDeleteWord}
+					isSuccessDeleteWord={isSuccessDeleteWord}
+				/>
+			}
 		</Meta>
 	)
 }

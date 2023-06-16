@@ -16,8 +16,9 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 	try {
 		const courses = await CoursesService.getAllCourses()
+		//	console.log('courses [slug] = ', courses)
 		const paths = courses.map((g: ICourse) => ({
-			params: { courseSlug: g.slug },
+			params: { courseSlug: g._id },
 		}))
 
 		return {
@@ -33,10 +34,10 @@ export const getStaticPaths: GetStaticPaths = async () => {
 }
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-	const courseSlug = String(params?.courseSlug)
+	const courseId = String(params?.courseSlug)
 
 	try {
-		const courseData = await CoursesService.getCourseDataBySlug(courseSlug)
+		const courseData = await CoursesService.getCourseDataById(courseId)
 
 		return {
 			props: { courseData },

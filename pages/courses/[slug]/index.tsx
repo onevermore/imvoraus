@@ -18,10 +18,10 @@ export const getStaticPaths: GetStaticPaths = async () => {
 		const paths = courses.map((g: ICourse) => ({
 			params: { slug: g.slug },
 		}))
-		console.log(paths)
+
 		return {
 			paths,
-			fallback: false,
+			fallback: 'blocking',
 		}
 	} catch (e) {
 		// console.log(errorCatch(e))

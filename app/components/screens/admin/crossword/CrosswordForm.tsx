@@ -26,6 +26,8 @@ import { toastError } from '@/utils/api/withToastrErrorRedux'
 import { convertCrossData } from '@/utils/crossword/convertCrossData'
 import { generateSlug } from '@/utils/string/generateSlug'
 
+import { getAdminUrl } from '@/config/url.config'
+
 import { optionsNumber } from '../select.data'
 import { ILevelsOption, IOptions } from '../select.types'
 
@@ -79,6 +81,10 @@ export const CrosswordForm = ({
 		mutationFn: (crossData: ICrossForm) => {
 			return CrosswordsService.createCrossword(crossData)
 		},
+		onSuccess() {
+			if (courseName) push(`/profile/courses/${cid}`)
+			else push(getAdminUrl('crosswords'))
+		},
 	})
 	const onSubmit: SubmitHandler<ICrossForm> = async (e: ICrossForm) => {
 		//console.log('cross form ===', e)
@@ -86,7 +92,7 @@ export const CrosswordForm = ({
 		const resCross = { ...e, course: cid ? (cid as string) : e.course }
 
 		await createCrossword.mutateAsync(resCross)
-		push('/courses')
+		//push('/courses')
 	}
 
 	const handleGenerateCross = () => {

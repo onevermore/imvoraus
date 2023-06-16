@@ -23,6 +23,12 @@ export const CoursesService = {
 		return data
 	},
 
+	async getCourseDataById(id: string) {
+		const { data } = await axiosClassic.get(getCoursesUrl(`/${id}`))
+
+		return data
+	},
+
 	async getAllCourses(searchTerm?: string, level?: string) {
 		let filterParams = {}
 		if (searchTerm) filterParams = { searchTerm }

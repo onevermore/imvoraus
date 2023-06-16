@@ -13,7 +13,7 @@ interface ITooltipProps {
 
 const Text: FC<ITooltipProps> = ({ text, onClick }) => {
 	const [isOver, setIsOver] = useState<number | null>(null)
-	console.count('Text render')
+	//console.count('Text render')
 
 	const handleMouseOver = (i: number, val: string) => {
 		setIsOver(i)
@@ -21,7 +21,7 @@ const Text: FC<ITooltipProps> = ({ text, onClick }) => {
 	}
 
 	const handleClick = (val: string) => {
-		console.log('click on word = ', val)
+		//	console.log('click on word = ', val)
 		onClick(val)
 	}
 	return (

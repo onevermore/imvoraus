@@ -9,6 +9,7 @@ export interface ICourse {
 	allowedUsers?: string[]
 	isPublic: boolean
 	ownerId: string
+	_id: string
 }
 
 export interface ICoursePaginatedData {
