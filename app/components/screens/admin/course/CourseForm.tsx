@@ -52,6 +52,10 @@ export const CourseForm = () => {
 		onError: (error, variables, context) => {
 			toastError(error, 'Create course')
 		},
+		onSuccess(data, variables, context) {
+			//console.log('UUUU ', data)
+			push(`/profile/courses/${data._id}`)
+		},
 	})
 
 	const onSubmit: SubmitHandler<ICourse> = async (e: ICourse) => {
@@ -63,9 +67,10 @@ export const CourseForm = () => {
 			allowedUsers: allUsernames,
 			...(allUsernames.length > 0 && { allowedUsers: allUsernames }),
 		}
-		console.log('course create data ====== ', courseFormData)
+		//	console.log('course create data ====== ', courseFormData)
+		//	await create.mutateAsync(courseFormData)
+
 		await create.mutateAsync(courseFormData)
-		push(`/profile/courses/${e.slug}`)
 	}
 
 	return (

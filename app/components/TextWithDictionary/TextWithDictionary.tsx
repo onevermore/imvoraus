@@ -48,10 +48,13 @@ const TextWithDictionary: FC<ITextPart> = ({ _id, title, text, course }) => {
 	const translatedText = data?.responseData?.translatedText
 	//console.log('loaded data ==== ', myWord)
 
-	const { dictionaryList, addWordAsync, deleteWordAsync } = useUsersDictionary(
-		user?._id,
-		_id
-	)
+	const {
+		dictionaryList,
+		addWordAsync,
+		deleteWordAsync,
+		isLoadingDeleteWord,
+		isSuccessDeleteWord,
+	} = useUsersDictionary(user?._id, _id)
 
 	const onAddWordtoDictionary = async () => {
 		const newWordData = {
@@ -118,6 +121,8 @@ const TextWithDictionary: FC<ITextPart> = ({ _id, title, text, course }) => {
 			<TextDictionary
 				list={dictionaryList || []}
 				removeHandler={deleteWordAsync}
+				deleteIsLoading={isLoadingDeleteWord}
+				isSuccessDeleteWord={isSuccessDeleteWord}
 			/>
 		</>
 	)

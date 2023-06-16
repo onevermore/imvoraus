@@ -30,7 +30,7 @@ export const useUsersDictionary = (userId: string = '', textId?: string) => {
 		isError,
 		data: dictionaryList,
 	} = useQuery(
-		['dictionary list'],
+		['dictionary list', userId, textId],
 		() => DictionaryService.getWordsByTextForUser(userId || '', textId),
 		{
 			select: (data) =>
@@ -44,51 +44,33 @@ export const useUsersDictionary = (userId: string = '', textId?: string) => {
 		}
 	)
 
-	const { mutateAsync: addWordAsync } = useMutation({
-		mutationFn: (dictionaryData: IAddWord) => {
-			return DictionaryService.addWord(dictionaryData)
-		},
-		onError: (error, variables, context) => {
-			toastError(error, 'Add word to dictionary')
-		},
-		onSuccess({ data: _id }) {
-			toastr.success('Add word', 'word added successfully')
-			queryClient.refetchQueries(['dictionary list'])
-		},
-	})
+	const { mutateAsync: addWordAsync, isLoading: isLoadingAddWord } =
+		useMutation({
+			mutationFn: (dictionaryData: IAddWord) => {
+				return DictionaryService.addWord(dictionaryData)
+			},
+			onError: (error, variables, context) => {
+				toastError(error, 'Add word to dictionary')
+			},
+			onSuccess({ data: _id }) {
+				toastr.success('Add word', 'word added successfully')
+				queryClient.refetchQueries(['dictionary list'])
+			},
+		})
 
-	const { mutateAsync: deleteWordAsync } = useMutation(
-		/*	(params: { wordId: string; userId: string }) => {
+	const {
+		mutateAsync: deleteWordAsync,
+		isLoading: isLoadingDeleteWord,
+		isSuccess: isSuccessDeleteWord,
+	} = useMutation({
+		mutationFn: (params: { wordId: string; userId: string }) => {
 			return DictionaryService.deleteWordFromUsersDictionary({
 				wordId: params.wordId,
 				userId: params.userId,
 			})
-		},*/
-		{
-			mutationFn: (params: { wordId: string; userId: string }) => {
-				return DictionaryService.deleteWordFromUsersDictionary({
-					wordId: params.wordId,
-					userId: params.userId,
-				})
-			},
-			onError: (error) => {
-				toastError(error, 'Delete word from dictionary')
-			},
-			onSuccess() {
-				toastr.success('Delete word', 'delete was successful')
-				queryClient.refetchQueries(['dictionary list'])
-			},
-		}
-	)
-
-	/*
-
-	const deleteWord = useMutation({
-		mutationFn: (wordId: string, userId: string) => {
-			return DictionaryService.deleteWordFromUsersDictionary(wordId, userId)
 		},
-		onError: (error, variables, context) => {
-			toastError(error, 'Add word to dictionary')
+		onError: (error) => {
+			toastError(error, 'Delete word from dictionary')
 		},
 		onSuccess() {
 			toastr.success('Delete word', 'delete was successful')
@@ -96,12 +78,13 @@ export const useUsersDictionary = (userId: string = '', textId?: string) => {
 		},
 	})
 
-*/
 	return {
 		usersDictionary,
 		dictionaryList,
-
 		addWordAsync,
 		deleteWordAsync,
+		isLoadingAddWord,
+		isLoadingDeleteWord,
+		isSuccessDeleteWord,
 	}
 }

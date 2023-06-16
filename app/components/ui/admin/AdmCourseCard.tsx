@@ -40,7 +40,7 @@ export const AdmCourseCard: FC<Omit<ICourseCard, 'ownerId'>> = ({
 				<div>
 					<Button
 						colored
-						onClick={() => router.push(`/profile/courses/${slug}`)}
+						onClick={() => router.push(`/profile/courses/${_id}`)}
 					>
 						Open
 					</Button>
