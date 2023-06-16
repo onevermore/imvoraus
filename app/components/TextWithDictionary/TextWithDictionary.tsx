@@ -46,7 +46,6 @@ const TextWithDictionary: FC<ITextPart> = ({ _id, title, text, course }) => {
 	} = useTranslation()
 
 	const translatedText = data?.responseData?.translatedText
-	//console.log('loaded data ==== ', myWord)
 
 	const {
 		dictionaryList,
