@@ -52,9 +52,9 @@ export const Profile: FC = () => {
 				<Heading title="Profile" className="mb-10" />
 				<div className="bg-primary/[0.4]  rounded-md p-16">
 					<DekorHeading text="username" />
-					<div>{'username1'}</div>
+					<div>{user?.username}</div>
 					<DekorHeading text="email" />
-					<div>{'username@imvoraus.com'}</div>
+					<div>{user?.email}</div>
 				</div>
 				<div className="mx-8 my-4">
 					<div className="">
