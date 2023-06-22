@@ -186,7 +186,10 @@ export const CrosswordForm = ({
 						<Field
 							{...register('title', {
 								required: 'Title is required!',
-								maxLength: 15,
+								validate: {
+									maxLength: (v) =>
+										v.length <= 40 || 'Title should have at most 40 characters',
+								},
 								onChange: (e) => {
 									setValue('slug', generateSlug(e.target.value))
 								},

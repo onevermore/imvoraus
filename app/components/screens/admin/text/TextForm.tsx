@@ -13,6 +13,7 @@ import { IText, ITextForm } from '@/shared/types/text.types'
 
 import { TextsService } from '@/services/texts.service'
 
+import { toastError } from '@/utils/api/withToastrErrorRedux'
 import { generateSlug } from '@/utils/string/generateSlug'
 
 import { getAdminUrl } from '@/config/url.config'
@@ -54,6 +55,9 @@ export const TextForm = ({ coursesNames }: { coursesNames: IOptions[] }) => {
 			if (courseName) push(`/profile/courses/${cid}`)
 			else push(getAdminUrl('texts'))
 		},
+		onError: (error, variables, context) => {
+			toastError(error, 'Create text')
+		},
 	})
 	const onSubmit: SubmitHandler<IText> = async (e: ITextForm) => {
 		const res: IText = {
@@ -61,7 +65,7 @@ export const TextForm = ({ coursesNames }: { coursesNames: IOptions[] }) => {
 			course: cid ? (cid as string) : courseIdOption,
 			complexity: complexityOption,
 		}
-		//console.log('text res === ', res)
+
 		await createText.mutateAsync(res)
 
 		//	console.log('all e === ', e)
@@ -90,9 +94,7 @@ export const TextForm = ({ coursesNames }: { coursesNames: IOptions[] }) => {
 				/>
 			) : (
 				<Field
-					{...register('courseTitle', {
-						required: 'courseTitle is required!',
-					})}
+					{...register('courseTitle')}
 					name="courseTitle" // Add this line
 					placeholder="Course Title"
 					error={errors.courseTitle}
@@ -105,7 +107,10 @@ export const TextForm = ({ coursesNames }: { coursesNames: IOptions[] }) => {
 				<Field
 					{...register('title', {
 						required: 'Title is required!',
-						maxLength: 15,
+						validate: {
+							maxLength: (v) =>
+								v.length <= 40 || 'Title should have at most 40 characters',
+						},
 						onChange: (e) => {
 							setValue('slug', generateSlug(e.target.value))
 						},
@@ -122,10 +127,6 @@ export const TextForm = ({ coursesNames }: { coursesNames: IOptions[] }) => {
 					error={errors.description}
 				/>
 
-				{/*<textarea
-					className="w-[100%] h-64"
-					{...register('text', { required: 'Text is required!' })}
-				/>*/}
 				<TextArea
 					placeholder="Text"
 					{...register('text', { required: 'Text is required!' })}
