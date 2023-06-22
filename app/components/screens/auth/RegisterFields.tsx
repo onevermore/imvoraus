@@ -4,6 +4,8 @@ import { FormState, UseFormRegister } from 'react-hook-form'
 
 import Field from '@/components/ui/form-elements/Field'
 
+import { UsersService } from '@/services/user.service'
+
 import { validEmail } from '@/utils/auth/Regex'
 
 interface IRegFields {
@@ -20,6 +22,26 @@ const RegisterFields: FC<IRegFields> = ({
 	return (
 		<>
 			<Field
+				{...register('username', {
+					required: 'username is required!',
+					validate: {
+						checkAvailability: async (value) => {
+							const isAvailable = await UsersService.checkUsernameAvailability(
+								value
+							)
+
+							return isAvailable || 'This username is already taken'
+						},
+					},
+					minLength: {
+						value: 3,
+						message: 'Username should have more than 2 symbols!',
+					},
+				})}
+				placeholder="username"
+				error={errors.username}
+			/>
+			<Field
 				{...register('email', {
 					required: 'Email is required!',
 					pattern: {
@@ -35,7 +57,7 @@ const RegisterFields: FC<IRegFields> = ({
 					required: 'Password is required!',
 					minLength: {
 						value: 6,
-						message: 'Min length should more 6 symbols!',
+						message: 'Min length should be more than 6 symbols!',
 					},
 				})}
 				placeholder="Password"

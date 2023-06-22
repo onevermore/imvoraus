@@ -1,6 +1,6 @@
 import { useMutation, useQuery } from '@tanstack/react-query'
 import { useRouter } from 'next/router'
-import { ChangeEvent, useCallback, useMemo, useState } from 'react'
+import { ChangeEvent, useMemo, useState } from 'react'
 import { toastr } from 'react-redux-toastr'
 import { StringParam, useQueryParam, withDefault } from 'use-query-params'
 
@@ -25,44 +25,58 @@ import { toastError } from '@/utils/api/withToastrErrorRedux'
 
 import { getAdminUrl } from '@/config/url.config'
 
-import { IOptions2 } from '../select.types'
-
-export const useCourses = (level: any, name: string) => {
-	const [cLevel, setCLevel] = useState('')
-	//	const [level, setLevel] = useQueryParam('level', withDefault(StringParam, ''))
-	//	const [name, setName] = useQueryParam('name', withDefault(StringParam, ''))
+export const useAdmCourses = () => {
+	const [searchTerm, setSearchTerm] = useState('')
+	const debouncedSearch = useDebounce(searchTerm, 500)
+	/*const [cLevel, setCLevel] = useState('')
+	const [name, setName] = useQueryParam('name', withDefault(StringParam, ''))
 	const debouncedSearch2 = useDebounce(name, 500)
-
+*/
 	const [page, setPage] = useState(1)
 
 	const queryData = useQuery(
-		['courses list general', debouncedSearch2, level, page],
+		['courses list', page],
 		() =>
 			CoursesService.getPaginatedCourses({
 				page,
-				searchTerm: debouncedSearch2,
-				level: level,
 			}),
 		{
 			select: (data: ICoursePaginatedData) => {
+				const courses = data.courses.map((course: ICourseCard2) => ({
+					_id: course._id,
+					editUrl: getAdminUrl(`course/edit/${course._id}`),
+					items: [
+						course.title,
+						course.description,
+						course.level,
+						course.price,
+						course.ownerId,
+						!course.isPublic && course.allowedUsers
+							? course.allowedUsers.length
+							: 'all',
+					],
+				}))
 				const courseData = {
-					courses: data.courses,
+					courses,
 					total: data.total,
 					totalPages: data.totalPages,
-					page: +data.page,
+					page: data.page,
 				}
-				console.log('select data === ', courseData)
 				return courseData
 			},
 
 			onError(error) {
-				toastError(error, 'courses list general')
+				toastError(error, 'courses list')
 			},
 			onSuccess(data) {
 				//console.log('success course data === ', data)
 			},
 		}
 	)
+
+	const handleSearch = (e: ChangeEvent<HTMLInputElement>) => {
+		setSearchTerm(e.target.value)
+	}
 
 	const { push } = useRouter()
 
@@ -81,7 +95,7 @@ export const useCourses = (level: any, name: string) => {
 	})
 
 	const { mutateAsync: deleteCourse } = useMutation(
-		['delete course'],
+		['delete text'],
 		(textId: string) => CoursesService.delete(textId),
 		{
 			onError(error) {
@@ -96,11 +110,13 @@ export const useCourses = (level: any, name: string) => {
 
 	return useMemo(
 		() => ({
+			handleSearch,
 			...queryData,
+			searchTerm,
 			deleteCourse,
 			createCourse,
 			setPage,
 		}),
-		[queryData, deleteCourse, createCourse]
+		[queryData, searchTerm, deleteCourse, createCourse]
 	)
 }

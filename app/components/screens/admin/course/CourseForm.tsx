@@ -38,6 +38,7 @@ export const CourseForm = () => {
 		mode: 'onChange',
 		defaultValues: {
 			isPublic: true,
+			price: 0,
 		},
 	})
 	const { push } = useRouter()
@@ -154,7 +155,7 @@ export const CourseForm = () => {
 						{...register('price', {
 							required: 'Price is required!',
 							validate: {
-								min: (v) => v >= 2 || 'The min price is 2',
+								min: (v) => v >= 0 || 'The min price is 0',
 								max: (v) => v < 100 || 'Max price is 99',
 							},
 						})}
@@ -204,6 +205,7 @@ export const CourseForm = () => {
 						})}
 						placeholder="Slug"
 						error={errors.slug}
+						disabled={true}
 					/>
 				</div>
 			</div>

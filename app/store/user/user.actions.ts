@@ -11,9 +11,14 @@ import { toastError } from '@/utils/api/withToastrErrorRedux'
 
 export const register = createAsyncThunk<IAuthResponse, IReg>(
 	'auth/register',
-	async ({ email, password, birthdate }, thunkAPI) => {
+	async ({ email, password, birthdate, username }, thunkAPI) => {
 		try {
-			const response = await AuthService.register(email, password, birthdate)
+			const response = await AuthService.register(
+				email,
+				password,
+				birthdate,
+				username
+			)
 			toastr.success('Registration', 'Completed successfully')
 			return response.data
 		} catch (error) {

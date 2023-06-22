@@ -61,7 +61,7 @@ export const TextForm = ({ coursesNames }: { coursesNames: IOptions[] }) => {
 			course: cid ? (cid as string) : courseIdOption,
 			complexity: complexityOption,
 		}
-
+		//console.log('text res === ', res)
 		await createText.mutateAsync(res)
 
 		//	console.log('all e === ', e)

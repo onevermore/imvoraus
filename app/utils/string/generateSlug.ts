@@ -5,6 +5,8 @@ export const generateSlug = (str: string): string => {
 		.replace(/[^0-9a-z_\-]+/gi, '')
 		.replace('---', '-')
 		.replace('--', '-')
+		.trim()
 		.toLowerCase()
+
 	return url
 }

@@ -1,5 +1,5 @@
 import RegisterFields from './RegisterFields'
-import { IReg, IRegFull } from './auth.interface'
+import { IRegFull } from './auth.interface'
 import { useRedirect } from './useRedirect'
 import Link from 'next/link'
 import { SubmitHandler, useForm } from 'react-hook-form'
@@ -31,9 +31,9 @@ export const Register = () => {
 
 	const onSubmit: SubmitHandler<IRegFull> = (data) => {
 		const { passwordConfirm, ...formData } = getValues()
+
 		register(formData)
-		//	console.log('data === ', data)
-		//	console.log('regData === ', regData)
+
 		reset()
 	}
 
@@ -53,7 +53,7 @@ export const Register = () => {
 						<Button
 							className={styles.active}
 							type="submit"
-							disabled={isLoading}
+							disabled={isLoading || !formState.isValid}
 						>
 							Register
 						</Button>

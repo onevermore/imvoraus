@@ -43,10 +43,14 @@ const Auth: FC = () => {
 					<AuthFields register={registerInput} formState={formState} />
 
 					<div className={styles.buttons}>
-						<Button type="submit" disabled={isLoading}>
+						<Link href={'/auth/register'}>Register</Link>
+						<Button
+							className={styles.active}
+							type="submit"
+							disabled={isLoading}
+						>
 							Login
 						</Button>
-						<Link href={'/auth/register'}>Register</Link>
 					</div>
 				</form>
 			</section>
