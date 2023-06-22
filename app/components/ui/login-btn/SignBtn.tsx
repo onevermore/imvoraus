@@ -36,7 +36,6 @@ export const SignBtn = () => {
 	return (
 		<div className="flex gap-5 justify-center shrink-0 pr-8 ">
 			<Button
-				size="large"
 				className=" min-w-max"
 				colored
 				onClick={() => router.push('/auth')}
@@ -44,7 +43,6 @@ export const SignBtn = () => {
 				Sign in
 			</Button>
 			<Button
-				size="large"
 				className=" min-w-max"
 				colored
 				onClick={() => router.push('/auth/register')}
