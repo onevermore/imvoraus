@@ -5,7 +5,11 @@
 		@apply mx-auto w-1/2 l-air-block bg-opacity-80  p-7 text-center;
 
 		.buttons {
-			@apply mt-12;
+			@apply max-w-[55%] flex-center-between;
+
+			> a {
+				@apply text-base underline text-gray-600 hover:text-gray-800;
+			}
 
 			> button {
 				&:first-child {

@@ -1,4 +1,4 @@
-import { ChangeEvent, FC } from 'react'
+import { ChangeEvent, FC, forwardRef } from 'react'
 
 import { MaterialIcon } from '../MaterialIcon'
 
@@ -9,11 +9,20 @@ interface ISearchField {
 	handleSearch: (e: ChangeEvent<HTMLInputElement>) => void
 }
 
-export const SearchField: FC<ISearchField> = ({ searchTerm, handleSearch }) => {
-	return (
-		<div className={s.search}>
-			<MaterialIcon name="MdSearch" />
-			<input placeholder="Search" value={searchTerm} onChange={handleSearch} />
-		</div>
-	)
-}
+const SearchField = forwardRef<HTMLInputElement, ISearchField>(
+	({ searchTerm, handleSearch }, ref) => {
+		return (
+			<div className={s.search}>
+				<MaterialIcon name="MdSearch" />
+				<input
+					ref={ref}
+					placeholder="Search"
+					value={searchTerm}
+					onChange={handleSearch}
+				/>
+			</div>
+		)
+	}
+)
+SearchField.displayName = 'SearchField'
+export default SearchField
