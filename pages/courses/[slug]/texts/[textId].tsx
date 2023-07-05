@@ -1,8 +1,8 @@
 import { axiosClassic } from 'api/interceptors'
 import { GetStaticPaths, GetStaticProps, NextPage } from 'next'
+import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
 
-import { TextWithDictionary } from '@/components/TextWithDictionary/TextWithDictionary'
 import { Heading } from '@/components/ui/heading/Heading'
 
 import { ITextPart } from '@/shared/types/text.types'
@@ -66,9 +66,16 @@ export const getStaticProps: GetStaticProps = async (context) => {
 	}
 }
 
+const DynamicTextWD = dynamic(
+	() => import('@/components/TextWithDictionary/TextWithDictionary'),
+	{
+		ssr: false,
+	}
+)
+
 const Text: NextPage<{ textData: ITextPart }> = ({ textData }) => {
 	return (
-		<TextWithDictionary
+		<DynamicTextWD
 			_id={textData._id}
 			title={textData.title}
 			text={textData.text}

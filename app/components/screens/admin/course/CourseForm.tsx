@@ -38,6 +38,7 @@ export const CourseForm = () => {
 		mode: 'onChange',
 		defaultValues: {
 			isPublic: true,
+			price: 0,
 		},
 	})
 	const { push } = useRouter()
@@ -52,19 +53,25 @@ export const CourseForm = () => {
 		onError: (error, variables, context) => {
 			toastError(error, 'Create course')
 		},
+		onSuccess(data, variables, context) {
+			//console.log('UUUU ', data)
+			push(`/profile/courses/${data._id}`)
+		},
 	})
 
 	const onSubmit: SubmitHandler<ICourse> = async (e: ICourse) => {
 		const allUsernames = usernames.map((v) => v.label)
 		const courseFormData = {
 			...e,
+			price: +e.price,
 			ownerId: user ? user._id : '',
 			allowedUsers: allUsernames,
 			...(allUsernames.length > 0 && { allowedUsers: allUsernames }),
 		}
+		//	console.log('course create data ====== ', courseFormData)
+		//	await create.mutateAsync(courseFormData)
 
 		await create.mutateAsync(courseFormData)
-		push('/courses')
 	}
 
 	return (
@@ -148,7 +155,7 @@ export const CourseForm = () => {
 						{...register('price', {
 							required: 'Price is required!',
 							validate: {
-								min: (v) => v >= 2 || 'The min price is 2',
+								min: (v) => v >= 0 || 'The min price is 0',
 								max: (v) => v < 100 || 'Max price is 99',
 							},
 						})}
@@ -198,6 +205,7 @@ export const CourseForm = () => {
 						})}
 						placeholder="Slug"
 						error={errors.slug}
+						disabled={true}
 					/>
 				</div>
 			</div>

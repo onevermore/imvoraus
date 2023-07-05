@@ -36,7 +36,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
 	const courseSlug = String(params?.slug)
-
+	console.log('params = ', params)
 	try {
 		const courseData = await CoursesService.getCourseDataBySlug(courseSlug)
 

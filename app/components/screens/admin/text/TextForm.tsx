@@ -6,12 +6,14 @@ import Select, { OnChangeValue } from 'react-select'
 
 import { Button } from '@/components/ui/form-elements/Button'
 import Field from '@/components/ui/form-elements/Field'
+import { TextArea } from '@/components/ui/form-elements/TextArea'
 import { Heading } from '@/components/ui/heading/Heading'
 
 import { IText, ITextForm } from '@/shared/types/text.types'
 
 import { TextsService } from '@/services/texts.service'
 
+import { toastError } from '@/utils/api/withToastrErrorRedux'
 import { generateSlug } from '@/utils/string/generateSlug'
 
 import { getAdminUrl } from '@/config/url.config'
@@ -29,6 +31,12 @@ export const TextForm = ({ coursesNames }: { coursesNames: IOptions[] }) => {
 	const [options, setOptions] = useState(optionss)
 	const [courseIdOption, setCourseIdOption] = useState('')
 	const [complexityOption, setComplexityOption] = useState(0)
+
+	const {
+		push,
+		query: { courseName, cid },
+	} = useRouter()
+
 	const {
 		handleSubmit,
 		register,
@@ -36,23 +44,31 @@ export const TextForm = ({ coursesNames }: { coursesNames: IOptions[] }) => {
 		setValue,
 	} = useForm<any>({
 		mode: 'onChange',
+		defaultValues: { courseTitle: courseName },
 	})
-	const { push } = useRouter()
 
 	const createText = useMutation({
 		mutationFn: (textData: IText) => {
 			return TextsService.createText(textData)
 		},
+		onSuccess() {
+			if (courseName) push(`/profile/courses/${cid}`)
+			else push(getAdminUrl('texts'))
+		},
+		onError: (error, variables, context) => {
+			toastError(error, 'Create text')
+		},
 	})
 	const onSubmit: SubmitHandler<IText> = async (e: ITextForm) => {
 		const res: IText = {
 			...e,
-			course: courseIdOption,
+			course: cid ? (cid as string) : courseIdOption,
 			complexity: complexityOption,
 		}
 
 		await createText.mutateAsync(res)
-		push(getAdminUrl('texts'))
+
+		//	console.log('all e === ', e)
 	}
 
 	const handleCourseSelect = (e: OnChangeValue<IOptions, boolean>) => {
@@ -67,19 +83,34 @@ export const TextForm = ({ coursesNames }: { coursesNames: IOptions[] }) => {
 
 	return (
 		<form onSubmit={handleSubmit(onSubmit)} className="max-w-2xl">
-			<Heading title="Create new text" />
-			<Select
-				id="1"
-				className="w-64"
-				options={coursesNames}
-				placeholder="Select course"
-				onChange={handleCourseSelect}
-			/>
+			<Heading title="Create new text" className="mb-6" />
+			{!courseName ? (
+				<Select
+					id="1"
+					className="w-64"
+					options={coursesNames}
+					placeholder="Select course"
+					onChange={handleCourseSelect}
+				/>
+			) : (
+				<Field
+					{...register('courseTitle')}
+					name="courseTitle" // Add this line
+					placeholder="Course Title"
+					error={errors.courseTitle}
+					value={courseName}
+					disabled
+					inputStyle={{ backgroundColor: '#ade4e4', textAlign: 'center' }}
+				/>
+			)}
 			<div className="flex  items-center flex-wrap justify-between py-4">
 				<Field
 					{...register('title', {
 						required: 'Title is required!',
-						maxLength: 15,
+						validate: {
+							maxLength: (v) =>
+								v.length <= 40 || 'Title should have at most 40 characters',
+						},
 						onChange: (e) => {
 							setValue('slug', generateSlug(e.target.value))
 						},
@@ -96,8 +127,8 @@ export const TextForm = ({ coursesNames }: { coursesNames: IOptions[] }) => {
 					error={errors.description}
 				/>
 
-				<textarea
-					className="w-[100%] h-64"
+				<TextArea
+					placeholder="Text"
 					{...register('text', { required: 'Text is required!' })}
 				/>
 				<Field
@@ -110,6 +141,7 @@ export const TextForm = ({ coursesNames }: { coursesNames: IOptions[] }) => {
 				<div></div>
 			</div>
 			<div className="pb-8">
+				<div>Complexity:</div>
 				<Select
 					id="2"
 					className="w-48"

@@ -62,8 +62,8 @@ export const TextEdit = () => {
 					{...register('title', {
 						required: 'Title is required!',
 						maxLength: {
-							value: 30,
-							message: 'Title must be no longer than 30 characters!',
+							value: 40,
+							message: 'Title must be no longer than 40 characters!',
 						},
 						onChange: (e) => {
 							setValue('slug', generateSlug(e.target.value))

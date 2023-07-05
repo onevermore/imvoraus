@@ -1,5 +1,7 @@
 import Text from './Text'
+import { useUsersDictionary } from './useUsersDictionary'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
+import dynamic from 'next/dynamic'
 import { FC, useEffect, useState } from 'react'
 import { SubmitHandler } from 'react-hook-form'
 import { toastr } from 'react-redux-toastr'
@@ -29,12 +31,7 @@ interface ITranslate {
 	translation: string
 }
 
-export const TextWithDictionary: FC<ITextPart> = ({
-	_id,
-	title,
-	text,
-	course,
-}) => {
+const TextWithDictionary: FC<ITextPart> = ({ _id, title, text, course }) => {
 	const { user } = useAuth()
 	const queryClient = useQueryClient()
 	const [list, setList] = useState<ITranslate[]>([])
@@ -51,35 +48,12 @@ export const TextWithDictionary: FC<ITextPart> = ({
 	const translatedText = data?.responseData?.translatedText
 
 	const {
-		isSuccess: isGood,
-		isLoading: isLoad,
-		isError,
-		data: dictionaryList,
-	} = useQuery(
-		['dictionary list'],
-		() => DictionaryService.getWordsByTextForUser(_id, user?._id || ''),
-		{
-			select: (data) =>
-				data.map((wordd: IDictionaryFull) => ({
-					word: wordd.word,
-					translation: wordd.translation,
-				})),
-			enabled: !!user,
-		}
-	)
-
-	const addWord = useMutation({
-		mutationFn: (dictionaryData: IAddWord) => {
-			return DictionaryService.addWord(dictionaryData)
-		},
-		onError: (error, variables, context) => {
-			toastError(error, 'Add word to dictionary')
-		},
-		onSuccess({ data: _id }) {
-			toastr.success('Add word', 'word added successfully')
-			queryClient.refetchQueries(['dictionary list'])
-		},
-	})
+		dictionaryList,
+		addWordAsync,
+		deleteWordAsync,
+		isLoadingDeleteWord,
+		isSuccessDeleteWord,
+	} = useUsersDictionary(user?._id, _id)
 
 	const onAddWordtoDictionary = async () => {
 		const newWordData = {
@@ -89,9 +63,8 @@ export const TextWithDictionary: FC<ITextPart> = ({
 			word: myWord,
 			translation: translatedText,
 		}
-		//console.log('data that will be added = ', newWordData)
 
-		await addWord.mutateAsync(newWordData)
+		await addWordAsync(newWordData)
 	}
 
 	const onClick = (value: string) => {
@@ -101,10 +74,6 @@ export const TextWithDictionary: FC<ITextPart> = ({
 
 	return (
 		<>
-			{isGood && <h1>SUCCESS GOOD !!!</h1>}
-			{isLoad && <h1>LOADING......</h1>}
-			{isError && <h1>ERROR !</h1>}
-
 			{
 				<Tooltip
 					id="foo"
@@ -112,7 +81,7 @@ export const TextWithDictionary: FC<ITextPart> = ({
 					events={['click']}
 					render={({ content, activeAnchor }) => {
 						//	console.log('tooltip content === ', content)
-						//	console.log('tooltip activeAnchor === ', activeAnchor)
+						//		console.log('tooltip activeAnchor === ', activeAnchor)
 						return (
 							<div className="w-full flex-center-between flex-wrap ">
 								<div>
@@ -148,7 +117,14 @@ export const TextWithDictionary: FC<ITextPart> = ({
 			<Text text={text} onClick={onClick} />
 			<br />
 
-			<TextDictionary list={dictionaryList} />
+			<TextDictionary
+				list={dictionaryList || []}
+				removeHandler={deleteWordAsync}
+				deleteIsLoading={isLoadingDeleteWord}
+				isSuccessDeleteWord={isSuccessDeleteWord}
+			/>
 		</>
 	)
 }
+
+export default TextWithDictionary

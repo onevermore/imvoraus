@@ -5,9 +5,11 @@ export interface IText {
 	complexity: number
 	slug: string
 	course: string
+	//courseTitle?: string
 }
 
 export interface ITextForm {
+	//courseTitle?: string
 	title: string
 	description: string
 	text: string

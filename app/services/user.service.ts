@@ -37,6 +37,17 @@ export const UsersService = {
 		return axiosClassic.put<string>(getUserUrl(`/${username}`), data)
 	},
 
+	async checkUsernameAvailability(username: string) {
+		//	try {
+		const res = await axiosClassic.get<{ available: boolean }>(
+			getUserUrl(`/check-username/${username}`)
+		)
+		return res.data.available
+		/*	} catch (error) {
+			console.error(error)
+		}*/
+	},
+
 	async uploadAvatar(file: FormData, username: string, subfolder: string) {
 		return axiosClassic.post<{ url: string; name: string }>(
 			'/user/avatar',

@@ -1,3 +1,4 @@
+import { useAdmCourses } from './useAdmCourses'
 import { useCourses } from './useCourses'
 import { useRouter } from 'next/router'
 
@@ -18,7 +19,7 @@ export const CoursesAdmList = () => {
 		deleteCourse,
 		searchTerm,
 		handleSearch,
-	} = useCourses()
+	} = useAdmCourses()
 
 	const { push } = useRouter()
 

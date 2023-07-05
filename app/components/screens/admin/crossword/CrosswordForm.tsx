@@ -22,21 +22,25 @@ import { ICrossData } from '@/shared/types/crossword.types'
 
 import { CrosswordsService } from '@/services/crosswords.service'
 
+import { toastError } from '@/utils/api/withToastrErrorRedux'
 import { convertCrossData } from '@/utils/crossword/convertCrossData'
 import { generateSlug } from '@/utils/string/generateSlug'
+
+import { getAdminUrl } from '@/config/url.config'
 
 import { optionsNumber } from '../select.data'
 import { ILevelsOption, IOptions } from '../select.types'
 
 export interface ICrossForm {
-	course: string
+	course?: string
 	slug: string
 	description: string
 	title: string
-	level: string
+	level?: string
 	complexity: string | number
 	data: ICrossData[]
 	lvl: string
+	courseTitle?: string
 }
 
 export const CrosswordForm = ({
@@ -49,6 +53,11 @@ export const CrosswordForm = ({
 	const [crossData, setCrossData] = useState({ across: {}, down: {} })
 
 	const {
+		push,
+		query: { courseName, cid },
+	} = useRouter()
+
+	const {
 		handleSubmit,
 		register,
 		formState: { errors, isValid },
@@ -58,6 +67,7 @@ export const CrosswordForm = ({
 		watch,
 	} = useForm<ICrossForm>({
 		mode: 'onChange',
+		defaultValues: { courseTitle: courseName as string },
 	})
 
 	const { fields, append, prepend, remove, swap, move, insert } = useFieldArray(
@@ -66,29 +76,38 @@ export const CrosswordForm = ({
 			name: 'data',
 		}
 	)
-	const { push } = useRouter()
 
 	const createCrossword = useMutation({
 		mutationFn: (crossData: ICrossForm) => {
 			return CrosswordsService.createCrossword(crossData)
 		},
+		onSuccess() {
+			if (courseName) push(`/profile/courses/${cid}`)
+			else push(getAdminUrl('crosswords'))
+		},
 	})
 	const onSubmit: SubmitHandler<ICrossForm> = async (e: ICrossForm) => {
 		//console.log('cross form ===', e)
-		await createCrossword.mutateAsync(e)
-		push('/courses')
+
+		const resCross = { ...e, course: cid ? (cid as string) : e.course }
+
+		await createCrossword.mutateAsync(resCross)
+		//push('/courses')
 	}
 
 	const handleGenerateCross = () => {
-		const transformedCrossData = convertCrossData(getValues('data'))
-		//	console.log('form values === ', getValues('data'))
-		setCrossData(transformedCrossData)
+		try {
+			const transformedCrossData = convertCrossData(getValues('data'))
+			//	console.log('form values === ', getValues('data'))
+			setCrossData(transformedCrossData)
+		} catch (e) {
+			toastError(e, 'Generate Cross')
+		}
 	}
 
 	//	const selectValue = watch('course')
 	const isSubmitDisabled =
 		!isValid ||
-		!!errors.course ||
 		!!errors.title ||
 		!!errors.slug ||
 		!!errors.description ||
@@ -111,45 +130,66 @@ export const CrosswordForm = ({
 						className="pt-6 mb-4 md:mb-10"
 						title="Create new crossword"
 					/>
-					<p className="">Course</p>
 
-					<Controller
-						control={control}
-						name={`course`}
-						render={({ field: { onChange } }) => (
-							<Select
-								id="3"
-								name="course"
-								className="w-48"
-								options={coursesNames}
-								placeholder="Select"
-								onChange={(selectedOption: any) => {
-									const res = selectedOption.value
-									onChange(res)
-									const lvl = courseLevels.filter((v) => v.value === res)[0]
-										.level
+					{!courseName ? (
+						<>
+							<p className="">Course</p>
+							<Controller
+								control={control}
+								name={`course`}
+								render={({ field: { onChange } }) => (
+									<Select
+										id="3"
+										name="course"
+										className="w-48"
+										options={coursesNames}
+										placeholder="Select"
+										onChange={(selectedOption: any) => {
+											const res = selectedOption.value
+											onChange(res)
+											const lvl = courseLevels.filter((v) => v.value === res)[0]
+												.level
 
-									setValue('level', lvl)
-								}}
+											setValue('level', lvl)
+										}}
+									/>
+								)}
 							/>
-						)}
-					/>
-
-					<div className="flex  flex-col flex-wrap  py-4">
+						</>
+					) : (
 						<Field
-							{...register('level', {
-								required: 'Level is required!',
+							{...register('courseTitle', {
+								required: 'courseTitle is required!',
 							})}
-							placeholder="Level"
-							error={errors.level}
+							name="courseTitle" // Add this line
+							placeholder="Course Title"
+							error={errors.courseTitle}
+							value={courseName}
 							disabled
-							style={{ width: '60px' }}
 							inputStyle={{ backgroundColor: '#ade4e4', textAlign: 'center' }}
 						/>
+					)}
+
+					<div className="flex  flex-col flex-wrap  py-4">
+						{!courseName && (
+							<Field
+								{...register('level', {
+									required: 'Level is required!',
+								})}
+								placeholder="Level"
+								error={errors.level}
+								disabled
+								style={{ width: '60px' }}
+								inputStyle={{ backgroundColor: '#ade4e4', textAlign: 'center' }}
+							/>
+						)}
 						<Field
 							{...register('title', {
 								required: 'Title is required!',
-								maxLength: 15,
+								validate: {
+									maxLength: (v) =>
+										v.length <= 40 || 'Title should have at most 40 characters',
+								},
 								onChange: (e) => {
 									setValue('slug', generateSlug(e.target.value))
 								},
@@ -226,6 +266,36 @@ export const CrosswordForm = ({
 						ADD CLUE
 					</Button>
 				</div>
+
+				<div className="leading-9 bg-red-600/[0.2] rounded-md p-6 mb-8">
+					<p className="text-red-600 font-bold">Achtung!</p>
+					Please click <b>&quot;Generate Cross&quot;</b> button{' '}
+					<b>before clicking &quot;Create&quot; </b>
+					to make sure that all data is correct!
+					<p>
+						If &quot;Create&quot; button <b>is disabled</b> then maybe you have
+						left some fields empty or the values are invalid! <br /> Please
+						check all your data one more time
+					</p>
+					<div className="m-8">
+						<h3 className="font-bold">Notice that:</h3>
+						<ul className="list-disc">
+							<li>
+								All numbers must be a{' '}
+								<span className="underline">positive integer</span> (Example: 5)
+							</li>
+							<li>
+								Mostly there is no need to change Slug field, as it&apos;s value
+								will be generated after you fill in Title field
+							</li>
+							<li>
+								There must be at least 1 Clue in Crossword. Click ADD CLUE to
+								add one!
+							</li>
+						</ul>
+					</div>
+				</div>
+
 				<div className="mb-10">
 					<Button
 						className=" mr-6"

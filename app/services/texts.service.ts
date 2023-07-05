@@ -29,7 +29,7 @@ export const TextsService = {
 	},
 
 	async createText(text: IText) {
-		const { data } = await axiosClassic.post(getTextsUrl(''), text)
+		const { data } = await axios.post(getTextsUrl(''), text)
 		return data
 	},
 

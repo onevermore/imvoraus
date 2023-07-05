@@ -1,3 +1,4 @@
+import { AdmCourseCard } from './AdmCourseCard'
 import router from 'next/router'
 import { FC } from 'react'
 
@@ -5,12 +6,11 @@ import { ICourseCard } from '@/components/ui/text-cards/CourseCard/course-card.i
 
 import courseImage from '@/assets/images/cour.jpg'
 
-import { Button } from '../../form-elements/Button'
-import { CourseCard } from '../CourseCard/CourseCard'
+import { Button } from '../form-elements/Button'
 
 import s from './CoursesList.module.scss'
 
-const CoursesList: FC<{ courses: ICourseCard[]; full?: boolean }> = ({
+const AdmCoursesList: FC<{ courses: ICourseCard[]; full?: boolean }> = ({
 	courses,
 	full,
 }) => {
@@ -19,7 +19,7 @@ const CoursesList: FC<{ courses: ICourseCard[]; full?: boolean }> = ({
 		<>
 			<div className="w-[80%] mx-auto grid md:grid-cols-2 xl:grid-cols-3 gap-5 pt-16">
 				{coursesData?.map((course: ICourseCard) => (
-					<CourseCard
+					<AdmCourseCard
 						key={course._id}
 						_id={course._id}
 						title={course.title}
@@ -49,4 +49,4 @@ const CoursesList: FC<{ courses: ICourseCard[]; full?: boolean }> = ({
 	)
 }
 
-export default CoursesList
+export default AdmCoursesList

@@ -1,6 +1,10 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
 	// reactStrictMode: true,
+	experimental: {
+		esmExternals: false, // THIS IS THE FLAG THAT MATTERS
+		appDir: false,
+	},
 	images: {
 		domains: [
 			'videos-imvoraus.s3.amazonaws.com',
@@ -9,15 +13,13 @@ const nextConfig = {
 		],
 		formats: ['image/avif', 'image/webp'],
 	},
-	experimental: {
-		esmExternals: false, // THIS IS THE FLAG THAT MATTERS
-	},
 	poweredByHeader: false,
 	env: {
 		REACT_APP_URL: process.env.REACT_APP_URL,
 		REACT_APP_ENV: process.env.REACT_APP_ENV,
 		APP_SERVER_URL: process.env.REACT_APP_SERVER_URL,
 		UPLOADTHING_SECRET: process.env.UPLOADTHING_SECRET,
+		API_URL: process.env.API_URL,
 	},
 	swcMinify: true,
 	async rewrites() {

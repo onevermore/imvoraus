@@ -10,12 +10,8 @@ const AdminNavItem: FC<{ navItem: INavItem }> = ({ navItem }) => {
 	const { asPath } = useRouter()
 
 	return (
-		<li>
-			<Link href={navItem.link}>
-				<a className={cn({ [s.active]: asPath === navItem.link })}>
-					{navItem.title}
-				</a>
-			</Link>
+		<li className={cn({ [s.active]: asPath === navItem.link })}>
+			<Link href={navItem.link}>{navItem.title}</Link>
 		</li>
 	)
 }

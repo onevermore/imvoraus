@@ -18,10 +18,8 @@ export const MenuItem: FC<{ item: IMenuItem }> = ({ item }) => {
 			})}
 		>
 			<Link href={item.link}>
-				<a>
-					<MaterialIcon name={item.icon} />
-					<span>{item.title}</span>
-				</a>
+				<MaterialIcon name={item.icon} />
+				<span>{item.title}</span>
 			</Link>
 		</li>
 	)

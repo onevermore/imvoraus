@@ -5,6 +5,7 @@ export interface IAuth {
 
 export interface IReg extends IAuth {
 	birthdate: Date
+	username: string
 }
 
 export interface IRegFull extends IReg {
