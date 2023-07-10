@@ -75,7 +75,7 @@ const TextDictionary: FC<ITextDictionary> = memo(
 						<th></th>
 					</tr>
 				</thead>
-				<tbody>
+				<tbody id="dictionary-list">
 					{list?.map((value, i) => (
 						<tr className={s.tr} key={i}>
 							<td className={s.td}>{value.word}</td>
