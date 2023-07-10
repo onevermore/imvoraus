@@ -15,7 +15,7 @@ export const PaginationItems: FC<PaginationProps> = ({
 	onPrevClick,
 	onNextClick,
 }) => {
-	console.log('total pages === ', totalPages)
+	//console.log('total pages === ', totalPages)
 	return (
 		<div className="flex items-center mt-10">
 			{page > 1 && (

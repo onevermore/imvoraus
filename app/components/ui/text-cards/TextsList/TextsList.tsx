@@ -35,6 +35,7 @@ const TextsList: FC<{ list: ITextDataFull[]; full?: boolean }> = ({
 		<>
 			<Heading title="Texts" className="py-8" />
 			<div
+			id='text-list'
 				className={cn({
 					[s['swipe-container']]: width < 450,
 					[s['grid-container']]: width >= 450,

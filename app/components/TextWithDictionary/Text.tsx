@@ -25,7 +25,7 @@ const Text: FC<ITooltipProps> = ({ text, onClick }) => {
 		onClick(val)
 	}
 	return (
-		<div>
+		<div id="text">
 			{text.split(' ').map((value, i) => (
 				<span
 					key={i}

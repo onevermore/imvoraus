@@ -17,7 +17,10 @@ const CoursesList: FC<{ courses: ICourseCard[]; full?: boolean }> = ({
 	const coursesData = full ? courses : courses.slice(0, 3)
 	return (
 		<>
-			<div className="w-[80%] mx-auto grid md:grid-cols-2 xl:grid-cols-3 gap-5 pt-16">
+			<div
+				id="courses-list"
+				className="w-[80%] mx-auto grid md:grid-cols-2 xl:grid-cols-3 gap-5 pt-16"
+			>
 				{coursesData?.map((course: ICourseCard) => (
 					<CourseCard
 						key={course._id}

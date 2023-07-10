@@ -18,33 +18,19 @@ import { useCourses } from '../admin/courses/useCourses'
 import { optionsLevel2 } from '../admin/select.data'
 import { IOptions2 } from '../admin/select.types'
 
-//import s from './Search.module.scss'
-
 const CoursesSearchable: FC = () => {
-	//	const [searchTerm, setSearchTerm] = useState('')
-	const router = useRouter()
-	//	const { name } = router.query
-	/*	const [name, setName] = useSearchParamsState({
-		name: 'name',
-		deserialize: (v: string | null) => v || '',
-	})*/
-	/*	const [level, setLevel] = useSearchParamsState({
-		name: 'level',
-		deserialize: (v: string | null) => v || '',
-	})*/
+	//const router = useRouter()
 
 	const [level, setLevel] = useQueryParam('level', withDefault(StringParam, ''))
 	const [name, setName] = useQueryParam('name', withDefault(StringParam, ''))
 	const [page, setPage] = useState(1)
 	const debouncedSearch = useDebounce(name, 500)
-	//const [level, setLevel] = useState('')
-	const searchInputRef = useRef<HTMLInputElement>(null)
+
 	const {
 		isSuccess,
 		data: myCourses,
 		isLoading,
 	} = useQuery(['search courses list', debouncedSearch, level, page], () =>
-		//CoursesService.getAllCourses(debouncedSearch as string, level)
 		CoursesService.getPaginatedCourses({
 			searchTerm: debouncedSearch,
 			level,
@@ -59,14 +45,6 @@ const CoursesSearchable: FC = () => {
 		if (selectedLevel) setLevel(selectedLevel.value)
 	}
 
-	useEffect(() => {
-		if (searchInputRef.current) {
-			searchInputRef.current.focus() // Focus the search input element on component mount
-		}
-	}, [myCourses])
-
-	console.log('myCourses === ', myCourses)
-
 	/*
 	const filterCoursesSearch = ({ name, level }) => {
 		const { query } = router
@@ -79,19 +57,11 @@ const CoursesSearchable: FC = () => {
 	}
 */
 
-	/*
-	const handleLevel = (selectedLevel: IOptions2 | null): void => {
-		if (selectedLevel) setLevel(selectedLevel.value)
-		//	filterCoursesSearch({ level: selectedLevel.value })
-		//if ((selectedLevel.value = '' || !selectedLevel.value))
-	}*/
-
 	return (
 		<div>
-			<div className="w-[40%] flex-center-between flex-wrap">
-				<div>
+			<div className="w-[80%] lg:w-[60%] xl:w-[50%]  flex-center-between flex-row flex-nowrap gap-4">
+				<div className="md:min-w-[50%]">
 					<SearchField
-						ref={searchInputRef}
 						searchTerm={(name as string) || ''}
 						handleSearch={handleSearch}
 					/>

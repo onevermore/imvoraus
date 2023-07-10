@@ -42,13 +42,6 @@ export const SignBtn = () => {
 			>
 				Sign in
 			</Button>
-			<Button
-				className=" min-w-max"
-				colored
-				onClick={() => router.push('/auth/register')}
-			>
-				Sign up
-			</Button>
 		</div>
 	)
 }
