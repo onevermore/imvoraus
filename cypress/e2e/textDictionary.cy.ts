@@ -1,4 +1,4 @@
-describe('template spec', () => {
+describe('template spec2', () => {
 	beforeEach(() => {
 		cy.login('test@gmail.com', 'tester*333')
 		cy.visit('http://localhost:3000/courses')
