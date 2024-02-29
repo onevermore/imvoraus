@@ -15,7 +15,7 @@ const Navigation: FC = () => {
 			<BurgerMenu />
 			<MenuContainer />
 			<SignBtn />
-			<SearchBar />
+			{/*<SearchBar />*/}
 		</div>
 	)
 }

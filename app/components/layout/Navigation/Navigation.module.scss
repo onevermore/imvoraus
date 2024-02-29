@@ -1,6 +1,6 @@
 .container {
 	width: 100%;
 	overflow: hidden;
-
-	@apply pt-4 sm:pt-11 px-2 sm:px-16 flex justify-between;
+	background-color: rgb(229, 209, 207);
+	@apply pt-4 rounded-b-lg shadow-inner sm:py-3 px-2 sm:px-16 flex-center-between;
 }

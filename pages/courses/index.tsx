@@ -3,6 +3,8 @@ import dynamic from 'next/dynamic'
 
 import { Heading } from '@/components/ui/heading/Heading'
 
+import { Meta } from '@/utils/meta/Meta'
+
 const DynamicSeacrhableCourses = dynamic(
 	() => import('@/components/screens/courses/CoursesSearchable'),
 	{
@@ -12,10 +14,12 @@ const DynamicSeacrhableCourses = dynamic(
 
 const Courses: NextPage = () => {
 	return (
-		<div>
-			<Heading title="Courses" className="mb-4" />
-			<DynamicSeacrhableCourses />
-		</div>
+		<Meta title="Our courses">
+			<div>
+				<Heading title="Courses" className="mb-4" />
+				<DynamicSeacrhableCourses />
+			</div>
+		</Meta>
 	)
 }
 
