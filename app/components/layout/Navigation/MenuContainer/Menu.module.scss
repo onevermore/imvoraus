@@ -1,5 +1,5 @@
 .menu {
-	@apply mb-14 animate-fade hidden xl:flex;
+	@apply mb-14 xl:mb-0 animate-fade hidden xl:flex;
 
 	.items {
 		@apply flex flex-nowrap shrink-0 grow-0;

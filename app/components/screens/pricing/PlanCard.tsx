@@ -1,4 +1,4 @@
-import { Button } from '../ui/form-elements/Button'
+import { Button } from '@/components/ui/form-elements/Button'
 
 interface PlanCardProps {
 	name: string

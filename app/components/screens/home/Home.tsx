@@ -9,6 +9,7 @@ import { toastr } from 'react-redux-toastr'
 import { Options } from '@/components/options/Options'
 import { Button } from '@/components/ui/form-elements/Button'
 import { DekorHeading } from '@/components/ui/heading-decor/DekorHeading'
+import { Section } from '@/components/ui/section/Section'
 
 import mainGif from '@/assets/images/gif1.gif'
 import crossGif from '@/assets/images/gif2.gif'
@@ -23,45 +24,58 @@ export const Home: FC<IHome> = () => {
 		>
 			<DekorHeading text="Learn German with us!" className="text-center" />
 			<h3>Sign up to create a course !</h3>
-			<DekorHeading className="text-center" text="Choose your level:" />
-			<Options />
-			<DekorHeading
-				className="text-center"
-				text="Add new words to your dictionary!"
-			/>
-			<div>
-				<div className="flex justify-center">
-					<Image
-						alt="image"
-						src={mainGif.src}
-						width={0}
-						height={0}
-						sizes="100vw"
-						style={{
-							padding: '30px',
-							backgroundColor: 'rgb(14 189 183 / 0.3)',
-						}}
-						className="w-[90%] md:w-[70%] rounded-md"
-					/>
-				</div>
-			</div>
 
-			<div className="my-6">
-				<div className="flex justify-center">
-					<Image
-						alt="image"
-						src={crossGif.src}
-						width={0}
-						height={0}
-						sizes="100vw"
-						style={{
-							padding: '30px',
-							backgroundColor: 'rgb(14 189 183 / 0.3)',
-						}}
-						className="w-[90%] md:w-[70%] rounded-md"
-					/>
+			<Section>
+				<DekorHeading className="text-center" text="Choose your level:" />
+				<Options />
+			</Section>
+
+			<Section>
+				<DekorHeading
+					className="text-center"
+					text="Add new words to your dictionary!"
+				/>
+				<div>
+					<div className="flex justify-center">
+						<Image
+							alt="image"
+							src={mainGif.src}
+							width={0}
+							height={0}
+							sizes="100vw"
+							style={{
+								padding: '30px',
+								backgroundColor: 'rgb(14 189 183 / 0.3)',
+							}}
+							className="w-[90%] md:w-[70%] rounded-md"
+						/>
+					</div>
 				</div>
-			</div>
+			</Section>
+
+			<Section>
+				<DekorHeading className="text-center" text="We have crosswords!" />
+				<DekorHeading
+					className="text-center"
+					text="You can even create your own!"
+				/>
+				<div className="my-6">
+					<div className="flex justify-center">
+						<Image
+							alt="image"
+							src={crossGif.src}
+							width={0}
+							height={0}
+							sizes="100vw"
+							style={{
+								padding: '30px',
+								backgroundColor: 'rgb(14 189 183 / 0.3)',
+							}}
+							className="w-[90%] md:w-[70%] rounded-md"
+						/>
+					</div>
+				</div>
+			</Section>
 
 			{/*data && (
 				<Image

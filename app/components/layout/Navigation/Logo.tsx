@@ -12,7 +12,7 @@ export const Logo: FC = () => {
 				<div className="px-layout mb-10 block relative flex hidden xl:block">
 					<span
 						style={{ position: 'relative', left: '9px' }}
-						className="font-['Proxima Nova'] font-normal text-2xl tracking-[.5em]"
+						className="font-['Proxima Nova'] font-semibold text-2xl tracking-[.5em]"
 					>
 						imvoraus
 					</span>
@@ -24,13 +24,13 @@ export const Logo: FC = () => {
 							right: '-7px',
 						}}
 					>
-						<Image
+						{/*		<Image
 							src={logoImage}
 							width={50}
 							height={54}
 							alt="learn German"
 							draggable={false}
-						/>
+					/>*/}
 					</span>
 				</div>
 			</Link>
